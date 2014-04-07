@@ -98,10 +98,13 @@ public class Simulator_Logik {
 		case 2: do_subwf(_hex1); break;
 		case 14: do_swapf(_hex1); break;
 		case 6: do_xorwf(_hex1); break;
+		case 57: do_andlw(_hex1); break;
+		case 56: do_iorlw(_hex1); break;
+		case 58: do_xorlw(_hex1); break;
 		
 		}
 		
-		int hex2 = code_as_int & 0b1111111;
+		int hex2 = code_as_int & 0b0000000001111111;
 		int _hex2 = code_as_int & 0b1111111110000000;
 		switch (hex2) {
 		case 3: do_clrf(_hex2); break;
@@ -109,6 +112,128 @@ public class Simulator_Logik {
 		case 1: do_movwf(_hex2); break;
 		case 0: do_nop(); break;
 		}
+		
+		int hex3 = code_as_int & 0b0000001111111111;
+		int _hex3 = code_as_int & 0b1111110000000000;
+		switch(hex3){
+		case 4: do_bcf(_hex3); break;
+		case 5: do_bsf(_hex3); break;
+		case 6: do_btfsc(_hex3); break;
+		case 7: do_btfss(_hex3); break;
+		case 12: do_movlw(_hex3); break;
+		case 23: do_retlw(_hex3); break;
+		}
+		
+		int hex4 = code_as_int & 0b0000000111111111;
+		int _hex4 = code_as_int & 0b1111111000000000;
+		switch(hex4){
+		case 31: do_addlw(_hex4); break;
+		case 30: do_sublw(_hex4); break;
+		}
+		
+		int hex5 = code_as_int & 0b0000011111111111;
+		int _hex5 = code_as_int & 0b1111100000000000;
+		switch(hex5){
+		case 4: do_call(_hex5); break;
+		case 5: do_goto(_hex5); break;
+		}
+		
+		int hex6 = code_as_int & 0x0000;
+		switch(hex6){
+		case 100: do_clrwdt(); break;
+		case 9: do_retfie(); break;
+		case 8: do_return(); break;
+		case 99: do_sleep(); break;
+		
+		}
+		
+		
+		
+	}
+
+	private void do_sleep() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void do_return() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void do_retfie() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void do_clrwdt() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void do_goto(int _hex5) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void do_call(int _hex5) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void do_sublw(int _hex4) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void do_addlw(int _hex4) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void do_retlw(int _hex3) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void do_movlw(int _hex3) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void do_xorlw(int _hex1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void do_iorlw(int _hex1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void do_andlw(int _hex1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void do_btfss(int _hex3) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void do_btfsc(int _hex3) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void do_bsf(int _hex3) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void do_bcf(int _hex3) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private void do_nop() {
@@ -187,27 +312,13 @@ public class Simulator_Logik {
 	}
 
 	private void do_addwf(int a) {
-		String add1 = c + d;
-		int a = Integer.parseInt(add1, 2) + w_register;
-		String output = String.valueOf(a);
-		frame.label_wreg_value.setText(output);
-		w_register = a;
+		// TODO Auto-generated method stub
 	}
 
 	private void do_andwf(int a) {
-		String add1 = c + d;
-		int a = Integer.parseInt(add1, 2);
-		int b = a & w_register;
-		String output = String.valueOf(b);
-		frame.label_wreg_value.setText(output);
+		// TODO Auto-generated method stub
 	}	
 	private void do_clrf(int a){
-		String add1 = c + d;
-		add1 = add1.substring(1);
-		System.out.println(add1);
-		int a = Integer.parseInt(add1,2);
-		String b = Integer.toHexString(a);
-		System.out.println(a);
-		
+		// TODO Auto-generated method stub
 	}
 }
