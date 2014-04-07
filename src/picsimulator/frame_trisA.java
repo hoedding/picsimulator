@@ -38,7 +38,7 @@ public class frame_trisA extends JFrame {
 	 */
 	public frame_trisA() {
 		setTitle("TRIS A");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 205, 60);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
