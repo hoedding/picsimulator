@@ -1,31 +1,24 @@
 package picsimulator;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.FileReader;
-import java.math.BigInteger;
-import java.util.List;
-
 import javax.swing.JFileChooser;
-import javax.swing.ListModel;
 
 public class MainFrame_Logik {
 	private MainFrame frame;
-	
+	private Simulator_Logik simulator;
 
-	public MainFrame_Logik(MainFrame frame2) {
+	public MainFrame_Logik(MainFrame frame2, Simulator_Logik simulator) {
 		frame = frame2;
-		/* Spezialregister Start */
-		/* Spezialregister Ende */
-	}
+		}
 
 	public void register_safe() {
 		String register_export = "";
-		int m, n = 0;
+		int m = 0;
 		for (m = 0; m < 256; m++) {
 			{
-				register_export = register_export + frame.register_array[m]
+				register_export = register_export + simulator.register_array[m]
 						+ ";";
 			}
 		}
@@ -51,11 +44,11 @@ public class MainFrame_Logik {
 				zeile = in.readLine();
 				String[] splitResult = zeile.split(";");
 
-				int m, n, s = 0;
+				int m,  s = 0;
 				for (m = 0; m < 256; m++) {
 					{
 						/* Array wird mit Werten aus Dokument gefüllt */
-						frame.register_array[m] = splitResult[s];
+						simulator.register_array[m] = Integer.parseInt(splitResult[s]);
 						s++;
 					}
 				}
@@ -63,7 +56,7 @@ public class MainFrame_Logik {
 				while (m1 < 256) {
 					while (t1 < 8) {
 						/* Tabelle bekommt Werte aus Array zugewiesen */
-						frame.table_model.setValueAt(frame.register_array[m1],
+						frame.table_model.setValueAt(simulator.register_array[m1],
 								n1, t1);
 						t1++;
 						m1++;

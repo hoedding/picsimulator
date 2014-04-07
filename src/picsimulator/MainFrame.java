@@ -56,7 +56,7 @@ public class MainFrame extends JFrame {
 	public static frame_calculator calculator;
 	public JLabel lbl_wreg_value;
 	/* Array für Register */
-	String[] register_array = new String[256];
+	int[] register_array = new int[256];
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -64,8 +64,9 @@ public class MainFrame extends JFrame {
 				try {
 
 					MainFrame frame = new MainFrame();
-					logik = new MainFrame_Logik(frame);
+					
 					simulator = new Simulator_Logik(frame);// TODO
+					logik = new MainFrame_Logik(frame,simulator);
 					frame.setVisible(true);
 
 				} catch (Exception e) {

@@ -45,6 +45,8 @@ public class Simulator_Logik {
 	public int rbif = 0b00000000;
 	/* Das Ding enthält nur noch den Befehlscode */
 	public List<String> list_analyzed_code;
+	
+	int[] register_array = new int[256];
 
 	public Simulator_Logik(MainFrame _frame) {
 		frame = _frame;
@@ -82,34 +84,19 @@ public class Simulator_Logik {
 	}
 
 	public void what_to_do(String code) {
+		int code_as_int = Integer.parseInt(code);
+		int hex1 = code_as_int & 0x00ff;
+		int _hex1 = code_as_int & 0xff00;
+		switch (hex1) {
+		case 7: do_addwf(_hex1); break;
+		case 5:	do_andwf(_hex1); break;
+		case 1:	do_clrf(_hex1); break;
+				default: break;
+		}
 		
-		String a = Integer.toBinaryString(Integer.parseInt(Character
-				.toString(code.charAt(0))));
-		String b = Integer.toBinaryString(Integer.parseInt(Character
-				.toString(code.charAt(1))));
-		String c = Integer.toBinaryString(Integer.parseInt(Character
-				.toString(code.charAt(2))));
-		String d = Integer.toBinaryString(Integer.parseInt(Character
-				.toString(code.charAt(3))));
-	
-		switch (a) {
-		case "0": {
-			switch (b) {
-			case "111":do_addwf(c, d); break;
-			case "101":do_andwf(c, d);	break;
-			case "1": do_clrf(c,d); break;
-			default: break;
-			}
-		}
-		/*
-		 * case '1': {return;} case '2': {return;} case '3': {return;}
-		 */
-		default:
-			return;
-		}
 	}
 
-	private void do_addwf(String c, String d) {
+	private void do_addwf(int a) {
 		String add1 = c + d;
 		int a = Integer.parseInt(add1, 2) + w_register;
 		String output = String.valueOf(a);
@@ -117,7 +104,7 @@ public class Simulator_Logik {
 		w_register = a;
 	}
 
-	private void do_andwf(String c, String d) {
+	private void do_andwf(int a) {
 		String add1 = c + d;
 		int a = Integer.parseInt(add1, 2);
 		int b = a & w_register;
@@ -125,9 +112,13 @@ public class Simulator_Logik {
 		System.out.println(output);
 		frame.lbl_wreg_value.setText(output);
 	}	
-	private void do_clrf(String c, String d){
+	private void do_clrf(int a){
 		String add1 = c + d;
-		
+		add1 = add1.substring(1);
+		System.out.println(add1);
+		int a = Integer.parseInt(add1,2);
+		String b = Integer.toHexString(a);
+		System.out.println(a);
 		
 	}
 }
