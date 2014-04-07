@@ -1,11 +1,7 @@
 package picsimulator;
 
-import java.io.BufferedReader;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 public class Simulator_Logik {
 	public MainFrame frame;
@@ -90,9 +86,103 @@ public class Simulator_Logik {
 		switch (hex1) {
 		case 7: do_addwf(_hex1); break;
 		case 5:	do_andwf(_hex1); break;
-		case 1:	do_clrf(_hex1); break;
-				default: break;
+		case 9:	do_comf(_hex1); break;
+		case 3: do_decf(_hex1); break;
+		case 11: do_decfsz(_hex1); break;
+		case 10: do_incf(_hex1); break;
+		case 15: do_incfsz(_hex1); break;
+		case 4: do_iorwf(_hex1); break;
+		case 8: do_movf(_hex1); break;
+		case 13: do_rlf(_hex1); break;
+		case 12: do_rrf(_hex1); break;
+		case 2: do_subwf(_hex1); break;
+		case 14: do_swapf(_hex1); break;
+		case 6: do_xorwf(_hex1); break;
+		
 		}
+		
+		int hex2 = code_as_int & 0b1111111;
+		int _hex2 = code_as_int & 0b1111111110000000;
+		switch (hex2) {
+		case 3: do_clrf(_hex2); break;
+		case 2: do_clrw(_hex2); break;
+		case 1: do_movwf(_hex2); break;
+		case 0: do_nop(); break;
+		}
+	}
+
+	private void do_nop() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void do_movwf(int _hex2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void do_xorwf(int _hex1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void do_swapf(int _hex1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void do_subwf(int _hex1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void do_rrf(int _hex1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void do_rlf(int _hex1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void do_movf(int _hex1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void do_iorwf(int _hex1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void do_incfsz(int _hex1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void do_incf(int _hex1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void do_decfsz(int _hex1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void do_decf(int _hex1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void do_comf(int _hex1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void do_clrw(int _hex2) {
+		// TODO Auto-generated method stub
 		
 	}
 
@@ -100,7 +190,7 @@ public class Simulator_Logik {
 		String add1 = c + d;
 		int a = Integer.parseInt(add1, 2) + w_register;
 		String output = String.valueOf(a);
-		frame.lbl_wreg_value.setText(output);
+		frame.label_wreg_value.setText(output);
 		w_register = a;
 	}
 
@@ -109,8 +199,7 @@ public class Simulator_Logik {
 		int a = Integer.parseInt(add1, 2);
 		int b = a & w_register;
 		String output = String.valueOf(b);
-		System.out.println(output);
-		frame.lbl_wreg_value.setText(output);
+		frame.label_wreg_value.setText(output);
 	}	
 	private void do_clrf(int a){
 		String add1 = c + d;
