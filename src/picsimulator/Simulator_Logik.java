@@ -113,7 +113,7 @@ public class Simulator_Logik {
 		String add1 = c + d;
 		int a = Integer.parseInt(add1, 2) + w_register;
 		String output = String.valueOf(a);
-		frame.label_wreg_value.setText(output);
+		frame.lbl_wreg_value.setText(output);
 		w_register = a;
 	}
 
@@ -123,7 +123,7 @@ public class Simulator_Logik {
 		int b = a & w_register;
 		String output = String.valueOf(b);
 		System.out.println(output);
-		frame.label_wreg_value.setText(output);
+		frame.lbl_wreg_value.setText(output);
 	}	
 	private void do_clrf(String c, String d){
 		String add1 = c + d;

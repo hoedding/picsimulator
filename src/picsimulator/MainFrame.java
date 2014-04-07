@@ -54,7 +54,7 @@ public class MainFrame extends JFrame {
 	public static frame_trisA trisA;
 	public static frame_led led;
 	public static frame_calculator calculator;
-	public JLabel label_wreg_value;
+	public JLabel lbl_wreg_value;
 	/* Array für Register */
 	String[] register_array = new String[256];
 
@@ -302,16 +302,56 @@ public class MainFrame extends JFrame {
 				led.setVisible(true);
 			}
 		});
-		rdbtnWrfel.setBounds(305, 116, 141, 23);
+		rdbtnWrfel.setBounds(305, 116, 98, 23);
 		contentPane.add(rdbtnWrfel);
 		
 		JLabel lblWreg = new JLabel("W-Reg");
 		lblWreg.setBounds(422, 39, 61, 16);
 		contentPane.add(lblWreg);
 		
-		 label_wreg_value = new JLabel("0");
-		label_wreg_value.setBounds(495, 39, 61, 16);
-		contentPane.add(label_wreg_value);
+		 lbl_wreg_value = new JLabel("00");
+		lbl_wreg_value.setBounds(495, 39, 61, 16);
+		contentPane.add(lbl_wreg_value);
+		
+		JLabel lblFSR = new JLabel("FSR");
+		lblFSR.setBounds(422, 61, 46, 14);
+		contentPane.add(lblFSR);
+		
+		JLabel lbl_FRS_value = new JLabel("00");
+		lbl_FRS_value.setBounds(495, 61, 46, 14);
+		contentPane.add(lbl_FRS_value);
+		
+		JLabel lblPcl = new JLabel("PCL");
+		lblPcl.setBounds(422, 76, 46, 14);
+		contentPane.add(lblPcl);
+		
+		JLabel lbl_PCL_value = new JLabel("00");
+		lbl_PCL_value.setBounds(495, 76, 46, 14);
+		contentPane.add(lbl_PCL_value);
+		
+		JLabel lblPclath = new JLabel("PCLATH");
+		lblPclath.setBounds(422, 94, 46, 14);
+		contentPane.add(lblPclath);
+		
+		JLabel lbl_PCLATH_value = new JLabel("00");
+		lbl_PCLATH_value.setBounds(495, 94, 46, 14);
+		contentPane.add(lbl_PCLATH_value);
+		
+		JLabel lblPc = new JLabel("PC");
+		lblPc.setBounds(422, 112, 46, 14);
+		contentPane.add(lblPc);
+		
+		JLabel lbl_PC_value = new JLabel("0000");
+		lbl_PC_value.setBounds(495, 112, 46, 14);
+		contentPane.add(lbl_PC_value);
+		
+		JLabel lblStatus = new JLabel("Status");
+		lblStatus.setBounds(422, 135, 46, 14);
+		contentPane.add(lblStatus);
+		
+		JLabel lbl_Status_value = new JLabel("00");
+		lbl_Status_value.setBounds(495, 135, 46, 14);
+		contentPane.add(lbl_Status_value);
 
 	}
 }
