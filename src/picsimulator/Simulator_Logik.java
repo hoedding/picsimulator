@@ -12,14 +12,14 @@ public class Simulator_Logik {
 	public int fsr = 0b00000000;
 	public int pcl = 0b00000000;
 	public int pclath = 0b00000000;
-	// public int PC = 0b00000000;
+	private int PC = 0;
 	public int status = 0b00000000;
 	public int irp = 0b00000000;
 	public int rp1 = 0b00000000;
 	public int rp0 = 0b00000000;
 	public int t0 = 0b00000000;
 	public int pd = 0b00000000;
-	public int z = 0b00000000;
+	public boolean z = false;
 	public int dc = 0b00000000;
 	public int c = 0b00000000;
 	public int option = 0b00000000;
@@ -39,125 +39,170 @@ public class Simulator_Logik {
 	public int t0if = 0b00000000;
 	public int intf = 0b00000000;
 	public int rbif = 0b00000000;
-	/* Das Ding enthält nur noch den Befehlscode */
-	public List<String> list_analyzed_code;
+	public int sprung;
 	
-	int[] register_array = new int[256];
+	public List<String> list_analyzed_code;//TODO 
+	
+	public int[] register_array = new int[256];
+	private List<Code> code_list = new ArrayList<Code>();
+	
+	public MainFrame_Logik logik;
 
-	public Simulator_Logik(MainFrame _frame) {
+	public Simulator_Logik(MainFrame _frame, MainFrame_Logik _logik) {
 		frame = _frame;
-		list_analyzed_code = new ArrayList<>();
+		logik = _logik;
+		initialize_register_array();	
 	}
-
-	public void doSth() {
-		frame.txtProgrammCounter.setText("text");
+	/*Getter Setter für Programm counter*/
+	public void setProgramCounter(int i){
+		PC = i;
 	}
-
+	public int getProgrammCounter(){
+		return PC;
+	}
+	/*######## ARRAY FüR DAS REGISTER #######*/
+	public void initialize_register_array() {
+		register_array = new int[256];
+		int m;
+		for (m = 0; m < 256; m++) {
+			register_array[m] = 0;
+		}
+	}
+	public void setRegisterEntry(int index, int value){
+		register_array[index] = value;
+	}
+	public int getRegisterEntry(int index){
+		return register_array[index];
+	}
+	
+	/*######## LISTE MIT EINZELNEN CODE-ELEMENTEN #######*/
+	public void setCode(int _code){
+		Code code_element = new Code();
+		code_element.code = _code;
+		code_element.line_number = code_list.size()+1;
+		code_list.add(code_element);
+	}
+	
+	/*######## Löscht alles außer die relevanten 16 Bit 
+	 * 			und speichert den Programmcode über setCode()
+	 * 			in code_list 						########*/	
 	public void analyze_code(String _codezeile) {
 		String codezeile = _codezeile;
-
 		StringBuffer buffer = new StringBuffer(codezeile);
 		int i;
 		for (i = 0; i < 5; i++) {
 			buffer.deleteCharAt(0);
 		}
-
 		String s = "";
 		for (i = 0; i < 4; i++) {
 			s = s + buffer.charAt(i);
 		}
-		list_analyzed_code.add(s);
-
+		int code =	Integer.parseInt(s, 16);
+		setCode(code);
+	}
+	
+	/*######## Führt für jedes in der code_list enthaltene
+	 * 			Elemente die Funktion what_to_do() aus #######*/
+	public void start_programm() throws InterruptedException {
+		if (getProgrammCounter() == code_list.size()) {
+			gui_aktualisieren();
+			Thread.sleep(500);
+			setProgramCounter(0);
+			count_se_pr0gram();
+		} else {
+			gui_aktualisieren();
+			Thread.sleep(500);
+			count_se_pr0gram();
+		}
 	}
 
-	public void start_programm() {
-		int i;
+	public void count_se_pr0gram() throws InterruptedException{
 		
-		for (i = 0; i < list_analyzed_code.size(); i++) {
-			what_to_do(list_analyzed_code.get(i));
-		}
-		
+		System.out.println(code_list.get(getProgrammCounter()).code);
+		what_to_do(code_list.get(getProgrammCounter()).code);
+		setProgramCounter(getProgrammCounter()+1);;
+		start_programm();
 	}
 
-	public void what_to_do(String code) {
-		int code_as_int = Integer.parseInt(code);
-		int hex1 = code_as_int & 0x00ff;
-		int _hex1 = code_as_int & 0xff00;
-		switch (hex1) {
-		case 7: do_addwf(_hex1); break;
-		case 5:	do_andwf(_hex1); break;
-		case 9:	do_comf(_hex1); break;
-		case 3: do_decf(_hex1); break;
-		case 11: do_decfsz(_hex1); break;
-		case 10: do_incf(_hex1); break;
-		case 15: do_incfsz(_hex1); break;
-		case 4: do_iorwf(_hex1); break;
-		case 8: do_movf(_hex1); break;
-		case 13: do_rlf(_hex1); break;
-		case 12: do_rrf(_hex1); break;
-		case 2: do_subwf(_hex1); break;
-		case 14: do_swapf(_hex1); break;
-		case 6: do_xorwf(_hex1); break;
-		case 57: do_andlw(_hex1); break;
-		case 56: do_iorlw(_hex1); break;
-		case 58: do_xorlw(_hex1); break;
-		
-		}
-		
-		int hex2 = code_as_int & 0b0000000001111111;
-		int _hex2 = code_as_int & 0b1111111110000000;
-		switch (hex2) {
-		case 3: do_clrf(_hex2); break;
-		case 2: do_clrw(_hex2); break;
-		case 1: do_movwf(_hex2); break;
-		case 0: do_nop(); break;
-		}
-		
-		int hex3 = code_as_int & 0b0000001111111111;
-		int _hex3 = code_as_int & 0b1111110000000000;
-		switch(hex3){
-		case 4: do_bcf(_hex3); break;
-		case 5: do_bsf(_hex3); break;
-		case 6: do_btfsc(_hex3); break;
-		case 7: do_btfss(_hex3); break;
-		case 12: do_movlw(_hex3); break;
-		case 23: do_retlw(_hex3); break;
-		}
-		
-		int hex4 = code_as_int & 0b0000000111111111;
-		int _hex4 = code_as_int & 0b1111111000000000;
-		switch(hex4){
-		case 31: do_addlw(_hex4); break;
-		case 30: do_sublw(_hex4); break;
-		}
-		
-		int hex5 = code_as_int & 0b0000011111111111;
-		int _hex5 = code_as_int & 0b1111100000000000;
+	/*######## Tatsächliche Pic-Befehle #######*/
+	public void what_to_do(int code) {
+		int code_as_int = code;
+	
+		int hex5 = code_as_int & 0b1111100000000000;
+		int _hex5 = code_as_int & 0b0000011111111111;
 		switch(hex5){
-		case 4: do_call(_hex5); break;
-		case 5: do_goto(_hex5); break;
+		case 8192: do_call(_hex5); break;
+		case 10240: do_goto(_hex5); break;
 		}
 		
-		int hex6 = code_as_int & 0x0000;
+		int hex6 = code_as_int & 0b1111110000000000;
+		int _hex6 = code_as_int & 0b0000001111111111;
 		switch(hex6){
+		case 4096: do_bcf(_hex6); break;
+		case 5120: do_bsf(_hex6); break;
+		case 6144: do_btfsc(_hex6); break;
+		case 7168: do_btfss(_hex6); break;
+		case 12288: do_movlw(_hex6); break;
+		case 13312: do_retlw(_hex6); break;
+		}
+		
+		int hex7 = code_as_int & 0b1111111000000000;
+		int _hex7 = code_as_int & 0b0000000111111111;
+		switch(hex7){
+		case 15872: do_addlw(_hex7); break;
+		case 15360: do_sublw(_hex7); break;
+		}
+		
+		int hex8 = code_as_int & 0b1111111100000000;
+		int _hex8 = code_as_int & 0b0000000011111111;
+		switch (hex8) {
+		case 1792: do_addwf(_hex8); break;
+		case 1280:	do_andwf(_hex8); break;
+		case 2304:	do_comf(_hex8); break;
+		case 768: do_decf(_hex8); break;
+		case 2816: do_decfsz(_hex8); break;
+		case 2560: do_incf(_hex8); break;
+		case 3840: do_incfsz(_hex8); break;
+		case 1024: do_iorwf(_hex8); break;
+		case 2048: do_movf(_hex8); break;
+		case 3328: do_rlf(_hex8); break;
+		case 3072: do_rrf(_hex8); break;
+		case 512: do_subwf(_hex8); break;
+		case 3584: do_swapf(_hex8); break;
+		case 1536: do_xorwf(_hex8); break;
+		case 14592: do_andlw(_hex8); break;
+		case 14336: do_iorlw(_hex8); break;
+		case 14848: do_xorlw(_hex8); break;
+		
+		}
+		
+		int hex16 = code_as_int & 0b0000000000000000;
+		switch(hex16){
 		case 100: do_clrwdt(); break;
 		case 9: do_retfie(); break;
 		case 8: do_return(); break;
 		case 99: do_sleep(); break;
-		
 		}
 		
-		
+		int hex9 = code_as_int & 0b1111111110000000;
+		int _hex9 = code_as_int & 0b0000000001111111;
+		switch (hex9) {
+		case 384: do_clrf(_hex9); break;
+		case 256: do_clrw(_hex9); break;
+		case 128: do_movwf(_hex9); break;
+		case 0: do_nop(); break;
+		}
 		
 	}
 
 	private void do_sleep() {
-		// TODO Auto-generated method stub
+		// TODO standby mode ??
+		
 		
 	}
 
 	private void do_return() {
-		// TODO Auto-generated method stub
+		setProgramCounter(sprung);
 		
 	}
 
@@ -173,12 +218,15 @@ public class Simulator_Logik {
 
 	private void do_goto(int _hex5) {
 		// TODO Auto-generated method stub
-		
+		sprung = getProgrammCounter();
+		System.out.println(getProgrammCounter());
+		setProgramCounter(_hex5);
+		System.out.println(getProgrammCounter());
 	}
 
 	private void do_call(int _hex5) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("call");
 	}
 
 	private void do_sublw(int _hex4) {
@@ -213,36 +261,40 @@ public class Simulator_Logik {
 
 	private void do_andlw(int _hex1) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("andlw");
 	}
 
 	private void do_btfss(int _hex3) {
-		// TODO Auto-generated method stub
-		
+		if(register_array[_hex3]>0){
+			setProgramCounter(getProgrammCounter()+1);
+		}
 	}
 
 	private void do_btfsc(int _hex3) {
-		// TODO Auto-generated method stub
+		if(register_array[_hex3]==0){
+			setProgramCounter(getProgrammCounter()+1);
+		}
 		
 	}
 
 	private void do_bsf(int _hex3) {
-		// TODO Auto-generated method stub
+		register_array[_hex3]=1;
 		
 	}
 
 	private void do_bcf(int _hex3) {
-		// TODO Auto-generated method stub
+		register_array[_hex3]=0;
 		
 	}
 
 	private void do_nop() {
-		// TODO Auto-generated method stub
+		// TODO Einfach nix tun ? 
 		
 	}
 
 	private void do_movwf(int _hex2) {
-		// TODO Auto-generated method stub
+		register_array[_hex2] = w_register;
+		gui_aktualisieren();
 		
 	}
 
@@ -257,8 +309,8 @@ public class Simulator_Logik {
 	}
 
 	private void do_subwf(int _hex1) {
-		// TODO Auto-generated method stub
-		
+		register_array[_hex1]=register_array[_hex1]-w_register;
+		gui_aktualisieren();
 	}
 
 	private void do_rrf(int _hex1) {
@@ -282,43 +334,93 @@ public class Simulator_Logik {
 	}
 
 	private void do_incfsz(int _hex1) {
-		// TODO Auto-generated method stub
+		// TODO wie funktioniert incfsz
 		
 	}
 
 	private void do_incf(int _hex1) {
-		// TODO Auto-generated method stub
+		register_array[_hex1]=register_array[_hex1]+1;
 		
 	}
 
 	private void do_decfsz(int _hex1) {
-		// TODO Auto-generated method stub
-		
+		int temp = register_array[_hex1] - 1;
+		register_array[_hex1] = temp;
+		if (temp == 0) {
+			setProgramCounter(getProgrammCounter() + 1);
+		}
+		//TODO wie funktioniert decfsz
 	}
 
 	private void do_decf(int _hex1) {
-		// TODO Auto-generated method stub
-		
+		register_array[_hex1] = register_array[_hex1]-1;
+		change_z();
+		gui_aktualisieren();
 	}
 
 	private void do_comf(int _hex1) {
-		// TODO Auto-generated method stub
+		// TODO was ist complement ?
 		
 	}
 
 	private void do_clrw(int _hex2) {
-		// TODO Auto-generated method stub
+		w_register = 0b0;
+		change_z();
+		gui_aktualisieren();
 		
 	}
 
 	private void do_addwf(int a) {
-		// TODO Auto-generated method stub
+		w_register = w_register + a;
+		change_z();
+		gui_aktualisieren();
 	}
 
 	private void do_andwf(int a) {
-		// TODO Auto-generated method stub
+		w_register = w_register & a;
+		change_z();
+		gui_aktualisieren();
 	}	
 	private void do_clrf(int a){
-		// TODO Auto-generated method stub
+		register_array[a] = 0b0;
+		change_z();
+		gui_aktualisieren();
+	}
+	public void gui_aktualisieren(){
+		/*W-Register in GUI setzen*/
+	frame.lbl_wreg_value.setText(String.valueOf(w_register).toString());
+	 	/*Aktualisieren der Tabelle mit den Werten aus Register_Array*/
+	tabelle_aktualisieren();
+		/*z überprüfen ob true/false*/
+	if(z=true){frame.label_z_value.setText("1");}else{frame.label_z_value.setText("0");}
+		/*Aktuellen Code in Liste markieren*/
+	frame.txtProgrammCounter.setText(String.valueOf(PC).toString());
+	}
+		
+	public void tabelle_aktualisieren(){
+	
+			int m1 = 0, n1 = 0, t1 = 0;
+			while (m1 < 256) {
+				while (t1 < 8) {
+					/* Tabelle bekommt Werte aus Array zugewiesen */
+					
+					frame.table_model.setValueAt(register_array[m1],
+							n1, t1);
+					t1++;
+					m1++;
+				}
+				t1 = 0;
+				n1++;
+		}
+		}
+
+	public void change_z() {
+		if (z = true) {
+			z = false;
+		} else {
+			if (z = false) {
+				z = true;
+			}
+		}
 	}
 }

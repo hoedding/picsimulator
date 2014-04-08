@@ -1,6 +1,5 @@
 package picsimulator;
 
-
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -36,7 +35,7 @@ import javax.swing.JLabel;
 public class MainFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private JTextField txtZeit;
 	public JTextField txtProgrammCounter;
 	public JTextField txtLaufzeit;
@@ -55,19 +54,20 @@ public class MainFrame extends JFrame {
 	public static frame_led led;
 	public static frame_calculator calculator;
 	public JLabel lbl_wreg_value;
-	
+	public JLabel label_z_value;
+	public static MainFrame frame;
+	public Thread t1;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 
-					MainFrame frame = new MainFrame();
-					
-					simulator = new Simulator_Logik(frame);
-					logik = new MainFrame_Logik(frame,simulator);
-					frame.setVisible(true);
+					frame = new MainFrame();
 
+					simulator = new Simulator_Logik(frame, logik);
+					logik = new MainFrame_Logik(frame, simulator);
+					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -76,7 +76,6 @@ public class MainFrame extends JFrame {
 	}
 
 	public MainFrame() {
-
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1112, 497);
 		JPanel contentPane = new JPanel();
@@ -105,10 +104,10 @@ public class MainFrame extends JFrame {
 
 		JMenuItem mntmSchalter = new JMenuItem("Schalter");
 		mnErweiterungen.add(mntmSchalter);
-		
+
 		JMenu mnTools = new JMenu("Tools");
 		menuBar.add(mnTools);
-		
+
 		JMenuItem mntmCalculator = new JMenuItem("Calculator");
 		mntmCalculator.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -126,29 +125,24 @@ public class MainFrame extends JFrame {
 		JButton btnStart = new JButton("Start");
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				long time = -System.currentTimeMillis();
-				//TODO Testfunktionen
-				
-				int i;
-				for(i=0;i<listModel.size();i++){
-					simulator.analyze_code(listModel.elementAt(i));
-					}
-				
-				simulator.start_programm();
-				/*for(i=0;i<simulator.list_analyzed_code.size();i++){
-					System.out.println(simulator.list_analyzed_code.get(i));
-				}*/
-				long new_time = time + System.currentTimeMillis();
-				txtLaufzeit.setText(new_time + "ms");
+
+				Thread t1 = new Thread(
+						new Thread_Logik(frame, simulator, logik));
+				t1.start();
 
 			}
 		});
 		btnStart.setBounds(10, 34, 91, 29);
 		contentPane.add(btnStart);
 
-		JButton btnStop = new JButton("Stop");
-		btnStop.setBounds(10, 61, 91, 29);
-		contentPane.add(btnStop);
+		JButton btnPause = new JButton("Pause");
+		btnPause.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//TODO
+			}
+		});
+		btnPause.setBounds(10, 61, 91, 29);
+		contentPane.add(btnPause);
 
 		txtZeit = new JTextField();
 		txtZeit.setEditable(false);
@@ -208,7 +202,7 @@ public class MainFrame extends JFrame {
 		label_3.setBounds(119, 156, 66, 17);
 		contentPane.add(label_3);
 
-		 listModel = new DefaultListModel<String>();
+		listModel = new DefaultListModel<String>();
 		list_code = new JList<String>(listModel);
 
 		scrollpane_code = new JScrollPane(list_code);
@@ -217,7 +211,7 @@ public class MainFrame extends JFrame {
 
 		String[] titles = new String[] { "00", "01", "02", "03", "04", "05",
 				"06", "07" };
-		 table_model = new DefaultTableModel(titles, 32);
+		table_model = new DefaultTableModel(titles, 32);
 		JTable table = new JTable(table_model);
 		JScrollPane scrollpane_table = new JScrollPane(table);
 		scrollpane_table.setBounds(803, 33, 301, 428);
@@ -263,7 +257,7 @@ public class MainFrame extends JFrame {
 		JButton btnRegisterSpeichern = new JButton("Register speichern");
 		btnRegisterSpeichern.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				logik.register_safe();
+
 			}
 		});
 		btnRegisterSpeichern.setBounds(677, 61, 117, 29);
@@ -304,54 +298,71 @@ public class MainFrame extends JFrame {
 		});
 		rdbtnWrfel.setBounds(305, 116, 98, 23);
 		contentPane.add(rdbtnWrfel);
-		
+
 		JLabel lblWreg = new JLabel("W-Reg");
 		lblWreg.setBounds(422, 39, 61, 16);
 		contentPane.add(lblWreg);
-		
-		 lbl_wreg_value = new JLabel("00");
+
+		lbl_wreg_value = new JLabel("00");
 		lbl_wreg_value.setBounds(495, 39, 61, 16);
 		contentPane.add(lbl_wreg_value);
-		
+
 		JLabel lblFSR = new JLabel("FSR");
 		lblFSR.setBounds(422, 61, 46, 14);
 		contentPane.add(lblFSR);
-		
+
 		JLabel lbl_FRS_value = new JLabel("00");
 		lbl_FRS_value.setBounds(495, 61, 46, 14);
 		contentPane.add(lbl_FRS_value);
-		
+
 		JLabel lblPcl = new JLabel("PCL");
 		lblPcl.setBounds(422, 76, 46, 14);
 		contentPane.add(lblPcl);
-		
+
 		JLabel lbl_PCL_value = new JLabel("00");
 		lbl_PCL_value.setBounds(495, 76, 46, 14);
 		contentPane.add(lbl_PCL_value);
-		
+
 		JLabel lblPclath = new JLabel("PCLATH");
 		lblPclath.setBounds(422, 94, 46, 14);
 		contentPane.add(lblPclath);
-		
+
 		JLabel lbl_PCLATH_value = new JLabel("00");
 		lbl_PCLATH_value.setBounds(495, 94, 46, 14);
 		contentPane.add(lbl_PCLATH_value);
-		
+
 		JLabel lblPc = new JLabel("PC");
 		lblPc.setBounds(422, 112, 46, 14);
 		contentPane.add(lblPc);
-		
+
 		JLabel lbl_PC_value = new JLabel("0000");
 		lbl_PC_value.setBounds(495, 112, 46, 14);
 		contentPane.add(lbl_PC_value);
-		
+
 		JLabel lblStatus = new JLabel("Status");
 		lblStatus.setBounds(422, 135, 46, 14);
 		contentPane.add(lblStatus);
-		
+
 		JLabel lbl_Status_value = new JLabel("00");
 		lbl_Status_value.setBounds(495, 135, 46, 14);
 		contentPane.add(lbl_Status_value);
+
+		JLabel lblZ = new JLabel("Z");
+		lblZ.setBounds(530, 39, 20, 16);
+		contentPane.add(lblZ);
+
+		label_z_value = new JLabel("00");
+		label_z_value.setBounds(556, 39, 37, 16);
+		contentPane.add(label_z_value);
+		
+		JButton btnWeiter = new JButton("Weiter");
+		btnWeiter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO
+			}
+		});
+		btnWeiter.setBounds(10, 89, 91, 29);
+		contentPane.add(btnWeiter);
 
 	}
 }

@@ -3,29 +3,18 @@ package picsimulator;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.FileReader;
+
 import javax.swing.JFileChooser;
 
 public class MainFrame_Logik {
 	private MainFrame frame;
 	private Simulator_Logik simulator;
 
-	public MainFrame_Logik(MainFrame frame2, Simulator_Logik simulator) {
-		frame = frame2;
+	public MainFrame_Logik(MainFrame _frame, Simulator_Logik _simulator) {
+		frame = _frame;
+		simulator = _simulator;
 		}
-
-	public void register_safe() {
-		String register_export = "";
-		int m = 0;
-		for (m = 0; m < 256; m++) {
-			{
-				register_export = register_export + simulator.register_array[m]
-						+ ";";
-			}
-		}
-		System.out.println(register_export);
-		// TODO exportmöglichkeit für das Register
-	}
-
+	
 	@SuppressWarnings("resource")
 	public void register_load() {
 		/* Auswählen der Datei */
@@ -52,18 +41,20 @@ public class MainFrame_Logik {
 						s++;
 					}
 				}
-				int m1 = 0, n1 = 0, t1 = 0;
+				
+				simulator.tabelle_aktualisieren();
+				/*int m1 = 0, n1 = 0, t1 = 0;
 				while (m1 < 256) {
 					while (t1 < 8) {
 						/* Tabelle bekommt Werte aus Array zugewiesen */
-						frame.table_model.setValueAt(simulator.register_array[m1],
+					/*	frame.table_model.setValueAt(simulator.register_array[m1],
 								n1, t1);
 						t1++;
 						m1++;
 					}
 					t1 = 0;
 					n1++;
-				}
+				}*/
 
 			} catch (IOException e1) {
 				e1.printStackTrace();
@@ -76,8 +67,7 @@ public class MainFrame_Logik {
 		int i;
 		for (i = 0; i < frame.listModel.size(); i++) {
 			String temp = frame.listModel.elementAt(i);
-			if ((temp.startsWith("     ") /*& !temp.contains("$")*/)) {
-
+			if (temp.startsWith("     ")) {
 				frame.listModel.remove(i);
 				i--;
 			}
@@ -158,5 +148,5 @@ public class MainFrame_Logik {
 		frame_trisA trisa = new frame_trisA();
 		trisa.setVisible(true);
 	}
-
+	
 }
