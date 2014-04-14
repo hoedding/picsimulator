@@ -12,7 +12,7 @@ public class Simulator_Logik {
 	public int fsr = 0b00000000;
 	public int pcl = 0b00000000;
 	public int pclath = 0b00000000;
-	private int PC = 0;
+	
 	public int status = 0b00000000;
 	public int irp = 0b00000000;
 	public int rp1 = 0b00000000;
@@ -40,6 +40,7 @@ public class Simulator_Logik {
 	public int intf = 0b00000000;
 	public int rbif = 0b00000000;
 	public int sprung;
+	private int PC = 0;
 	
 	public List<String> list_analyzed_code;//TODO 
 	
@@ -125,7 +126,7 @@ public class Simulator_Logik {
 	}
 
 	/*######## Tatsächliche Pic-Befehle #######*/
-	public void what_to_do(int code) {
+	public void what_to_do(int code) throws InterruptedException {
 		int code_as_int = code;
 	
 		int hex5 = code_as_int & 0b1111100000000000;
@@ -207,12 +208,12 @@ public class Simulator_Logik {
 	}
 
 	private void do_retfie() {
-		// TODO Auto-generated method stub
+		// TODO Return from Interrupt
 		
 	}
 
 	private void do_clrwdt() {
-		// TODO Auto-generated method stub
+		// TODO Clear WatchDog Timer
 		
 	}
 
@@ -323,8 +324,14 @@ public class Simulator_Logik {
 	}
 
 	private void do_movf(int _hex1) {
-		// TODO Auto-generated method stub
-		
+		int temp = _hex1 & 0b10000000;
+		int _temp = _hex1 & 0b01111111;
+		if(temp==1){
+			register_array[_temp] = _temp;
+		}else{
+			w_register = _hex1;
+		}
+		gui_aktualisieren();
 	}
 
 	private void do_iorwf(int _hex1) {
