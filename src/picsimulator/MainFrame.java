@@ -57,6 +57,7 @@ public class MainFrame extends JFrame {
 	public JLabel label_z_value;
 	public static MainFrame frame;
 	public Thread t1;
+	public boolean oliver;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -116,10 +117,10 @@ public class MainFrame extends JFrame {
 			}
 		});
 		mnTools.add(mntmCalculator);
-		
+
 		JMenu mnHelp = new JMenu("Hilfe");
 		menuBar.add(mnHelp);
-		
+
 		JMenuItem mntmDoku = new JMenuItem("Dokumentation");
 		mnHelp.add(mntmDoku);
 
@@ -130,12 +131,30 @@ public class MainFrame extends JFrame {
 
 		JButton btnStart = new JButton("Start");
 		btnStart.addActionListener(new ActionListener() {
+			@SuppressWarnings("static-access")
 			public void actionPerformed(ActionEvent e) {
-
+				/* ############## */
+				oliver = true;
+				start();
+				/* ############## */
 				Thread t1 = new Thread(
 						new Thread_Logik(frame, simulator, logik));
 				t1.start();
+				try {
+					t1.sleep(500);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				
+				}
+			}
 
+			private void start() {
+				logik.filter_code();
+				int i;
+				for (i = 0; i < frame.listModel.size(); i++) {
+					simulator.analyze_code(frame.listModel.elementAt(i));
+				}
 			}
 		});
 		btnStart.setBounds(10, 34, 91, 29);
@@ -144,7 +163,7 @@ public class MainFrame extends JFrame {
 		JButton btnPause = new JButton("Pause");
 		btnPause.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//TODO
+				oliver = false;
 			}
 		});
 		btnPause.setBounds(10, 61, 91, 29);
@@ -210,7 +229,6 @@ public class MainFrame extends JFrame {
 
 		listModel = new DefaultListModel<String>();
 		list_code = new JList<String>(listModel);
-	
 
 		scrollpane_code = new JScrollPane(list_code);
 		scrollpane_code.setBounds(10, 246, 781, 215);
@@ -361,11 +379,21 @@ public class MainFrame extends JFrame {
 		label_z_value = new JLabel("00");
 		label_z_value.setBounds(556, 39, 37, 16);
 		contentPane.add(label_z_value);
-		
+
 		JButton btnWeiter = new JButton("Weiter");
 		btnWeiter.addActionListener(new ActionListener() {
+			@SuppressWarnings("static-access")
 			public void actionPerformed(ActionEvent e) {
-				// TODO
+				Thread t1 = new Thread(
+						new Thread_Logik_Once(frame, simulator, logik));
+				t1.start();
+				try {
+					t1.sleep(500);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				
+				}
 			}
 		});
 		btnWeiter.setBounds(10, 89, 91, 29);

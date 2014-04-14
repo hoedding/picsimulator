@@ -129,9 +129,8 @@ public class Simulator_Logik {
 
 		System.out.println(code_list.get(getProgrammCounter()).code);
 		what_to_do(code_list.get(getProgrammCounter()).code);
-		setProgramCounter(getProgrammCounter() + 1);
-		;
-		start_programm();
+		setProgramCounter(getProgrammCounter()+1);;
+		
 	}
 
 	/* ######## Tatsächliche Pic-Befehle ####### */
@@ -282,7 +281,7 @@ public class Simulator_Logik {
 
 	private void do_return() throws InterruptedException {
 		setProgramCounter(sprung);
-		start_programm();
+		
 	}
 
 	private void do_retfie() {
@@ -540,17 +539,31 @@ public class Simulator_Logik {
 		change_z();
 		gui_aktualisieren();
 	}
-
-	public void gui_aktualisieren() {
-		/* W-Register in GUI setzen */
-		frame.lbl_wreg_value.setText(String.valueOf(w_register).toString());
-		/* Aktualisieren der Tabelle mit den Werten aus Register_Array */
-		tabelle_aktualisieren();
-		/* z überprüfen ob true/false */
-		if (z = true) {
-			frame.label_z_value.setText("1");
-		} else {
-			frame.label_z_value.setText("0");
+	public void gui_aktualisieren(){
+		/*W-Register in GUI setzen*/
+	frame.lbl_wreg_value.setText(String.valueOf(w_register).toString());
+	 	/*Aktualisieren der Tabelle mit den Werten aus Register_Array*/
+	tabelle_aktualisieren();
+		/*z überprüfen ob true/false*/
+	if(z=true){frame.label_z_value.setText("1");}else{frame.label_z_value.setText("0");}
+		/*Aktuellen Code in Liste markieren*/
+	frame.txtProgrammCounter.setText(String.valueOf(PC+1).toString());
+	}
+		
+	public void tabelle_aktualisieren(){
+	
+			int m1 = 0, n1 = 0, t1 = 0;
+			while (m1 < 256) {
+				while (t1 < 8) {
+					/* Tabelle bekommt Werte aus Array zugewiesen */
+					
+					frame.table_model.setValueAt(register_array[m1],
+							n1, t1);
+					t1++;
+					m1++;
+				}
+				t1 = 0;
+				n1++;
 		}
 		/* Aktuellen Code in Liste markieren */
 		frame.txtProgrammCounter.setText(String.valueOf(PC).toString());
@@ -580,5 +593,16 @@ public class Simulator_Logik {
 				z = true;
 			}
 		}
+	}
+	public void write_to_register(int adress, int value){
+		if(adress==0){
+			adress = 4;
+		} 
+		register_array[adress]=value;
+	}
+	
+	public int get_C(){
+		int _temp = register_array[3] & 0b00000001;
+		return _temp;
 	}
 }
