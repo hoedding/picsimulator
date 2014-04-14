@@ -143,10 +143,29 @@ public class MainFrame_Logik {
 			e.printStackTrace();
 		}
 	}
-
+	private frame_trisA trisa;
 	public void open_trisA() {
-		frame_trisA trisa = new frame_trisA();
+		
+		if(trisa==null){
+		 trisa = new frame_trisA(frame);
 		trisa.setVisible(true);
+		}
+	}
+	private frame_trisB trisb;
+	public void open_trisB() {
+		
+		if(trisb==null){
+		 trisb = new frame_trisB(frame);
+		trisb.setVisible(true);
+		}
+	}
+	private frame_trisC trisc;
+	public void open_trisC() {
+		
+		if(trisc==null){
+		 trisc = new frame_trisC(frame);
+		trisc.setVisible(true);
+		}
 	}
 	
 }

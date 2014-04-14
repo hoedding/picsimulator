@@ -37,7 +37,6 @@ public class MainFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	private JTextField txtZeit;
-	public JTextField txtProgrammCounter;
 	public JTextField txtLaufzeit;
 	public JTextField txtTakt;
 	public JTextField txtwreg;
@@ -55,6 +54,10 @@ public class MainFrame extends JFrame {
 	public static frame_calculator calculator;
 	public JLabel lbl_wreg_value;
 	public JLabel label_z_value;
+	public JLabel label_C_value;
+	public JLabel lbl_Status_value;
+	public JLabel lbl_PC_value;
+	public JLabel label_DC_value;
 	public static MainFrame frame;
 	public Thread t1;
 	public boolean oliver;
@@ -176,13 +179,6 @@ public class MainFrame extends JFrame {
 		contentPane.add(txtZeit);
 		txtZeit.setColumns(10);
 
-		txtProgrammCounter = new JTextField();
-		txtProgrammCounter.setEditable(false);
-		txtProgrammCounter.setText("Programm Counter");
-		txtProgrammCounter.setBounds(205, 68, 88, 28);
-		contentPane.add(txtProgrammCounter);
-		txtProgrammCounter.setColumns(10);
-
 		txtLaufzeit = new JTextField();
 		txtLaufzeit.setEditable(false);
 		txtLaufzeit.setText("Laufzeit");
@@ -209,10 +205,6 @@ public class MainFrame extends JFrame {
 		txtTakt.setBounds(205, 145, 88, 28);
 		contentPane.add(txtTakt);
 		txtTakt.setColumns(10);
-
-		Label label_1 = new Label("PC:");
-		label_1.setBounds(119, 79, 66, 17);
-		contentPane.add(label_1);
 
 		Label label = new Label("Zeit:");
 		label.setBounds(119, 39, 66, 17);
@@ -307,6 +299,11 @@ public class MainFrame extends JFrame {
 		contentPane.add(rdbtnTrisA);
 
 		JRadioButton rdbtnTrisB = new JRadioButton("TRIS B");
+		rdbtnTrisB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				logik.open_trisB();
+			}
+		});
 		rdbtnTrisB.setBounds(305, 62, 77, 23);
 		contentPane.add(rdbtnTrisB);
 
@@ -360,7 +357,7 @@ public class MainFrame extends JFrame {
 		lblPc.setBounds(422, 112, 46, 14);
 		contentPane.add(lblPc);
 
-		JLabel lbl_PC_value = new JLabel("0000");
+		lbl_PC_value = new JLabel("0000");
 		lbl_PC_value.setBounds(495, 112, 46, 14);
 		contentPane.add(lbl_PC_value);
 
@@ -368,7 +365,7 @@ public class MainFrame extends JFrame {
 		lblStatus.setBounds(422, 135, 46, 14);
 		contentPane.add(lblStatus);
 
-		JLabel lbl_Status_value = new JLabel("00");
+		 lbl_Status_value = new JLabel("00");
 		lbl_Status_value.setBounds(495, 135, 46, 14);
 		contentPane.add(lbl_Status_value);
 
@@ -398,6 +395,26 @@ public class MainFrame extends JFrame {
 		});
 		btnWeiter.setBounds(10, 89, 91, 29);
 		contentPane.add(btnWeiter);
+		
+		JLabel lblC = new JLabel("C");
+		lblC.setBounds(530, 61, 61, 16);
+		contentPane.add(lblC);
+		
+		label_C_value = new JLabel("00");
+		label_C_value.setBounds(556, 61, 61, 16);
+		contentPane.add(label_C_value);
+		
+		JLabel lblDc = new JLabel("DC");
+		lblDc.setBounds(530, 74, 61, 16);
+		contentPane.add(lblDc);
+		
+		label_DC_value = new JLabel("00");
+		label_DC_value.setBounds(556, 74, 61, 16);
+		contentPane.add(label_DC_value);
 
+	}
+	public void add_to_register(int adress, int value){
+		System.out.println(adress + "  " + value);
+		simulator.write_to_register(adress, value);
 	}
 }

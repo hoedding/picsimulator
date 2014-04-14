@@ -153,10 +153,10 @@ public class Simulator_Logik {
 		int _hex6 = code_as_int & 0b0000001111111111;
 		switch (hex6) {
 		case 4096:
-			do_bcf(_hex6);
+			//do_bcf(_hex6);
 			break;
 		case 5120:
-			do_bsf(_hex6);
+			//do_bsf(_hex6);
 			break;
 		case 6144:
 			do_btfsc(_hex6);
@@ -383,17 +383,17 @@ public class Simulator_Logik {
 
 	}
 
-	private void do_bsf(int _hex3) {
+	/*private void do_bsf(int _hex3) {
 		register_array[_hex3] = 1;
 		gui_aktualisieren();
 
-	}
+	}*/
 
-	private void do_bcf(int _hex3) {
+	/*private void do_bcf(int _hex3) {
 		register_array[_hex3] = 0;
 		gui_aktualisieren();
 
-	}
+	}*/
 
 	private void do_nop() {
 
@@ -620,26 +620,40 @@ public class Simulator_Logik {
 			frame.label_z_value.setText("0");
 		}
 		/* Aktuellen Code in Liste markieren */
-		frame.txtProgrammCounter.setText(String.valueOf(PC + 1).toString());
+		//TODO
+		
+		/* PC setzen in Frame */
+		frame.lbl_PC_value.setText(String.valueOf(PC + 1).toString());
+		
+		/* C setzen in Frame*/
+		frame.label_C_value.setText(String.valueOf(get_C()).toString());
+		
+		/*Status setzen*/
+		frame.lbl_Status_value.setText(String.valueOf(register_array[3]).toString());
+		
+		/*DC setzen*/
+		frame.label_DC_value.setText(String.valueOf(get_DC()).toString());
 	}
-
-	public void tabelle_aktualisieren() {
-
-		int m1 = 0, n1 = 0, t1 = 0;
-		while (m1 < 256) {
-			while (t1 < 8) {
-				/* Tabelle bekommt Werte aus Array zugewiesen */
-
-				frame.table_model.setValueAt(register_array[m1], n1, t1);
-				t1++;
-				m1++;
-			}
-			t1 = 0;
-			n1++;
+		
+	public void tabelle_aktualisieren(){
+	
+			int m1 = 0, n1 = 0, t1 = 0;
+			while (m1 < 256) {
+				while (t1 < 8) {
+					/* Tabelle bekommt Werte aus Array zugewiesen */
+					
+					frame.table_model.setValueAt(register_array[m1],
+							n1, t1);
+					t1++;
+					m1++;
+				}
+				t1 = 0;
+				n1++;
 		}
 		/* Aktuellen Code in Liste markieren */
-		frame.txtProgrammCounter.setText(String.valueOf(PC).toString());
+		
 	}
+
 
 	public void change_z() {
 		if (z = true) {
@@ -654,16 +668,43 @@ public class Simulator_Logik {
 	public void write_to_register(int adress, int value) {
 		if (adress == 0) {
 			adress = 4;
-		}
-		register_array[adress] = value;
+		} 
+		register_array[adress]=value;
+		gui_aktualisieren();
 	}
-
+	
 	public int get_C() {
 		int _temp = register_array[3] & 0b00000001;
-		return _temp;
+		if (_temp == 1) {
+			return 1;
+		} else {
+			return 0;
+		}
 	}
+	public int get_DC(){
+		int _temp = register_array[3] & 0b00000010;
+		if (_temp == 2) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+
 
 	public void change_C(int carry_flag) {
 
 	}
+
+	public int get_Z(){
+		int _temp = register_array[3] & 0b00000100;
+		if (_temp == 4) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+	
+	
+	
+
 }

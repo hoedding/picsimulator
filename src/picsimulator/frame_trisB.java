@@ -1,36 +1,27 @@
 package picsimulator;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import java.awt.GridLayout;
+public class frame_trisB extends JFrame {
 
-import javax.swing.JRadioButton;
-
-import java.awt.Color;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-public class frame_trisA extends JFrame {
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8142784351573647845L;
 	private JPanel contentPane;
 	private JTextField textField;
 	private MainFrame frame;
 
-	public frame_trisA(final MainFrame frame) {
+	public frame_trisB(final MainFrame frame) {
 		this.frame = frame;
 		setTitle("TRIS A");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -84,20 +75,20 @@ public class frame_trisA extends JFrame {
 		JButton btnSpeichern = new JButton("Speichern");
 		btnSpeichern.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int trisA;
-				if(radioButton_1.isSelected()){trisA=0b10000000;}else{trisA=0b0;}
-				if(radioButton_2.isSelected()){trisA=trisA+0b1000000;}else{trisA=trisA+0b0;}
-				if(radioButton_3.isSelected()){trisA=trisA+0b100000;}else{trisA=trisA+0b0;}
-				if(radioButton_4.isSelected()){trisA=trisA+0b10000;}else{trisA=trisA+0b0;}
-				if(radioButton_5.isSelected()){trisA=trisA+0b1000;}else{trisA=trisA+0b0;}
-				if(radioButton_6.isSelected()){trisA=trisA+0b100;}else{trisA=trisA+0b0;}
-				if(radioButton_7.isSelected()){trisA=trisA+0b10;}else{trisA=trisA+0b0;}
-				if(radioButton_8.isSelected()){trisA=trisA+0b1;}else{trisA=trisA+0b0;}
-				System.out.println(trisA);
+				int trisB;
+				if(radioButton_1.isSelected()){trisB=0b10000000;}else{trisB=0b0;}
+				if(radioButton_2.isSelected()){trisB=trisB+0b1000000;}else{trisB=trisB+0b0;}
+				if(radioButton_3.isSelected()){trisB=trisB+0b100000;}else{trisB=trisB+0b0;}
+				if(radioButton_4.isSelected()){trisB=trisB+0b10000;}else{trisB=trisB+0b0;}
+				if(radioButton_5.isSelected()){trisB=trisB+0b1000;}else{trisB=trisB+0b0;}
+				if(radioButton_6.isSelected()){trisB=trisB+0b100;}else{trisB=trisB+0b0;}
+				if(radioButton_7.isSelected()){trisB=trisB+0b10;}else{trisB=trisB+0b0;}
+				if(radioButton_8.isSelected()){trisB=trisB+0b1;}else{trisB=trisB+0b0;}
+				System.out.println(trisB);
 				if(textField.getText()==""){
 									
 				}else {
-					frame.add_to_register(Integer.parseInt(textField.getText()), trisA);
+					frame.add_to_register(Integer.parseInt(textField.getText()), trisB);
 				}
 			}
 		});
