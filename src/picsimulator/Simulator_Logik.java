@@ -569,21 +569,6 @@ public class Simulator_Logik {
 		frame.txtProgrammCounter.setText(String.valueOf(PC).toString());
 	}
 
-	public void tabelle_aktualisieren() {
-
-		int m1 = 0, n1 = 0, t1 = 0;
-		while (m1 < 256) {
-			while (t1 < 8) {
-				/* Tabelle bekommt Werte aus Array zugewiesen */
-
-				frame.table_model.setValueAt(register_array[m1], n1, t1);
-				t1++;
-				m1++;
-			}
-			t1 = 0;
-			n1++;
-		}
-	}
 
 	public void change_z() {
 		if (z = true) {
