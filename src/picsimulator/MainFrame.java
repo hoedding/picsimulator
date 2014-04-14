@@ -210,6 +210,7 @@ public class MainFrame extends JFrame {
 
 		listModel = new DefaultListModel<String>();
 		list_code = new JList<String>(listModel);
+	
 
 		scrollpane_code = new JScrollPane(list_code);
 		scrollpane_code.setBounds(10, 246, 781, 215);

@@ -117,7 +117,7 @@ public class Simulator_Logik {
 	}
 
 	public void count_se_pr0gram() throws InterruptedException{
-		
+	
 		System.out.println(code_list.get(getProgrammCounter()).code);
 		what_to_do(code_list.get(getProgrammCounter()).code);
 		setProgramCounter(getProgrammCounter()+1);;
@@ -201,9 +201,9 @@ public class Simulator_Logik {
 		
 	}
 
-	private void do_return() {
+	private void do_return() throws InterruptedException {
 		setProgramCounter(sprung);
-		
+		start_programm();
 	}
 
 	private void do_retfie() {
@@ -217,7 +217,6 @@ public class Simulator_Logik {
 	}
 
 	private void do_goto(int _hex5) {
-		// TODO Auto-generated method stub
 		sprung = getProgrammCounter();
 		System.out.println(getProgrammCounter());
 		setProgramCounter(_hex5);
