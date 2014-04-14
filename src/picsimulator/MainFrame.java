@@ -116,6 +116,12 @@ public class MainFrame extends JFrame {
 			}
 		});
 		mnTools.add(mntmCalculator);
+		
+		JMenu mnHelp = new JMenu("Hilfe");
+		menuBar.add(mnHelp);
+		
+		JMenuItem mntmDoku = new JMenuItem("Dokumentation");
+		mnHelp.add(mntmDoku);
 
 		final SimpleAttributeSet keyWord = new SimpleAttributeSet();
 		StyleConstants.setForeground(keyWord, Color.RED);
