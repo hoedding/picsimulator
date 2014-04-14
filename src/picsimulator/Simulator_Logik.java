@@ -129,8 +129,9 @@ public class Simulator_Logik {
 
 		System.out.println(code_list.get(getProgrammCounter()).code);
 		what_to_do(code_list.get(getProgrammCounter()).code);
-		setProgramCounter(getProgrammCounter()+1);;
-		
+		setProgramCounter(getProgrammCounter() + 1);
+		;
+
 	}
 
 	/* ######## Tatsächliche Pic-Befehle ####### */
@@ -281,7 +282,7 @@ public class Simulator_Logik {
 
 	private void do_return() throws InterruptedException {
 		setProgramCounter(sprung);
-		
+
 	}
 
 	private void do_retfie() {
@@ -451,12 +452,65 @@ public class Simulator_Logik {
 	private void do_rrf(int _hex1) {
 
 		int temp = _hex1 & 0b10000000;
+		int _temp = _hex1 & 0b01111111;
+		int value = register_array[_temp];
+		int carry_flag;
+
+		if (get_C() == 1) {
+
+			value += 256;
+			carry_flag = _temp & 0b00000001;
+
+		} else {
+
+			carry_flag = _temp & 0b00000001;
+		}
+
+		change_C(carry_flag);
+
+		value = value >> 1;
+
+		if (temp == 0) {
+
+			w_register = value;
+
+		} else {
+
+			register_array[_temp] = value;
+		}
 
 		gui_aktualisieren();
 	}
 
 	private void do_rlf(int _hex1) {
-		// TODO Auto-generated method stub
+
+		int temp = _hex1 & 0b10000000;
+		int _temp = _hex1 & 0b01111111;
+		int value = register_array[_temp];
+		int carry_flag;
+
+		if (get_C() == 1) {
+
+			value += 1;
+			carry_flag = _temp & 0b10000000;
+
+		} else {
+
+			carry_flag = _temp & 0b10000000;
+		}
+
+		change_C(carry_flag);
+
+		value = value << 1;
+
+		if (temp == 0) {
+
+			w_register = value;
+
+		} else {
+
+			register_array[_temp] = value;
+		}
 
 		gui_aktualisieren();
 
@@ -474,7 +528,21 @@ public class Simulator_Logik {
 	}
 
 	private void do_iorwf(int _hex1) {
-		// TODO Auto-generated method stub
+
+		int temp = _hex1 & 0b10000000;
+
+		int temp_ = _hex1 & 0b01111111;
+
+		if (temp == 0) {
+
+			w_register = w_register | temp_;
+
+		}
+
+		else {
+
+			register_array[temp_] = w_register | temp_;
+		}
 
 		gui_aktualisieren();
 
@@ -539,36 +607,39 @@ public class Simulator_Logik {
 		change_z();
 		gui_aktualisieren();
 	}
-	public void gui_aktualisieren(){
-		/*W-Register in GUI setzen*/
-	frame.lbl_wreg_value.setText(String.valueOf(w_register).toString());
-	 	/*Aktualisieren der Tabelle mit den Werten aus Register_Array*/
-	tabelle_aktualisieren();
-		/*z überprüfen ob true/false*/
-	if(z=true){frame.label_z_value.setText("1");}else{frame.label_z_value.setText("0");}
-		/*Aktuellen Code in Liste markieren*/
-	frame.txtProgrammCounter.setText(String.valueOf(PC+1).toString());
+
+	public void gui_aktualisieren() {
+		/* W-Register in GUI setzen */
+		frame.lbl_wreg_value.setText(String.valueOf(w_register).toString());
+		/* Aktualisieren der Tabelle mit den Werten aus Register_Array */
+		tabelle_aktualisieren();
+		/* z überprüfen ob true/false */
+		if (z = true) {
+			frame.label_z_value.setText("1");
+		} else {
+			frame.label_z_value.setText("0");
+		}
+		/* Aktuellen Code in Liste markieren */
+		frame.txtProgrammCounter.setText(String.valueOf(PC + 1).toString());
 	}
-		
-	public void tabelle_aktualisieren(){
-	
-			int m1 = 0, n1 = 0, t1 = 0;
-			while (m1 < 256) {
-				while (t1 < 8) {
-					/* Tabelle bekommt Werte aus Array zugewiesen */
-					
-					frame.table_model.setValueAt(register_array[m1],
-							n1, t1);
-					t1++;
-					m1++;
-				}
-				t1 = 0;
-				n1++;
+
+	public void tabelle_aktualisieren() {
+
+		int m1 = 0, n1 = 0, t1 = 0;
+		while (m1 < 256) {
+			while (t1 < 8) {
+				/* Tabelle bekommt Werte aus Array zugewiesen */
+
+				frame.table_model.setValueAt(register_array[m1], n1, t1);
+				t1++;
+				m1++;
+			}
+			t1 = 0;
+			n1++;
 		}
 		/* Aktuellen Code in Liste markieren */
 		frame.txtProgrammCounter.setText(String.valueOf(PC).toString());
 	}
-
 
 	public void change_z() {
 		if (z = true) {
@@ -579,15 +650,20 @@ public class Simulator_Logik {
 			}
 		}
 	}
-	public void write_to_register(int adress, int value){
-		if(adress==0){
+
+	public void write_to_register(int adress, int value) {
+		if (adress == 0) {
 			adress = 4;
-		} 
-		register_array[adress]=value;
+		}
+		register_array[adress] = value;
 	}
-	
-	public int get_C(){
+
+	public int get_C() {
 		int _temp = register_array[3] & 0b00000001;
 		return _temp;
+	}
+
+	public void change_C(int carry_flag) {
+
 	}
 }
