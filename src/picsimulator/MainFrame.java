@@ -3,6 +3,7 @@ package picsimulator;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
+import javax.naming.ldap.Rdn;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -31,6 +32,14 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.JRadioButton;
 import javax.swing.JLabel;
+
+import java.awt.event.InputMethodListener;
+import java.awt.event.InputMethodEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeEvent;
+import javax.swing.SwingConstants;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class MainFrame extends JFrame {
 
@@ -61,6 +70,8 @@ public class MainFrame extends JFrame {
 	public static MainFrame frame;
 	public Thread t1;
 	public boolean oliver;
+	public JTable table;
+	public JButton btnRegisterSpeichern;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -226,11 +237,23 @@ public class MainFrame extends JFrame {
 		scrollpane_code.setBounds(10, 246, 781, 215);
 		contentPane.add(scrollpane_code);
 
+		
 		String[] titles = new String[] { "00", "01", "02", "03", "04", "05",
 				"06", "07" };
 		table_model = new DefaultTableModel(titles, 32);
-		JTable table = new JTable(table_model);
+		 table = new JTable(table_model);
+		 table.setToolTipText("Zweifaches Drücken von 'Enter' überträgt den eingetragenen Zahlenwert direkt in den Speicher. ");
+		 table.addKeyListener(new KeyAdapter() {
+		 	@Override
+		 	public void keyPressed(KeyEvent e) {
+		 		if(e.getKeyCode()==KeyEvent.VK_ENTER){
+		 			btnRegisterSpeichern.doClick();
+		 		}
+		 	}
+		 });
+	
 		JScrollPane scrollpane_table = new JScrollPane(table);
+		
 		scrollpane_table.setBounds(803, 33, 301, 428);
 		int m, i = 0;
 		/* Beim initialisieren wird das Register mit 00 gefüllt */
@@ -268,16 +291,35 @@ public class MainFrame extends JFrame {
 				logik.register_load();
 			}
 		});
-		btnRegisterLaden.setBounds(677, 34, 117, 29);
+		btnRegisterLaden.setBounds(653, 34, 141, 29);
 		contentPane.add(btnRegisterLaden);
 
-		JButton btnRegisterSpeichern = new JButton("Register speichern");
+		 btnRegisterSpeichern = new JButton("Register speichern");
 		btnRegisterSpeichern.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				int i,m;
+				for (i = 0; i <= 31; i++) {
+					for (m = 0; m <= 7; m++) {
+						int adress = i*8+m;
+					//TODO bisher nur decimal möglich
+						String test = String.valueOf(frame.table.getValueAt(i, m));
+						System.out.println(test);
+						int value;
+						try {
+							value = Integer.parseInt(test);
+							System.out.println(value);
+							simulator.register_array[adress]=value;
+						} catch (NumberFormatException e1) {
+							
+							e1.printStackTrace();
+						}
+						
 
+					}
+				}
 			}
 		});
-		btnRegisterSpeichern.setBounds(677, 61, 117, 29);
+		btnRegisterSpeichern.setBounds(653, 61, 141, 29);
 		contentPane.add(btnRegisterSpeichern);
 
 		JButton btnReloadOriginal = new JButton("Original");
@@ -411,7 +453,7 @@ public class MainFrame extends JFrame {
 		label_DC_value = new JLabel("00");
 		label_DC_value.setBounds(556, 74, 61, 16);
 		contentPane.add(label_DC_value);
-
+		
 	}
 	public void add_to_register(int adress, int value){
 		System.out.println(adress + "  " + value);
