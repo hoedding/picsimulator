@@ -438,9 +438,17 @@ public class Simulator_Logik {
 
 	}
 
-	private void do_subwf(int adress) {
+	private void do_subwf(int _hex) {
 		System.out.println("SUBWF");
-		setRegisterEntry(adress, (getRegisterEntry(adress) - w_register));
+		int d = _hex & 0b10000000;
+		int adress = _hex & 0b01111111;
+		int value = getRegisterEntry(adress) - w_register;
+
+		if (d == 0) {
+			w_register = value;
+		} else {
+			setRegisterEntry(adress, value);
+		}
 		change_Z();
 		change_C();
 		change_DC();

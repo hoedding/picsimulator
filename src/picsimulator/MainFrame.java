@@ -163,13 +163,7 @@ public class MainFrame extends JFrame {
 				}
 			}
 
-			private void start() {
-				logik.filter_code();
-				int i;
-				for (i = 0; i < frame.listModel.size(); i++) {
-					simulator.analyze_code(frame.listModel.elementAt(i));
-				}
-			}
+			
 		});
 		btnStart.setBounds(10, 34, 91, 29);
 		contentPane.add(btnStart);
@@ -458,5 +452,12 @@ public class MainFrame extends JFrame {
 	public void add_to_register(int adress, int value){
 		System.out.println(adress + "  " + value);
 		simulator.write_to_register(adress, value);
+	}
+	private void start() {
+		logik.filter_code();
+		int i;
+		for (i = 0; i < frame.listModel.size(); i++) {
+			simulator.analyze_code(frame.listModel.elementAt(i));
+		}
 	}
 }
