@@ -43,11 +43,23 @@ public class Simulator_Logik {
 	}
 
 	public void setRegisterEntry(int index, int value) {
-		register_array[index] = value;
+		if (index == 0) {
+			value = value & 0b11111111;
+			register_array[register_array[4]] = value;
+			
+		} else {
+			value = value & 0b11111111;
+			register_array[index] = value;
+			
+		}
 	}
 
 	public int getRegisterEntry(int index) {
-		return register_array[index];
+		if (index == 0) {
+			return register_array[register_array[4]];
+		} else {
+			return register_array[index];
+		}
 	}
 
 	/* ######## LISTE MIT EINZELNEN CODE-ELEMENTEN ####### */
@@ -81,15 +93,15 @@ public class Simulator_Logik {
 	 * ######## Führt für jedes in der code_list enthaltene Elemente die
 	 * Funktion what_to_do() aus #######
 	 */
-	public void start_programm() throws InterruptedException {
+	public void start_programm(int takt) throws InterruptedException {
 		if (getProgrammCounter() == code_list.size()) {
 			gui_aktualisieren();
-			Thread.sleep(100);
+			Thread.sleep(takt);
 			setProgramCounter(0);
 			count_se_pr0gram();
 		} else {
 			gui_aktualisieren();
-			Thread.sleep(100);
+			Thread.sleep(takt);
 			count_se_pr0gram();
 		}
 	}
@@ -320,6 +332,7 @@ public class Simulator_Logik {
 		int temp = _hex3 & 0b0011111111;
 		w_register = temp;
 		setProgramCounter(STACK.get(STACK.size() - 1));
+		STACK.remove(STACK.size() - 1);
 		gui_aktualisieren();
 	}
 
@@ -464,7 +477,7 @@ public class Simulator_Logik {
 		int value = getRegisterEntry(adress);
 
 		if (get_C() == 1) {
-			value += 256;
+			//value += 256;
 		}
 
 		if ((value & 0b000000001) == 1) {
@@ -495,7 +508,7 @@ public class Simulator_Logik {
 		value = value << 1;
 
 		if (get_C() == 1) {
-			value += 1;
+		//	value += 1;
 		}
 
 		if ((value & 0b100000000) == 256) {
@@ -560,7 +573,7 @@ public class Simulator_Logik {
 
 			w_register = decr;
 		}
-		if (decr == 0) {
+		if (getRegisterEntry(adress) == 0) {
 			setProgramCounter(getProgrammCounter() + 1);
 		}
 		gui_aktualisieren();
@@ -660,7 +673,7 @@ public class Simulator_Logik {
 
 	private void do_clrf(int a) {
 		System.out.println("CLRF");
-		register_array[a - 1] = 0b0;
+		setRegisterEntry(a, 0);
 		change_Z();
 		gui_aktualisieren();
 	}
@@ -785,22 +798,18 @@ public class Simulator_Logik {
 		switch (position) {
 		case 0: {
 			setRegisterEntry(adress, (getRegisterEntry(adress)|0b00000001));
-			System.out.println("1. Bit");
 			break;
 		}
 		case 1: {
 			setRegisterEntry(adress, (getRegisterEntry(adress)|0b00000010));
-			System.out.println("2. Bit");
 			break;
 		}
 		case 2: {
 			setRegisterEntry(adress, (getRegisterEntry(adress)|0b00000100));
-			System.out.println("3. Bit");
 			break;
 		}
 		case 3: {
 			setRegisterEntry(adress, (getRegisterEntry(adress)|0b00001000));
-			System.out.println("4. Bit");
 			break;
 		}
 		case 4: {

@@ -40,6 +40,7 @@ import java.beans.PropertyChangeEvent;
 import javax.swing.SwingConstants;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.ImageIcon;
 
 public class MainFrame extends JFrame {
 
@@ -67,11 +68,14 @@ public class MainFrame extends JFrame {
 	public JLabel lbl_Status_value;
 	public JLabel lbl_PC_value;
 	public JLabel label_DC_value;
+	public JLabel lblErrorMsgs;
 	public static MainFrame frame;
 	public Thread t1;
 	public boolean oliver;
 	public JTable table;
 	public JButton btnRegisterSpeichern;
+	private JButton btnWeiter;
+	private JButton btnPause;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -147,6 +151,10 @@ public class MainFrame extends JFrame {
 		btnStart.addActionListener(new ActionListener() {
 			@SuppressWarnings("static-access")
 			public void actionPerformed(ActionEvent e) {
+				if(listModel.size()>0){
+					lblErrorMsgs.setVisible(false);
+					btnWeiter.setEnabled(true);
+					btnPause.setEnabled(true);
 				/* ############## */
 				oliver = true;
 				start();
@@ -161,6 +169,10 @@ public class MainFrame extends JFrame {
 					e1.printStackTrace();
 				
 				}
+				} else {
+					lblErrorMsgs.setText("Kein Programm geöffnet.");
+					lblErrorMsgs.setVisible(true);
+				}
 			}
 
 			
@@ -168,13 +180,18 @@ public class MainFrame extends JFrame {
 		btnStart.setBounds(10, 34, 91, 29);
 		contentPane.add(btnStart);
 
-		JButton btnPause = new JButton("Pause");
+		 btnPause = new JButton("Pause");
 		btnPause.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				oliver = false;
+				if(listModel.size()==0){
+					lblErrorMsgs.setText("Kein Programm geöffnet.");
+					lblErrorMsgs.setVisible(true);
+				}
 			}
 		});
 		btnPause.setBounds(10, 61, 91, 29);
+		btnPause.setEnabled(false);
 		contentPane.add(btnPause);
 
 		txtZeit = new JTextField();
@@ -261,6 +278,9 @@ public class MainFrame extends JFrame {
 		JMenuItem mntmDateiffnen = new JMenuItem("Datei \u00F6ffnen");
 		mntmDateiffnen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				simulator.initialize_register_array();
+				simulator.gui_aktualisieren();
+				listModel.removeAllElements();
 				logik.load_code();
 			}
 		});
@@ -413,7 +433,7 @@ public class MainFrame extends JFrame {
 		label_z_value.setBounds(556, 39, 37, 16);
 		contentPane.add(label_z_value);
 
-		JButton btnWeiter = new JButton("Weiter");
+		 btnWeiter = new JButton("Weiter");
 		btnWeiter.addActionListener(new ActionListener() {
 			@SuppressWarnings("static-access")
 			public void actionPerformed(ActionEvent e) {
@@ -430,6 +450,7 @@ public class MainFrame extends JFrame {
 			}
 		});
 		btnWeiter.setBounds(10, 89, 91, 29);
+		btnWeiter.setEnabled(false);
 		contentPane.add(btnWeiter);
 		
 		JLabel lblC = new JLabel("C");
@@ -447,6 +468,12 @@ public class MainFrame extends JFrame {
 		label_DC_value = new JLabel("00");
 		label_DC_value.setBounds(556, 74, 61, 16);
 		contentPane.add(label_DC_value);
+		
+		 lblErrorMsgs = new JLabel("Test");
+		lblErrorMsgs.setVisible(false);
+		lblErrorMsgs.setIcon(new ImageIcon(MainFrame.class.getResource("/javax/swing/plaf/metal/icons/Warn.gif")));
+		lblErrorMsgs.setBounds(555, 212, 233, 29);
+		contentPane.add(lblErrorMsgs);
 		
 	}
 	public void add_to_register(int adress, int value){

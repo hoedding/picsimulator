@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.FileReader;
 
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class MainFrame_Logik {
 	private MainFrame frame;
@@ -78,6 +80,8 @@ public class MainFrame_Logik {
 	public void load_code() {
 		/* Auswählen der Datei */
 		JFileChooser chooser = new JFileChooser();
+		FileFilter filter = new FileNameExtensionFilter("Lst File", "lst");
+		chooser.setFileFilter(filter);
 		/* Was wurde angeklickt -> rueckgabewert */
 		int rueckgabeWert = chooser.showOpenDialog(null);
 		if (rueckgabeWert == JFileChooser.APPROVE_OPTION) {
