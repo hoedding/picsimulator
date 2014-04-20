@@ -115,26 +115,26 @@ public class Simulator_Logik {
 			break;
 		}
 
-		int hex6 = code_as_int & 0b1111110000000000;
-		int _hex6 = code_as_int & 0b0000001111111111;
-		switch (hex6) {
+		int hex10 = code_as_int & 0b1111110000000000;
+		int _hex10 = code_as_int & 0b0000001111111111;
+		switch (hex10) {
 		case 4096:
-			do_bcf(_hex6);
+			do_bcf(_hex10);
 			break;
 		case 5120:
-			do_bsf(_hex6);
+			do_bsf(_hex10);
 			break;
 		case 6144:
-			do_btfsc(_hex6);
+			do_btfsc(_hex10);
 			break;
 		case 7168:
-			do_btfss(_hex6);
+			do_btfss(_hex10);
 			break;
 		case 12288:
-			do_movlw(_hex6);
+			do_movlw(_hex10);
 			break;
 		case 13312:
-			do_retlw(_hex6);
+			do_retlw(_hex10);
 			break;
 		}
 
@@ -377,14 +377,16 @@ public class Simulator_Logik {
 	}
 
 	private void do_bsf(int _hex3) {
-		int bit = _hex3 & 0b1110000000;
+		System.out.println("BSF");
+		int bit = (_hex3 & 0b1110000000) / 128	;
 		int adress = _hex3 & 0b0001111111;
 		set_Bit(bit, adress);
 		gui_aktualisieren();
 	}
 
 	private void do_bcf(int _hex3) {
-		int bit = _hex3 & 0b1110000000;
+		System.out.println("BCF");
+		int bit = (_hex3 & 0b1110000000) / 128;
 		int adress = _hex3 & 0b0001111111;
 		clear_Bit(bit, adress);
 		gui_aktualisieren();
@@ -783,18 +785,22 @@ public class Simulator_Logik {
 		switch (position) {
 		case 0: {
 			setRegisterEntry(adress, (getRegisterEntry(adress)|0b00000001));
+			System.out.println("1. Bit");
 			break;
 		}
 		case 1: {
 			setRegisterEntry(adress, (getRegisterEntry(adress)|0b00000010));
+			System.out.println("2. Bit");
 			break;
 		}
 		case 2: {
 			setRegisterEntry(adress, (getRegisterEntry(adress)|0b00000100));
+			System.out.println("3. Bit");
 			break;
 		}
 		case 3: {
 			setRegisterEntry(adress, (getRegisterEntry(adress)|0b00001000));
+			System.out.println("4. Bit");
 			break;
 		}
 		case 4: {
