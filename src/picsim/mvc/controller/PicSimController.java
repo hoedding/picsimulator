@@ -26,7 +26,7 @@ public class PicSimController {
 		this.view = view;
 		this.model = model;
 		this.running = false;
-		initialize_register_array();
+		model.reset_model();
 		addListener();
 		ReloadGUI();
 	}
@@ -57,22 +57,13 @@ public class PicSimController {
 		return model.get_takt();
 	}
 
-	/* ARRAY FüR DAS REGISTER */
-	public void initialize_register_array() {
-
-		int m;
-		for (m = 0; m < 256; m++) {
-
-			model.setRegisterEntry(m, 0);
-		}
-
-	}
+	/* ARRAY F��R DAS REGISTER */
 
 	public void start_programm(int takt) throws InterruptedException {
 		/*
-		 * Überprüfung ob Ende des Programms erreicht wird kann am Ende gelöscht
-		 * werden !!
-		 */// TODO löschen
+		 * ��berpr��fung ob Ende des Programms erreicht wird kann am Ende
+		 * gel��scht werden !!
+		 */// TODO l��schen
 		if (model.getProgrammCounter() == model.code_list.size()) {
 			Thread.sleep(takt);
 			model.setProgramCounter(0);
@@ -84,7 +75,7 @@ public class PicSimController {
 	}
 
 	/*
-	 * ######## Führt für jedes in der code_list enthaltene Elemente die
+	 * ######## F��hrt f��r jedes in der code_list enthaltene Elemente die
 	 * Funktion what_to_do() aus #######
 	 */
 	public void start_function() throws InterruptedException {
@@ -96,14 +87,14 @@ public class PicSimController {
 	public void ReloadGUI() {
 		/* Erweiterungen aktualisieren */
 		ReloadElements();
-		/* aktuell ausgeführten Code markieren */
+		/* aktuell ausgef��hrten Code markieren */
 		view.select_code(model.getProgrammCounter());
 		/* W-Register in GUI setzen */
 		view.set_W_value("1");
 		// frame.lbl_wreg_value.setText(String.valueOf(w_register).toString());
 		/* Aktualisieren der Tabelle mit den Werten aus Register_Array */
 		ReloadTable();
-		/* z überprüfen ob true/false */
+		/* z ��berpr��fen ob true/false */
 		if (model.get_Z() == 1) {
 
 			view.set_Z_value(String.valueOf(model.get_Z()));
@@ -202,7 +193,7 @@ public class PicSimController {
 				t1.start();
 
 			} else {
-				view.set_ErrorMsgs("Kein Programm geöffnet.");
+				view.set_ErrorMsgs("Kein Programm ge��ffnet.");
 				set_running(false);
 			}
 
@@ -268,11 +259,10 @@ public class PicSimController {
 
 	@SuppressWarnings("resource")
 	private void loadFile() {
-		initialize_register_array();
-		model.CleanStack();
-		model.setProgramCounter(0);
-		model.CleanWReg();
+
+		running = false;
 		view.clear_ListModel();
+		model.reset_model();
 		ReloadGUI();
 
 		/* Auswählen der Datei */
@@ -295,7 +285,7 @@ public class PicSimController {
 
 				while ((zeile = in.readLine()) != null) {
 					try {
-						/* Zeile für Zeile wird in TextPane eingefügt */
+						/* Zeile f��r Zeile wird in TextPane eingef��gt */
 
 						view.addElementListModel(zeile);
 
@@ -338,7 +328,7 @@ public class PicSimController {
 
 	@SuppressWarnings("resource")
 	public void register_load() {
-		/* Auswählen der Datei */
+		/* Ausw��hlen der Datei */
 		JFileChooser chooser = new JFileChooser();
 		/* Was wurde angeklickt -> rueckgabewert */
 		int rueckgabeWert = chooser.showOpenDialog(null);
@@ -357,7 +347,7 @@ public class PicSimController {
 				int m, s = 0;
 				for (m = 0; m < 256; m++) {
 					{
-						/* Array wird mit Werten aus Dokument gefüllt */
+						/* Array wird mit Werten aus Dokument gef��llt */
 						model.setRegisterEntry(m,
 								Integer.parseInt(splitResult[s]));
 

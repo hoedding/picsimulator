@@ -19,17 +19,20 @@ public class PicSimModel {
 	private String path_of_registerfile;
 
 	public PicSimModel() {
-
+		// Konstruktor
 	}
 
+	// Stack löschen
 	public void CleanStack() {
 		STACK.clear();
 	}
 
+	// WReg löschen
 	public void CleanWReg() {
 		w_register = 0;
 	}
 
+	// Getter Setter Programmfile
 	public String getPath_of_programfile() {
 		return path_of_programfile;
 	}
@@ -38,6 +41,7 @@ public class PicSimModel {
 		this.path_of_programfile = path_of_programfile;
 	}
 
+	// Getter Setter Registerfile
 	public String getPath_of_registerfile() {
 		return path_of_registerfile;
 	}
@@ -46,15 +50,16 @@ public class PicSimModel {
 		this.path_of_registerfile = path_of_registerfile;
 	}
 
-	/* Getter Setter f��r Programm counter */
 	public void setProgramCounter(int i) {
 		PC = i;
 	}
 
+	// Getter ProgramCounter
 	public int getProgrammCounter() {
 		return PC;
 	}
 
+	// Getter Setter Takt
 	public void set_takt(int takt) {
 		this.takt = takt;
 	}
@@ -63,20 +68,23 @@ public class PicSimModel {
 		return takt;
 	}
 
+	// Getter Status
 	public int get_status() {
-		return 1;
-		// TODO status
+		return getRegisterEntry(3);
+
 	}
 
+	/* Register schreiben */
 	public void setRegisterEntry(int index, int value) {
 		if (is_bit_set(5, 3)) {
+			// Wenn das Bit für Bankumschaltung gesetzt ist
 			if (index == 0) {
 				value = value & 0b11111111;
-				register_array[register_array[4 + 128]] = value;
+				register_array[register_array[4 + 127]] = value;
 
 			} else {
 				value = value & 0b11111111;
-				register_array[index + 128] = value;
+				register_array[index + 127] = value;
 			}
 		} else {
 			if (index == 0) {
@@ -90,6 +98,7 @@ public class PicSimModel {
 		}
 	}
 
+	/* Eintrag aus Register holen */
 	public int getRegisterEntry(int index) {
 		if (index == 0) {
 			return register_array[register_array[4]];
@@ -98,14 +107,31 @@ public class PicSimModel {
 		}
 	}
 
-	/* ######## LISTE MIT EINZELNEN CODE-ELEMENTEN ####### */
+	/* Model zurücksetzen */
+	public void reset_model() {
+		int m;
+		for (m = 0; m < 256; m++) {
+
+			register_array[m] = 0;
+		}
+		w_register = 0;
+		STACK.clear();
+		sprung = 0;
+		PC = 0;
+		code_list.clear();
+		path_of_programfile = "";
+		path_of_registerfile = "";
+		takt = 4000;
+	}
+
+	/* LISTE MIT EINZELNEN CODE-ELEMENTEN */
 	public void setCode(int _code) {
 		code_list.add(_code);
 	}
 
 	/*
-	 * ######## L��scht alles au��er die relevanten 16 Bit und speichert den
-	 * Programmcode ��ber setCode() in code_list ########
+	 * Löscht alles außer die relevanten 16 Bit und speichert den Programmcode
+	 * über setCode() in code_list
 	 */
 	public void analyze_code(String _codezeile) {
 		String codezeile = _codezeile;
@@ -122,7 +148,10 @@ public class PicSimModel {
 		setCode(code);
 	}
 
-	/* ######## Tats��chliche Pic-Befehle ####### */
+	/*
+	 * Tatsächliche Pic-Befehle Hier findet die Auswahl der Befehle nach
+	 * Bitfolge statt
+	 */
 	public void what_to_do(int code) throws InterruptedException {
 		int code_as_int = code;
 
@@ -263,6 +292,11 @@ public class PicSimModel {
 
 	}
 
+	/*
+	 * ############################### * Befehlscode nach Datenblatt * *
+	 * #############################
+	 */
+
 	private void do_sleep() {
 		// TODO clear bit PD
 		// TODO clear bit TO
@@ -274,7 +308,7 @@ public class PicSimModel {
 	}
 
 	private void do_return() throws InterruptedException {
-		System.out.println("return !!");
+
 		int adress = STACK.pop();
 
 		setProgramCounter(adress);
@@ -703,14 +737,7 @@ public class PicSimModel {
 
 	}
 
-	public void write_to_register(int adress, int value) {
-		if (adress == 0) {
-			adress = 4;
-		}
-		setRegisterEntry(adress, value);
-
-	}
-
+	/* Getter und Setter für C,DC,Z */
 	public int get_C() {
 		if (is_bit_set(1, 3)) {
 			return 1;
@@ -759,6 +786,10 @@ public class PicSimModel {
 		}
 	}
 
+	/*
+	 * Veränderung von Daten direkt in der Tabelle werden hier ins Register
+	 * geschrieben
+	 */
 	public void write_table_to_register(int xColumn, int yRow, String value) {
 
 		int adress = (yRow * 8) + xColumn + 1;
@@ -766,6 +797,7 @@ public class PicSimModel {
 
 	}
 
+	/* Einzelnes Bit in bestimmter Speicherstelle setzen */
 	public void set_Bit(int position, int adress) {
 		switch (position) {
 		case 0: {
@@ -805,6 +837,7 @@ public class PicSimModel {
 		}
 	}
 
+	/* Einzelnes Bit in bestimmter Speicherstelle löschen */
 	public void clear_Bit(int position, int adress) {
 		switch (position) {
 		case 0: {
@@ -844,6 +877,7 @@ public class PicSimModel {
 		}
 	}
 
+	/* Überprüfung ob einzlenes Bit gesetzt ist */
 	public boolean is_bit_set(int position, int adress) {
 		switch (position) {
 		case 0: {
