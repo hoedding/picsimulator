@@ -21,10 +21,12 @@ public class PicSimModel {
 	public PicSimModel() {
 
 	}
-	public void CleanStack(){
+
+	public void CleanStack() {
 		STACK.clear();
 	}
-	public void CleanWReg(){
+
+	public void CleanWReg() {
 		w_register = 0;
 	}
 
@@ -67,14 +69,24 @@ public class PicSimModel {
 	}
 
 	public void setRegisterEntry(int index, int value) {
-		if (index == 0) {
-			value = value & 0b11111111;
-			register_array[register_array[4]] = value;
+		if (is_bit_set(5, 3)) {
+			if (index == 0) {
+				value = value & 0b11111111;
+				register_array[register_array[4 + 128]] = value;
 
+			} else {
+				value = value & 0b11111111;
+				register_array[index + 128] = value;
+			}
 		} else {
-			value = value & 0b11111111;
-			register_array[index] = value;
+			if (index == 0) {
+				value = value & 0b11111111;
+				register_array[register_array[4]] = value;
 
+			} else {
+				value = value & 0b11111111;
+				register_array[index] = value;
+			}
 		}
 	}
 
