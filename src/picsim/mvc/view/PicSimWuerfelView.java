@@ -1,20 +1,17 @@
-package picsimulator;
+package picsim.mvc.view;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.GridLayout;
 import javax.swing.JRadioButton;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
-public class frame_led extends JFrame {
-
+public class PicSimWuerfelView extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9095640580082799139L;
 	private JPanel contentPane;
 
 	/**
@@ -24,7 +21,7 @@ public class frame_led extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					frame_led frame = new frame_led();
+					PicSimWuerfelView frame = new PicSimWuerfelView();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,7 +33,7 @@ public class frame_led extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public frame_led() {
+	public PicSimWuerfelView() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 89, 110);
 		contentPane = new JPanel();

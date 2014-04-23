@@ -1,5 +1,2 @@
 eclipse.preferences.version=1
-encoding//src/picsimulator/MainFrame.java=UTF-8
-encoding//src/picsimulator/MainFrame_Logik.java=UTF-8
-encoding//src/picsimulator/Simulator_Logik.java=UTF-8
-encoding//src/picsimulator/Thread_Logik.java=UTF-8
+encoding//src/picsim/mvc/model/PicSimModel.java=UTF-8
