@@ -57,9 +57,6 @@ public class PicSimView extends JFrame {
 	private JButton btnRegisterLaden;
 
 	private JRadioButton rdbtnWrfel;
-	private JRadioButton rdbtnTrisA;
-	private JRadioButton rdbtnTrisB;
-	private JRadioButton rdbtnTrisC;
 
 	private JMenuItem mntmDateiffnen;
 	private JMenuItem mntmCalculator;
@@ -236,18 +233,6 @@ public class PicSimView extends JFrame {
 		btnRegisterSpeichern = new JButton("Register speichern");
 		btnRegisterSpeichern.setBounds(653, 61, 141, 29);
 		contentPane.add(btnRegisterSpeichern);
-
-		rdbtnTrisA = new JRadioButton("TRIS A");
-		rdbtnTrisA.setBounds(305, 34, 77, 23);
-		contentPane.add(rdbtnTrisA);
-
-		rdbtnTrisB = new JRadioButton("TRIS B");
-		rdbtnTrisB.setBounds(305, 62, 77, 23);
-		contentPane.add(rdbtnTrisB);
-
-		rdbtnTrisC = new JRadioButton("TRIS C");
-		rdbtnTrisC.setBounds(305, 90, 77, 23);
-		contentPane.add(rdbtnTrisC);
 
 		rdbtnWrfel = new JRadioButton("W��rfel");
 
@@ -706,18 +691,6 @@ public class PicSimView extends JFrame {
 
 	public void setOpenWuerfelListener(ActionListener l) {
 		rdbtnWrfel.addActionListener(l);
-	}
-
-	public void setOpenTrisAListener(ActionListener l) {
-		rdbtnTrisA.addActionListener(l);
-	}
-
-	public void setOpenTrisBListener(ActionListener l) {
-		rdbtnTrisB.addActionListener(l);
-	}
-
-	public void setOpenTrisCListener(ActionListener l) {
-		rdbtnTrisC.addActionListener(l);
 	}
 
 	public void setChangeTableEntryListener(KeyAdapter l) {
