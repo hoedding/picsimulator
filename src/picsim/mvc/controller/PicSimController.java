@@ -934,7 +934,7 @@ public class PicSimController {
 	}
 		
 		
-	}
+	
 	 class ChangePortBBit7 implements MouseListener{
 
 		@Override
@@ -969,8 +969,8 @@ public class PicSimController {
 
 		}
 
-
-	}
+	 }
+	
 	 
 	 private void changeTheRegisterFromPortA(int ID){
 		 switch(ID){
@@ -985,6 +985,7 @@ public class PicSimController {
 		 default:{break;}
 		 }
 	 }
+	 
 	 private void changeTheRegisterFromPortB(int ID){
 		 switch(ID){
 		 case 0:{int temp = view.getValuePortB() & 0b00000001; model.setRegisterEntry(6, (model.getRegisterEntry(5) + 1)); break;}
@@ -999,4 +1000,5 @@ public class PicSimController {
 		 }
 	 }
 	 
+
 }
