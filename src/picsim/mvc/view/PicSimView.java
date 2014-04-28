@@ -764,7 +764,7 @@ public class PicSimView extends JFrame {
 	}
 
 	public void setTrisALabels(int t) {
-		t = t & 0b11111111;
+	//	t = t & 0b11111111;
 		int a = t & 0b00000001;
 		int b = t & 0b00000010;
 		int c = t & 0b00000100;
@@ -816,7 +816,7 @@ public class PicSimView extends JFrame {
 	}
 
 	public void setPortALabels(int t) {
-		t = t & 0b11111111;
+	//	t = t & 0b11111111;
 		int a = t & 0b00000001;
 		int b = t & 0b00000010;
 		int c = t & 0b00000100;
@@ -869,7 +869,7 @@ public class PicSimView extends JFrame {
 	}
 
 	public void setTrisBLabels(int t) {
-		t = t & 0b11111111;
+	//	t = t & 0b11111111;
 		int a = t & 0b00000001;
 		int b = t & 0b00000010;
 		int c = t & 0b00000100;
@@ -921,7 +921,7 @@ public class PicSimView extends JFrame {
 	}
 
 	public void setPortBLabels(int t) {
-		t = t & 0b11111111;
+		//TODO t = t & 0b11111111;
 		int a = t & 0b00000001;
 		int b = t & 0b00000010;
 		int c = t & 0b00000100;
@@ -975,9 +975,9 @@ public class PicSimView extends JFrame {
 
 	public int getValuePortA() {
 
-		String value = label_20.getText() + label_19.getText()
-				+ label_18.getText() + label_17.getText() + label_16.getText()
-				+ label_15.getText() + label_14.getText() + label_13.getText();
+		String value = label_13.getText() + label_14.getText()
+				+ label_15.getText() + label_16.getText() + label_17.getText()
+				+ label_18.getText() + label_19.getText() + label_20.getText();
 
 		int binary = Integer.parseInt(value, 2);
 
@@ -986,9 +986,9 @@ public class PicSimView extends JFrame {
 
 	public int getValuePortB() {
 
-		String value = label_45.getText() + label_44.getText()
-				+ label_43.getText() + label_42.getText() + label_41.getText()
-				+ label_40.getText() + label_39.getText() + label_38.getText();
+		String value = label_38.getText() + label_39.getText()
+				+ label_40.getText() + label_41.getText() + label_42.getText()
+				+ label_43.getText() + label_44.getText() + label_45.getText();
 		
 		int binary = Integer.parseInt(value, 2);
 
