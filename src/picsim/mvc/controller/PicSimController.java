@@ -2,6 +2,8 @@ package picsim.mvc.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -29,6 +31,10 @@ public class PicSimController {
 		model.reset_model();
 		addListener();
 		ReloadGUI();
+		view.setTrisALabels(255);
+		view.setPortALabels(255);
+		view.setTrisBLabels(255);
+		view.setPortBLabels(0);
 	}
 
 	private void addListener() {
@@ -42,6 +48,7 @@ public class PicSimController {
 		view.setOpenTrisAListener(new OpenTrisAListener());
 		view.setOpenTrisBListener(new OpenTrisBListener());
 		view.setOpenTrisCListener(new OpenTrisCListener());
+		view.setChangeTrisABit1(new ChangeTrisABit1());
 	}
 
 	public boolean get_running() {
@@ -422,6 +429,42 @@ public class PicSimController {
 		model.setRegisterEntry(adress, value);
 		ReloadGUI();
 
+	}
+	
+	class ChangeTrisABit1 implements MouseListener{
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			System.out.println("klick!!");
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		
+		
 	}
 
 }

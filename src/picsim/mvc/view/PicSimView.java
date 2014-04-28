@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Label;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
+import java.awt.event.MouseListener;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -26,9 +27,14 @@ import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
+
 import java.awt.GridLayout;
 import java.awt.SystemColor;
+
 import javax.swing.UIManager;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PicSimView extends JFrame {
 
@@ -69,6 +75,45 @@ public class PicSimView extends JFrame {
 	private JList<String> list_code;
 	private DefaultListModel<String> listModel;
 
+	/* LABEL TRIS A und PORT A */
+	private JLabel lblI;
+	private JLabel lblI_1;
+	private JLabel lblI_2;
+	private JLabel lblI_3;
+	private JLabel lblI_4;
+	private JLabel lblI_5;
+	private JLabel lblI_6;
+	private JLabel lblI_7;
+	private JLabel label_13;
+	private JLabel label_14;
+	private JLabel label_15;
+	private JLabel label_16;
+	private JLabel label_17;
+	private JLabel label_18;
+	private JLabel label_19;
+	private JLabel label_20;
+
+	/* Label TRIS B und PORT B */
+	private JLabel label_28;
+	private JLabel label_29;
+	private JLabel label_30;
+	private JLabel label_31;
+	private JLabel label_32;
+	private JLabel label_33;
+	private JLabel label_34;
+	private JLabel label_35;
+	private JLabel label_38;
+	private JLabel label_39;
+	private JLabel label_40;
+	private JLabel label_41;
+	private JLabel label_42;
+	private JLabel label_43;
+	private JLabel label_44;
+	private JLabel label_45;
+
+	private JLabel label_47;
+	private JLabel label_23;
+	
 	public PicSimView() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1112, 599);
@@ -297,263 +342,263 @@ public class PicSimView extends JFrame {
 				.getResource("/javax/swing/plaf/metal/icons/Warn.gif")));
 		lblErrorMsgs.setBounds(10, 315, 233, 29);
 		contentPane.add(lblErrorMsgs);
-		
+
 		JPanel panel_4 = new JPanel();
-		panel_4.setBounds(609, 105, 182, 108);
+		panel_4.setBounds(609, 105, 188, 108);
 		contentPane.add(panel_4);
 		panel_4.setLayout(null);
-		
+
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 194, 29);
 		panel_4.add(panel);
 		panel.setBackground(Color.LIGHT_GRAY);
 		panel.setBorder(UIManager.getBorder("FormattedTextField.border"));
 		panel.setLayout(new GridLayout(1, 0, 0, 0));
-		
+
 		JLabel lblRA = new JLabel("RA");
 		panel.add(lblRA);
-		
+
 		JLabel label_1 = new JLabel("");
 		panel.add(label_1);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("7");
 		panel.add(lblNewLabel_1);
-		
+
 		JLabel lblNewLabel_2 = new JLabel("6");
 		panel.add(lblNewLabel_2);
-		
+
 		JLabel lblNewLabel_3 = new JLabel("5");
 		panel.add(lblNewLabel_3);
-		
+
 		JLabel lblNewLabel_4 = new JLabel("4");
 		panel.add(lblNewLabel_4);
-		
+
 		JLabel lblNewLabel_5 = new JLabel("3");
 		panel.add(lblNewLabel_5);
-		
+
 		JLabel lblNewLabel_6 = new JLabel("2");
 		panel.add(lblNewLabel_6);
-		
+
 		JLabel lblNewLabel_7 = new JLabel("1");
 		panel.add(lblNewLabel_7);
-		
+
 		JLabel lblNewLabel_8 = new JLabel("0");
 		panel.add(lblNewLabel_8);
-		
+
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(0, 29, 194, 29);
 		panel_4.add(panel_1);
 		panel_1.setBorder(UIManager.getBorder("FormattedTextField.border"));
 		panel_1.setBackground(UIManager.getColor("Button.background"));
 		panel_1.setLayout(new GridLayout(1, 0, 0, 0));
-		
+
 		JLabel lblTrisa = new JLabel("TA");
 		panel_1.add(lblTrisa);
-		
+
 		JLabel label_12 = new JLabel("");
 		panel_1.add(label_12);
-		
-		JLabel lblI = new JLabel("i");
+
+		lblI = new JLabel("i");
 		panel_1.add(lblI);
-		
-		JLabel lblI_1 = new JLabel("i");
+
+		lblI_1 = new JLabel("i");
 		panel_1.add(lblI_1);
-		
-		JLabel lblI_2 = new JLabel("i");
+
+		lblI_2 = new JLabel("i");
 		panel_1.add(lblI_2);
-		
-		JLabel lblI_3 = new JLabel("i");
+
+		lblI_3 = new JLabel("i");
 		panel_1.add(lblI_3);
-		
-		JLabel lblI_4 = new JLabel("i");
+
+		lblI_4 = new JLabel("i");
 		panel_1.add(lblI_4);
-		
-		JLabel lblI_5 = new JLabel("i");
+
+		lblI_5 = new JLabel("i");
 		panel_1.add(lblI_5);
-		
-		JLabel lblI_6 = new JLabel("i");
+
+		lblI_6 = new JLabel("i");
 		panel_1.add(lblI_6);
-		
-		JLabel lblI_7 = new JLabel("i");
+
+		lblI_7 = new JLabel("i");
 		panel_1.add(lblI_7);
-		
+
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(0, 56, 194, 29);
 		panel_4.add(panel_2);
 		panel_2.setBorder(UIManager.getBorder("FormattedTextField.border"));
 		panel_2.setBackground(SystemColor.window);
 		panel_2.setLayout(new GridLayout(1, 0, 0, 0));
-		
+
 		JLabel lblPin = new JLabel("P");
 		panel_2.add(lblPin);
-		
+
 		JLabel label_21 = new JLabel("");
 		panel_2.add(label_21);
-		
-		JLabel label_13 = new JLabel("0");
+
+		label_13 = new JLabel("0");
 		panel_2.add(label_13);
-		
-		JLabel label_14 = new JLabel("0");
+
+		label_14 = new JLabel("0");
 		panel_2.add(label_14);
-		
-		JLabel label_15 = new JLabel("0");
+
+		label_15 = new JLabel("0");
 		panel_2.add(label_15);
-		
-		JLabel label_16 = new JLabel("0");
+
+		label_16 = new JLabel("0");
 		panel_2.add(label_16);
-		
-		JLabel label_17 = new JLabel("0");
+
+		label_17 = new JLabel("0");
 		panel_2.add(label_17);
-		
-		JLabel label_18 = new JLabel("0");
+
+		label_18 = new JLabel("0");
 		panel_2.add(label_18);
-		
-		JLabel label_19 = new JLabel("0");
+
+		label_19 = new JLabel("0");
 		panel_2.add(label_19);
-		
-		JLabel label_20 = new JLabel("0");
+
+		label_20 = new JLabel("0");
 		panel_2.add(label_20);
-		
+
 		JPanel panel_3 = new JPanel();
 		panel_3.setBounds(39, 84, 155, 29);
 		panel_4.add(panel_3);
 		panel_3.setBorder(UIManager.getBorder("FormattedTextField.border"));
 		panel_3.setBackground(SystemColor.window);
 		panel_3.setLayout(new GridLayout(1, 0, 0, 0));
-		
+
 		JLabel label_5 = new JLabel("");
 		panel_3.add(label_5);
-		
-		JLabel label_23 = new JLabel("0");
+
+		 label_23 = new JLabel("0");
 		panel_3.add(label_23);
-		
+
 		JPanel panel_5 = new JPanel();
 		panel_5.setLayout(null);
 		panel_5.setBounds(609, 236, 182, 108);
 		contentPane.add(panel_5);
-		
+
 		JPanel panel_6 = new JPanel();
 		panel_6.setBorder(UIManager.getBorder("FormattedTextField.border"));
 		panel_6.setBackground(Color.LIGHT_GRAY);
 		panel_6.setBounds(0, 0, 194, 29);
 		panel_5.add(panel_6);
 		panel_6.setLayout(new GridLayout(1, 0, 0, 0));
-		
+
 		JLabel lblRb = new JLabel("RB");
 		panel_6.add(lblRb);
-		
+
 		JLabel label_6 = new JLabel("");
 		panel_6.add(label_6);
-		
+
 		JLabel label_7 = new JLabel("7");
 		panel_6.add(label_7);
-		
+
 		JLabel label_8 = new JLabel("6");
 		panel_6.add(label_8);
-		
+
 		JLabel label_9 = new JLabel("5");
 		panel_6.add(label_9);
-		
+
 		JLabel label_10 = new JLabel("4");
 		panel_6.add(label_10);
-		
+
 		JLabel label_11 = new JLabel("3");
 		panel_6.add(label_11);
-		
+
 		JLabel label_22 = new JLabel("2");
 		panel_6.add(label_22);
-		
+
 		JLabel label_24 = new JLabel("1");
 		panel_6.add(label_24);
-		
+
 		JLabel label_25 = new JLabel("0");
 		panel_6.add(label_25);
-		
+
 		JPanel panel_7 = new JPanel();
 		panel_7.setBorder(UIManager.getBorder("FormattedTextField.border"));
 		panel_7.setBackground(SystemColor.window);
 		panel_7.setBounds(0, 29, 194, 29);
 		panel_5.add(panel_7);
 		panel_7.setLayout(new GridLayout(1, 0, 0, 0));
-		
+
 		JLabel lblTb = new JLabel("TB");
 		panel_7.add(lblTb);
-		
+
 		JLabel label_27 = new JLabel("");
 		panel_7.add(label_27);
-		
-		JLabel label_28 = new JLabel("i");
+
+		label_28 = new JLabel("i");
 		panel_7.add(label_28);
-		
-		JLabel label_29 = new JLabel("i");
+
+		label_29 = new JLabel("i");
 		panel_7.add(label_29);
-		
-		JLabel label_30 = new JLabel("i");
+
+		label_30 = new JLabel("i");
 		panel_7.add(label_30);
-		
-		JLabel label_31 = new JLabel("i");
+
+		label_31 = new JLabel("i");
 		panel_7.add(label_31);
-		
-		JLabel label_32 = new JLabel("i");
+
+		label_32 = new JLabel("i");
 		panel_7.add(label_32);
-		
-		JLabel label_33 = new JLabel("i");
+
+		label_33 = new JLabel("i");
 		panel_7.add(label_33);
-		
-		JLabel label_34 = new JLabel("i");
+
+		label_34 = new JLabel("i");
 		panel_7.add(label_34);
-		
-		JLabel label_35 = new JLabel("i");
+
+		label_35 = new JLabel("i");
 		panel_7.add(label_35);
-		
+
 		JPanel panel_8 = new JPanel();
 		panel_8.setBorder(UIManager.getBorder("FormattedTextField.border"));
 		panel_8.setBackground(SystemColor.window);
 		panel_8.setBounds(0, 56, 194, 29);
 		panel_5.add(panel_8);
 		panel_8.setLayout(new GridLayout(1, 0, 0, 0));
-		
+
 		JLabel label_36 = new JLabel("P");
 		panel_8.add(label_36);
-		
+
 		JLabel label_37 = new JLabel("");
 		panel_8.add(label_37);
-		
-		JLabel label_38 = new JLabel("0");
+
+		label_38 = new JLabel("0");
 		panel_8.add(label_38);
-		
-		JLabel label_39 = new JLabel("0");
+
+		label_39 = new JLabel("0");
 		panel_8.add(label_39);
-		
-		JLabel label_40 = new JLabel("0");
+
+		label_40 = new JLabel("0");
 		panel_8.add(label_40);
-		
-		JLabel label_41 = new JLabel("0");
+
+		label_41 = new JLabel("0");
 		panel_8.add(label_41);
-		
-		JLabel label_42 = new JLabel("0");
+
+		label_42 = new JLabel("0");
 		panel_8.add(label_42);
-		
-		JLabel label_43 = new JLabel("0");
+
+		label_43 = new JLabel("0");
 		panel_8.add(label_43);
-		
-		JLabel label_44 = new JLabel("0");
+
+		label_44 = new JLabel("0");
 		panel_8.add(label_44);
-		
-		JLabel label_45 = new JLabel("0");
+
+		label_45 = new JLabel("0");
 		panel_8.add(label_45);
-		
+
 		JPanel panel_9 = new JPanel();
 		panel_9.setBorder(UIManager.getBorder("FormattedTextField.border"));
 		panel_9.setBackground(SystemColor.window);
 		panel_9.setBounds(39, 84, 155, 29);
 		panel_5.add(panel_9);
 		panel_9.setLayout(new GridLayout(1, 0, 0, 0));
-		
+
 		JLabel label_46 = new JLabel("");
 		panel_9.add(label_46);
-		
-		JLabel label_47 = new JLabel("0");
+
+		 label_47 = new JLabel("0");
 		panel_9.add(label_47);
 	}
 
@@ -683,4 +728,218 @@ public class PicSimView extends JFrame {
 	public void setChangeTableEntryListener(KeyAdapter l) {
 		table.addKeyListener(l);
 	}
+	
+	public void setChangeTrisABit1(MouseListener l){
+		lblI_7.addMouseListener(l);
+	}
+
+	public void setTrisALabels(int t) {
+		t = t & 0b11111111;
+		int a = t & 0b00000001;
+		int b = t & 0b00000010;
+		int c = t & 0b00000100;
+		int d = t & 0b00001000;
+		int e = t & 0b00010000;
+		int f = t & 0b00100000;
+		int g = t & 0b01000000;
+		int h = t & 0b10000000;
+		if (a > 0) {
+			lblI_7.setText("i");
+		} else {
+			lblI_7.setText("o");
+		}
+		if (b > 0) {
+			lblI_6.setText("i");
+		} else {
+			lblI_6.setText("o");
+		}
+		if (c > 0) {
+			lblI_5.setText("i");
+		} else {
+			lblI_5.setText("o");
+		}
+		if (d > 0) {
+			lblI_4.setText("i");
+		} else {
+			lblI_4.setText("o");
+		}
+		if (e > 0) {
+			lblI_3.setText("i");
+		} else {
+			lblI_3.setText("o");
+		}
+		if (f > 0) {
+			lblI_2.setText("i");
+		} else {
+			lblI_2.setText("o");
+		}
+		if (g > 0) {
+			lblI_1.setText("i");
+		} else {
+			lblI_1.setText("o");
+		}
+		if (h > 0) {
+			lblI.setText("i");
+		} else {
+			lblI.setText("o");
+		}
+	}
+	public void setPortALabels(int t){
+		t = t & 0b11111111;
+		int a = t & 0b00000001;
+		int b = t & 0b00000010;
+		int c = t & 0b00000100;
+		int d = t & 0b00001000;
+		int e = t & 0b00010000;
+		int f = t & 0b00100000;
+		int g = t & 0b01000000;
+		int h = t & 0b10000000;
+		if (a > 0) {
+			label_20.setText("1");
+		} else {
+			label_20.setText("0");
+		}
+		if (b > 0) {
+			label_19.setText("1");
+		} else {
+			label_19.setText("0");
+		}
+		if (c > 0) {
+			label_18.setText("1");
+		} else {
+			label_18.setText("0");
+		}
+		if (d > 0) {
+			label_17.setText("1");
+		} else {
+			label_17.setText("0");
+		}
+		if (e > 0) {
+			label_16.setText("1");
+		} else {
+			label_16.setText("0");
+		}
+		if (f > 0) {
+			label_15.setText("1");
+		} else {
+			label_15.setText("0");
+		}
+		if (g > 0) {
+			label_14.setText("1");
+		} else {
+			label_14.setText("0");
+		}
+		if (h > 0) {
+			label_13.setText("1");
+		} else {
+			label_13.setText("0");
+		}
+		label_23.setText(String.valueOf(t));
+	}
+	public void setTrisBLabels(int t){
+		t = t & 0b11111111;
+		int a = t & 0b00000001;
+		int b = t & 0b00000010;
+		int c = t & 0b00000100;
+		int d = t & 0b00001000;
+		int e = t & 0b00010000;
+		int f = t & 0b00100000;
+		int g = t & 0b01000000;
+		int h = t & 0b10000000;
+		if (a > 0) {
+			label_35.setText("i");
+		} else {
+			label_35.setText("o");
+		}
+		if (b > 0) {
+			label_34.setText("i");
+		} else {
+			label_34.setText("o");
+		}
+		if (c > 0) {
+			label_33.setText("i");
+		} else {
+			label_33.setText("o");
+		}
+		if (d > 0) {
+			label_32.setText("i");
+		} else {
+			label_32.setText("o");
+		}
+		if (e > 0) {
+			label_31.setText("i");
+		} else {
+			label_31.setText("o");
+		}
+		if (f > 0) {
+			label_30.setText("i");
+		} else {
+			label_30.setText("o");
+		}
+		if (g > 0) {
+			label_29.setText("i");
+		} else {
+			label_29.setText("o");
+		}
+		if (h > 0) {
+			label_28.setText("i");
+		} else {
+			label_28.setText("o");
+		}
+	}
+	public void setPortBLabels(int t){
+		t = t & 0b11111111;
+		int a = t & 0b00000001;
+		int b = t & 0b00000010;
+		int c = t & 0b00000100;
+		int d = t & 0b00001000;
+		int e = t & 0b00010000;
+		int f = t & 0b00100000;
+		int g = t & 0b01000000;
+		int h = t & 0b10000000;
+		if (a > 0) {
+			label_45.setText("1");
+		} else {
+			label_45.setText("0");
+		}
+		if (b > 0) {
+			label_44.setText("1");
+		} else {
+			label_44.setText("0");
+		}
+		if (c > 0) {
+			label_43.setText("1");
+		} else {
+			label_43.setText("0");
+		}
+		if (d > 0) {
+			label_42.setText("1");
+		} else {
+			label_42.setText("0");
+		}
+		if (e > 0) {
+			label_41.setText("1");
+		} else {
+			label_41.setText("0");
+		}
+		if (f > 0) {
+			label_40.setText("1");
+		} else {
+			label_40.setText("0");
+		}
+		if (g > 0) {
+			label_39.setText("1");
+		} else {
+			label_39.setText("0");
+		}
+		if (h > 0) {
+			label_38.setText("1");
+		} else {
+			label_38.setText("0");
+		}
+		label_47.setText(String.valueOf(t));
+	}
+	
+	
+	
 }
