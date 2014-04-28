@@ -2,7 +2,9 @@ package picsim.mvc.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.Label;
+import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.MouseListener;
@@ -22,19 +24,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
-
-import java.awt.GridLayout;
-import java.awt.SystemColor;
-
-import javax.swing.UIManager;
-
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class PicSimView extends JFrame {
 
@@ -113,7 +108,7 @@ public class PicSimView extends JFrame {
 
 	private JLabel label_47;
 	private JLabel label_23;
-	
+
 	public PicSimView() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1112, 599);
@@ -469,7 +464,7 @@ public class PicSimView extends JFrame {
 		JLabel label_5 = new JLabel("");
 		panel_3.add(label_5);
 
-		 label_23 = new JLabel("0");
+		label_23 = new JLabel("0");
 		panel_3.add(label_23);
 
 		JPanel panel_5 = new JPanel();
@@ -598,7 +593,7 @@ public class PicSimView extends JFrame {
 		JLabel label_46 = new JLabel("");
 		panel_9.add(label_46);
 
-		 label_47 = new JLabel("0");
+		label_47 = new JLabel("0");
 		panel_9.add(label_47);
 	}
 
@@ -728,9 +723,71 @@ public class PicSimView extends JFrame {
 	public void setChangeTableEntryListener(KeyAdapter l) {
 		table.addKeyListener(l);
 	}
+
+	public void setChangePortABit0(MouseListener l) {
+		label_20.addMouseListener(l);
+	}
+
+	public void setChangePortABit1(MouseListener l) {
+		label_19.addMouseListener(l);
+	}
+
+	public void setChangePortABit2(MouseListener l) {
+		label_18.addMouseListener(l);
+	}
+
+	public void setChangePortABit3(MouseListener l) {
+		label_17.addMouseListener(l);
+	}
+
+	public void setChangePortABit4(MouseListener l) {
+		label_16.addMouseListener(l);
+	}
+
+	public void setChangePortABit5(MouseListener l) {
+		label_15.addMouseListener(l);
+	}
+
+	public void setChangePortABit6(MouseListener l) {
+		label_14.addMouseListener(l);
+	}
+
+	public void setChangePortABit7(MouseListener l) {
+		label_13.addMouseListener(l);
+	}
 	
-	public void setChangeTrisABit1(MouseListener l){
-		lblI_7.addMouseListener(l);
+	// PortB
+
+	public void setChangePortBBit0(MouseListener l) {
+		label_38.addMouseListener(l);
+	}
+
+	public void setChangePortBBit1(MouseListener l) {
+		label_39.addMouseListener(l);
+	}
+
+	public void setChangePortBBit2(MouseListener l) {
+		label_40.addMouseListener(l);
+	}
+
+	public void setChangePortBBit3(MouseListener l) {
+		label_41.addMouseListener(l);
+	}
+
+	public void setChangePortBBit4(MouseListener l) {
+		label_42.addMouseListener(l);
+	}
+
+	public void setChangePortBBit5(MouseListener l) {
+		label_43.addMouseListener(l);
+	}
+
+	public void setChangePortBBit6(MouseListener l) {
+		label_44.addMouseListener(l);
+	}
+
+	public void setChangePortBBit7(MouseListener l) {
+		label_45.addMouseListener(l);
 	}
 
 	public void setTrisALabels(int t) {
@@ -784,7 +841,8 @@ public class PicSimView extends JFrame {
 			lblI.setText("o");
 		}
 	}
-	public void setPortALabels(int t){
+
+	public void setPortALabels(int t) {
 		t = t & 0b11111111;
 		int a = t & 0b00000001;
 		int b = t & 0b00000010;
@@ -836,7 +894,8 @@ public class PicSimView extends JFrame {
 		}
 		label_23.setText(String.valueOf(t));
 	}
-	public void setTrisBLabels(int t){
+
+	public void setTrisBLabels(int t) {
 		t = t & 0b11111111;
 		int a = t & 0b00000001;
 		int b = t & 0b00000010;
@@ -887,7 +946,8 @@ public class PicSimView extends JFrame {
 			label_28.setText("o");
 		}
 	}
-	public void setPortBLabels(int t){
+
+	public void setPortBLabels(int t) {
 		t = t & 0b11111111;
 		int a = t & 0b00000001;
 		int b = t & 0b00000010;
@@ -939,7 +999,5 @@ public class PicSimView extends JFrame {
 		}
 		label_47.setText(String.valueOf(t));
 	}
-	
-	
-	
+
 }
