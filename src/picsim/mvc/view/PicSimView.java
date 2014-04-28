@@ -68,7 +68,7 @@ public class PicSimView extends JFrame {
 
 	public PicSimView() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1112, 497);
+		setBounds(100, 100, 1112, 599);
 		JPanel contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -167,7 +167,7 @@ public class PicSimView extends JFrame {
 		list_code = new JList<String>(listModel);
 
 		scrollpane_code = new JScrollPane(list_code);
-		scrollpane_code.setBounds(10, 246, 781, 215);
+		scrollpane_code.setBounds(10, 356, 781, 215);
 		contentPane.add(scrollpane_code);
 
 		String[] titles = new String[] { "00", "01", "02", "03", "04", "05",
@@ -175,11 +175,11 @@ public class PicSimView extends JFrame {
 		table_model = new DefaultTableModel(titles, 32);
 		table = new JTable(table_model);
 
-		table.setToolTipText("Zweifaches Drücken von 'Enter' überträgt den eingetragenen Zahlenwert direkt in den Speicher. ");
+		table.setToolTipText("Zweifaches Dr��cken von 'Enter' ��bertr��gt den eingetragenen Zahlenwert direkt in den Speicher. ");
 
 		JScrollPane scrollpane_table = new JScrollPane(table);
 
-		scrollpane_table.setBounds(803, 33, 301, 428);
+		scrollpane_table.setBounds(803, 33, 301, 538);
 
 		mntmDateiffnen = new JMenuItem("Datei \u00F6ffnen");
 		mnDatei.add(mntmDateiffnen);
@@ -206,7 +206,7 @@ public class PicSimView extends JFrame {
 		rdbtnTrisC.setBounds(305, 90, 77, 23);
 		contentPane.add(rdbtnTrisC);
 
-		rdbtnWrfel = new JRadioButton("Würfel");
+		rdbtnWrfel = new JRadioButton("W��rfel");
 
 		rdbtnWrfel.setBounds(305, 116, 98, 23);
 		contentPane.add(rdbtnWrfel);
