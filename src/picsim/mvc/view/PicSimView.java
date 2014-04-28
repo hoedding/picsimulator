@@ -26,6 +26,9 @@ import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
+import java.awt.GridLayout;
+import java.awt.SystemColor;
+import javax.swing.UIManager;
 
 public class PicSimView extends JFrame {
 
@@ -292,8 +295,266 @@ public class PicSimView extends JFrame {
 		lblErrorMsgs.setVisible(false);
 		lblErrorMsgs.setIcon(new ImageIcon(PicSimView.class
 				.getResource("/javax/swing/plaf/metal/icons/Warn.gif")));
-		lblErrorMsgs.setBounds(555, 212, 233, 29);
+		lblErrorMsgs.setBounds(10, 315, 233, 29);
 		contentPane.add(lblErrorMsgs);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBounds(609, 105, 182, 108);
+		contentPane.add(panel_4);
+		panel_4.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 0, 194, 29);
+		panel_4.add(panel);
+		panel.setBackground(Color.LIGHT_GRAY);
+		panel.setBorder(UIManager.getBorder("FormattedTextField.border"));
+		panel.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		JLabel lblRA = new JLabel("RA");
+		panel.add(lblRA);
+		
+		JLabel label_1 = new JLabel("");
+		panel.add(label_1);
+		
+		JLabel lblNewLabel_1 = new JLabel("7");
+		panel.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("6");
+		panel.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("5");
+		panel.add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_4 = new JLabel("4");
+		panel.add(lblNewLabel_4);
+		
+		JLabel lblNewLabel_5 = new JLabel("3");
+		panel.add(lblNewLabel_5);
+		
+		JLabel lblNewLabel_6 = new JLabel("2");
+		panel.add(lblNewLabel_6);
+		
+		JLabel lblNewLabel_7 = new JLabel("1");
+		panel.add(lblNewLabel_7);
+		
+		JLabel lblNewLabel_8 = new JLabel("0");
+		panel.add(lblNewLabel_8);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(0, 29, 194, 29);
+		panel_4.add(panel_1);
+		panel_1.setBorder(UIManager.getBorder("FormattedTextField.border"));
+		panel_1.setBackground(UIManager.getColor("Button.background"));
+		panel_1.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		JLabel lblTrisa = new JLabel("TA");
+		panel_1.add(lblTrisa);
+		
+		JLabel label_12 = new JLabel("");
+		panel_1.add(label_12);
+		
+		JLabel lblI = new JLabel("i");
+		panel_1.add(lblI);
+		
+		JLabel lblI_1 = new JLabel("i");
+		panel_1.add(lblI_1);
+		
+		JLabel lblI_2 = new JLabel("i");
+		panel_1.add(lblI_2);
+		
+		JLabel lblI_3 = new JLabel("i");
+		panel_1.add(lblI_3);
+		
+		JLabel lblI_4 = new JLabel("i");
+		panel_1.add(lblI_4);
+		
+		JLabel lblI_5 = new JLabel("i");
+		panel_1.add(lblI_5);
+		
+		JLabel lblI_6 = new JLabel("i");
+		panel_1.add(lblI_6);
+		
+		JLabel lblI_7 = new JLabel("i");
+		panel_1.add(lblI_7);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBounds(0, 56, 194, 29);
+		panel_4.add(panel_2);
+		panel_2.setBorder(UIManager.getBorder("FormattedTextField.border"));
+		panel_2.setBackground(SystemColor.window);
+		panel_2.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		JLabel lblPin = new JLabel("P");
+		panel_2.add(lblPin);
+		
+		JLabel label_21 = new JLabel("");
+		panel_2.add(label_21);
+		
+		JLabel label_13 = new JLabel("0");
+		panel_2.add(label_13);
+		
+		JLabel label_14 = new JLabel("0");
+		panel_2.add(label_14);
+		
+		JLabel label_15 = new JLabel("0");
+		panel_2.add(label_15);
+		
+		JLabel label_16 = new JLabel("0");
+		panel_2.add(label_16);
+		
+		JLabel label_17 = new JLabel("0");
+		panel_2.add(label_17);
+		
+		JLabel label_18 = new JLabel("0");
+		panel_2.add(label_18);
+		
+		JLabel label_19 = new JLabel("0");
+		panel_2.add(label_19);
+		
+		JLabel label_20 = new JLabel("0");
+		panel_2.add(label_20);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBounds(39, 84, 155, 29);
+		panel_4.add(panel_3);
+		panel_3.setBorder(UIManager.getBorder("FormattedTextField.border"));
+		panel_3.setBackground(SystemColor.window);
+		panel_3.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		JLabel label_5 = new JLabel("");
+		panel_3.add(label_5);
+		
+		JLabel label_23 = new JLabel("0");
+		panel_3.add(label_23);
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setLayout(null);
+		panel_5.setBounds(609, 236, 182, 108);
+		contentPane.add(panel_5);
+		
+		JPanel panel_6 = new JPanel();
+		panel_6.setBorder(UIManager.getBorder("FormattedTextField.border"));
+		panel_6.setBackground(Color.LIGHT_GRAY);
+		panel_6.setBounds(0, 0, 194, 29);
+		panel_5.add(panel_6);
+		panel_6.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		JLabel lblRb = new JLabel("RB");
+		panel_6.add(lblRb);
+		
+		JLabel label_6 = new JLabel("");
+		panel_6.add(label_6);
+		
+		JLabel label_7 = new JLabel("7");
+		panel_6.add(label_7);
+		
+		JLabel label_8 = new JLabel("6");
+		panel_6.add(label_8);
+		
+		JLabel label_9 = new JLabel("5");
+		panel_6.add(label_9);
+		
+		JLabel label_10 = new JLabel("4");
+		panel_6.add(label_10);
+		
+		JLabel label_11 = new JLabel("3");
+		panel_6.add(label_11);
+		
+		JLabel label_22 = new JLabel("2");
+		panel_6.add(label_22);
+		
+		JLabel label_24 = new JLabel("1");
+		panel_6.add(label_24);
+		
+		JLabel label_25 = new JLabel("0");
+		panel_6.add(label_25);
+		
+		JPanel panel_7 = new JPanel();
+		panel_7.setBorder(UIManager.getBorder("FormattedTextField.border"));
+		panel_7.setBackground(SystemColor.window);
+		panel_7.setBounds(0, 29, 194, 29);
+		panel_5.add(panel_7);
+		panel_7.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		JLabel lblTb = new JLabel("TB");
+		panel_7.add(lblTb);
+		
+		JLabel label_27 = new JLabel("");
+		panel_7.add(label_27);
+		
+		JLabel label_28 = new JLabel("i");
+		panel_7.add(label_28);
+		
+		JLabel label_29 = new JLabel("i");
+		panel_7.add(label_29);
+		
+		JLabel label_30 = new JLabel("i");
+		panel_7.add(label_30);
+		
+		JLabel label_31 = new JLabel("i");
+		panel_7.add(label_31);
+		
+		JLabel label_32 = new JLabel("i");
+		panel_7.add(label_32);
+		
+		JLabel label_33 = new JLabel("i");
+		panel_7.add(label_33);
+		
+		JLabel label_34 = new JLabel("i");
+		panel_7.add(label_34);
+		
+		JLabel label_35 = new JLabel("i");
+		panel_7.add(label_35);
+		
+		JPanel panel_8 = new JPanel();
+		panel_8.setBorder(UIManager.getBorder("FormattedTextField.border"));
+		panel_8.setBackground(SystemColor.window);
+		panel_8.setBounds(0, 56, 194, 29);
+		panel_5.add(panel_8);
+		panel_8.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		JLabel label_36 = new JLabel("P");
+		panel_8.add(label_36);
+		
+		JLabel label_37 = new JLabel("");
+		panel_8.add(label_37);
+		
+		JLabel label_38 = new JLabel("0");
+		panel_8.add(label_38);
+		
+		JLabel label_39 = new JLabel("0");
+		panel_8.add(label_39);
+		
+		JLabel label_40 = new JLabel("0");
+		panel_8.add(label_40);
+		
+		JLabel label_41 = new JLabel("0");
+		panel_8.add(label_41);
+		
+		JLabel label_42 = new JLabel("0");
+		panel_8.add(label_42);
+		
+		JLabel label_43 = new JLabel("0");
+		panel_8.add(label_43);
+		
+		JLabel label_44 = new JLabel("0");
+		panel_8.add(label_44);
+		
+		JLabel label_45 = new JLabel("0");
+		panel_8.add(label_45);
+		
+		JPanel panel_9 = new JPanel();
+		panel_9.setBorder(UIManager.getBorder("FormattedTextField.border"));
+		panel_9.setBackground(SystemColor.window);
+		panel_9.setBounds(39, 84, 155, 29);
+		panel_5.add(panel_9);
+		panel_9.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		JLabel label_46 = new JLabel("");
+		panel_9.add(label_46);
+		
+		JLabel label_47 = new JLabel("0");
+		panel_9.add(label_47);
 	}
 
 	public void set_W_value(String s) {
@@ -422,5 +683,4 @@ public class PicSimView extends JFrame {
 	public void setChangeTableEntryListener(KeyAdapter l) {
 		table.addKeyListener(l);
 	}
-
 }
