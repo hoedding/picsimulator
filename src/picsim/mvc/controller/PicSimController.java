@@ -413,6 +413,7 @@ public class PicSimController {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
+			changeTheRegisterFromPortA(0);
 			System.out.println("klick!!");
 		}
 
@@ -447,6 +448,7 @@ public class PicSimController {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
+			changeTheRegisterFromPortA(1);
 			System.out.println("klick!!");
 		}
 
@@ -481,6 +483,7 @@ public class PicSimController {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
+			changeTheRegisterFromPortA(2);
 			System.out.println("klick!!");
 		}
 
@@ -515,6 +518,7 @@ public class PicSimController {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
+			changeTheRegisterFromPortA(3);
 			System.out.println("klick!!");
 		}
 
@@ -549,6 +553,7 @@ public class PicSimController {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
+			changeTheRegisterFromPortA(4);
 			System.out.println("klick!!");
 		}
 
@@ -583,6 +588,7 @@ public class PicSimController {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
+			changeTheRegisterFromPortA(5);
 			System.out.println("klick!!");
 		}
 
@@ -617,6 +623,7 @@ public class PicSimController {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
+			changeTheRegisterFromPortA(6);
 			System.out.println("klick!!");
 		}
 
@@ -651,6 +658,7 @@ public class PicSimController {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
+			changeTheRegisterFromPortA(7);
 			System.out.println("klick!!");
 		}
 
@@ -685,6 +693,7 @@ public class PicSimController {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
+			changeTheRegisterFromPortB(0);
 			System.out.println("klick!!");
 		}
 
@@ -719,6 +728,7 @@ public class PicSimController {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
+			changeTheRegisterFromPortB(1);
 			System.out.println("klick!!");
 		}
 
@@ -753,6 +763,7 @@ public class PicSimController {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
+			changeTheRegisterFromPortB(2);
 			System.out.println("klick!!");
 		}
 
@@ -787,6 +798,7 @@ public class PicSimController {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
+			changeTheRegisterFromPortB(3);
 			System.out.println("klick!!");
 		}
 
@@ -821,6 +833,7 @@ public class PicSimController {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
+			changeTheRegisterFromPortB(4);
 			System.out.println("klick!!");
 		}
 
@@ -855,6 +868,7 @@ public class PicSimController {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
+			changeTheRegisterFromPortB(5);
 			System.out.println("klick!!");
 		}
 
@@ -889,6 +903,7 @@ public class PicSimController {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
+			changeTheRegisterFromPortB(6);
 			System.out.println("klick!!");
 		}
 
@@ -917,12 +932,16 @@ public class PicSimController {
 		}
 
 	}
-
-	class ChangePortBBit7 implements MouseListener {
+		
+		
+	}
+	 class ChangePortBBit7 implements MouseListener{
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
+			
 			// TODO Auto-generated method stub
+			changeTheRegisterFromPortB(7);
 			System.out.println("klick!!");
 		}
 
@@ -950,5 +969,34 @@ public class PicSimController {
 
 		}
 
+
 	}
+	 
+	 private void changeTheRegisterFromPortA(int ID){
+		 switch(ID){
+		 case 0:{int temp = view.getValuePortA() & 0b00000001; model.setRegisterEntry(5, (model.getRegisterEntry(5) + 1)); break;}
+		 case 1:{int temp = view.getValuePortA() & 0b00000010; model.setRegisterEntry(5, (model.getRegisterEntry(5) + 2)); break;}
+		 case 2:{int temp = view.getValuePortA() & 0b00000100; model.setRegisterEntry(5, (model.getRegisterEntry(5) + 4)); break;}
+		 case 3:{int temp = view.getValuePortA() & 0b00001000; model.setRegisterEntry(5, (model.getRegisterEntry(5) + 8)); break;}
+		 case 4:{int temp = view.getValuePortA() & 0b00010000; model.setRegisterEntry(5, (model.getRegisterEntry(5) + 16)); break;}
+		 case 5:{int temp = view.getValuePortA() & 0b00100000; model.setRegisterEntry(5, (model.getRegisterEntry(5) + 32)); break;}
+		 case 6:{int temp = view.getValuePortA() & 0b01000000; model.setRegisterEntry(5, (model.getRegisterEntry(5) + 64)); break;}
+		 case 7:{int temp = view.getValuePortA() & 0b10000000; model.setRegisterEntry(5, (model.getRegisterEntry(5) + 128)); break;}
+		 default:{break;}
+		 }
+	 }
+	 private void changeTheRegisterFromPortB(int ID){
+		 switch(ID){
+		 case 0:{int temp = view.getValuePortB() & 0b00000001; model.setRegisterEntry(6, (model.getRegisterEntry(5) + 1)); break;}
+		 case 1:{int temp = view.getValuePortB() & 0b00000010; model.setRegisterEntry(6, (model.getRegisterEntry(5) + 2)); break;}
+		 case 2:{int temp = view.getValuePortB() & 0b00000100; model.setRegisterEntry(6, (model.getRegisterEntry(5) + 4)); break;}
+		 case 3:{int temp = view.getValuePortB() & 0b00001000; model.setRegisterEntry(6, (model.getRegisterEntry(5) + 8)); break;}
+		 case 4:{int temp = view.getValuePortB() & 0b00010000; model.setRegisterEntry(6, (model.getRegisterEntry(5) + 16)); break;}
+		 case 5:{int temp = view.getValuePortB() & 0b00100000; model.setRegisterEntry(6, (model.getRegisterEntry(5) + 32)); break;}
+		 case 6:{int temp = view.getValuePortB() & 0b01000000; model.setRegisterEntry(6, (model.getRegisterEntry(5) + 64)); break;}
+		 case 7:{int temp = view.getValuePortB() & 0b10000000; model.setRegisterEntry(6, (model.getRegisterEntry(5) + 128)); break;}
+		 default:{break;}
+		 }
+	 }
+	 
 }
