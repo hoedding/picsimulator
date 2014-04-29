@@ -974,33 +974,33 @@ public class PicSimController {
 	 
 	 private void changeTheRegisterFromPortA(int ID){
 		 switch(ID){
-		 case 0:{int temp = view.getValuePortA() & 0b00000001; if(temp==0) { model.set_Bit(0, 5); }else { model.clear_Bit(0, 5); } break;}
-		 case 1:{int temp = view.getValuePortA() & 0b00000010; if(temp==0) { model.set_Bit(1, 5); }else { model.clear_Bit(1, 5); } break;}
-		 case 2:{int temp = view.getValuePortA() & 0b00000100; if(temp==0) { model.set_Bit(2, 5); }else { model.clear_Bit(2, 5); } break;}
-		 case 3:{int temp = view.getValuePortA() & 0b00001000; if(temp==0) {  model.set_Bit(3, 5); }else { model.clear_Bit(3, 5); } break;}
-		 case 4:{int temp = view.getValuePortA() & 0b00010000; if(temp==0) {  model.set_Bit(4, 5); }else { model.clear_Bit(4, 5); } break;}
-		 case 5:{int temp = view.getValuePortA() & 0b00100000; if(temp==0) {  model.set_Bit(5, 5); }else { model.clear_Bit(5, 5); } break;}
-		 case 6:{int temp = view.getValuePortA() & 0b01000000; if(temp==0) {  model.set_Bit(6, 5); }else { model.clear_Bit(6, 5); } break;}
-		 case 7:{int temp = view.getValuePortA() & 0b10000000; if(temp==0) {  model.set_Bit(7, 5); }else { model.clear_Bit(7, 5); } break;}
+		 case 0:{int temp = view.getValuePortA() & 0b00000001; if(temp==0) { model.setPortA(model.getPortA()+1); }else { model.setPortA(model.getPortA()-1); }  break;}
+		 case 1:{int temp = view.getValuePortA() & 0b00000010; if(temp==0) { model.setPortA(model.getPortA()+2); }else { model.setPortA(model.getPortA()-2); }  break;}
+		 case 2:{int temp = view.getValuePortA() & 0b00000100; if(temp==0) { model.setPortA(model.getPortA()+4); }else { model.setPortA(model.getPortA()-4); }  break;}
+		 case 3:{int temp = view.getValuePortA() & 0b00001000; if(temp==0) { model.setPortA(model.getPortA()+8); }else { model.setPortA(model.getPortA()-8); }  break;}
+		 case 4:{int temp = view.getValuePortA() & 0b00010000; if(temp==0) { model.setPortA(model.getPortA()+16); }else { model.setPortA(model.getPortA()-16); }  break;}
+		 case 5:{int temp = view.getValuePortA() & 0b00100000; if(temp==0) { model.setPortA(model.getPortA()+32); }else { model.setPortA(model.getPortA()-32); }  break;}
+		 case 6:{int temp = view.getValuePortA() & 0b01000000; if(temp==0) { model.setPortA(model.getPortA()+64); }else { model.setPortA(model.getPortA()-64); }  break;}
+		 case 7:{int temp = view.getValuePortA() & 0b10000000; if(temp==0) { model.setPortA(model.getPortA()+128); }else { model.setPortA(model.getPortA()-128); }  break;}
 		 default:{break;}
 		 }
-		 
+		 model.setRegisterEntry(5,model.getPortA());
 		 ReloadGUI();
 	 }
 	 
 	 private void changeTheRegisterFromPortB(int ID){
 		 switch(ID){
-		 case 0:{int temp = view.getValuePortA() & 0b00000001; if(temp==0) { model.set_Bit(0, 6); } else { model.clear_Bit(0, 6); System.out.println("clear b0"); } break;}
-		 case 1:{int temp = view.getValuePortA() & 0b00000010; if(temp==0) { model.set_Bit(1, 6); }else { model.clear_Bit(1, 6); } break;}
-		 case 2:{int temp = view.getValuePortA() & 0b00000100; if(temp==0) { model.set_Bit(2, 6); }else { model.clear_Bit(2, 6); } break;}
-		 case 3:{int temp = view.getValuePortA() & 0b00001000; if(temp==0) {  model.set_Bit(3, 6); }else { model.clear_Bit(3, 6); } break;}
-		 case 4:{int temp = view.getValuePortA() & 0b00010000; if(temp==0) {  model.set_Bit(4, 6); }else { model.clear_Bit(4, 6); } break;}
-		 case 5:{int temp = view.getValuePortA() & 0b00100000; if(temp==0) {  model.set_Bit(5, 6); }else { model.clear_Bit(5, 6); } break;}
-		 case 6:{int temp = view.getValuePortA() & 0b01000000; if(temp==0) {  model.set_Bit(6, 6); }else { model.clear_Bit(6, 6); } break;}
-		 case 7:{int temp = view.getValuePortA() & 0b10000000; if(temp==0) {  model.set_Bit(7, 6); }else { model.clear_Bit(7, 6); } break;}
+		 case 0:{int temp = view.getValuePortA() & 0b00000001; if(temp==0) {  model.setPortB(model.getPortB()+1); }else { model.setPortB(model.getPortB()-1); } break;}
+		 case 1:{int temp = view.getValuePortA() & 0b00000010; if(temp==0) {  model.setPortB(model.getPortB()+2); }else { model.setPortB(model.getPortB()-2); } break;}
+		 case 2:{int temp = view.getValuePortA() & 0b00000100; if(temp==0) {  model.setPortB(model.getPortB()+4); }else { model.setPortB(model.getPortB()-4); } break;}
+		 case 3:{int temp = view.getValuePortA() & 0b00001000; if(temp==0) {  model.setPortB(model.getPortB()+8); }else { model.setPortB(model.getPortB()-8); } break;}
+		 case 4:{int temp = view.getValuePortA() & 0b00010000; if(temp==0) {  model.setPortB(model.getPortB()+16); }else { model.setPortB(model.getPortB()-16); } break;}
+		 case 5:{int temp = view.getValuePortA() & 0b00100000; if(temp==0) {  model.setPortB(model.getPortB()+32); }else { model.setPortB(model.getPortB()-32); } break;}
+		 case 6:{int temp = view.getValuePortA() & 0b01000000; if(temp==0) {  model.setPortB(model.getPortB()+64); }else { model.setPortB(model.getPortB()-64); } break;}
+		 case 7:{int temp = view.getValuePortA() & 0b10000000; if(temp==0) {  model.setPortB(model.getPortB()+128); }else { model.setPortB(model.getPortB()-128); } break;}
 		 default:{break;}
 		  }
-		
+		 model.setRegisterEntry(6,model.getPortB());
 		 ReloadGUI();
 	 }
 	 

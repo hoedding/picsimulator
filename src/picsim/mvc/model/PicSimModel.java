@@ -17,6 +17,9 @@ public class PicSimModel {
 	private int takt;
 	private String path_of_programfile;
 	private String path_of_registerfile;
+	
+	private int portA;
+	private int portB;
 
 	public PicSimModel() {
 		// Konstruktor
@@ -30,6 +33,22 @@ public class PicSimModel {
 	// WReg löschen
 	public void CleanWReg() {
 		w_register = 0;
+	}
+
+	public int getPortA() {
+		return portA;
+	}
+
+	public void setPortA(int portA) {
+		this.portA = portA;
+	}
+
+
+	public int getPortB() {
+		return portB;
+	}
+	public void setPortB(int portB) {
+		this.portB = portB;
 	}
 
 	// Getter Setter Programmfile
@@ -77,14 +96,16 @@ public class PicSimModel {
 	/* Register schreiben */
 	public void setRegisterEntry(int index, int value) {
 		if (is_bit_set(5, 3)) {
+			
 			// Wenn das Bit für Bankumschaltung gesetzt ist
+			
 			if (index == 0) {
 				value = value & 0b11111111;
-				register_array[register_array[4 + 127]] = value;
+				register_array[register_array[4] + 128] = value;
 
 			} else {
 				value = value & 0b11111111;
-				register_array[index + 127] = value;
+				register_array[index + 128] = value;
 			}
 		} else {
 			if (index == 0) {
