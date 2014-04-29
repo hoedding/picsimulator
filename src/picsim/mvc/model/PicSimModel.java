@@ -12,7 +12,7 @@ public class PicSimModel {
 	private int PC = 0;
 
 	private Deque<Integer> STACK = new ArrayDeque<Integer>();
-	private int[] register_array = new int[256];
+	public int[] register_array = new int[256];
 	public List<Integer> code_list = new ArrayList<Integer>();
 	private int takt;
 	private String path_of_programfile;
@@ -116,6 +116,17 @@ public class PicSimModel {
 				value = value & 0b11111111;
 				register_array[index] = value;
 			}
+		}
+	}
+	
+	private void setRegisterEntryOneBit(int index, int value){
+		if (index == 0) {
+			value = value & 0b11111111;
+			register_array[register_array[4]] = value;
+
+		} else {
+			value = value & 0b11111111;
+			register_array[index] = value;
 		}
 	}
 
@@ -464,17 +475,20 @@ public class PicSimModel {
 	}
 
 	private void do_bsf(int _hex3) {
-
+		System.out.println("bsf");
 		int bit = (_hex3 & 0b1110000000) / 128;
+		
 		int adress = _hex3 & 0b0001111111;
+		System.out.println(bit + ". bit an der "+ adress + ". adresse");
 		set_Bit(bit, adress);
 
 	}
 
 	private void do_bcf(int _hex3) {
-
+		System.out.println("bcf");
 		int bit = (_hex3 & 0b1110000000) / 128;
 		int adress = _hex3 & 0b0001111111;
+		System.out.println(bit + ". bit an der "+ adress + ". adresse");
 		clear_Bit(bit, adress);
 
 	}
@@ -822,35 +836,35 @@ public class PicSimModel {
 	public void set_Bit(int position, int adress) {
 		switch (position) {
 		case 0: {
-			setRegisterEntry(adress, (getRegisterEntry(adress) | 0b00000001));
+			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) | 0b00000001));
 			break;
 		}
 		case 1: {
-			setRegisterEntry(adress, (getRegisterEntry(adress) | 0b00000010));
+			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) | 0b00000010));
 			break;
 		}
 		case 2: {
-			setRegisterEntry(adress, (getRegisterEntry(adress) | 0b00000100));
+			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) | 0b00000100));
 			break;
 		}
 		case 3: {
-			setRegisterEntry(adress, (getRegisterEntry(adress) | 0b00001000));
+			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) | 0b00001000));
 			break;
 		}
 		case 4: {
-			setRegisterEntry(adress, (getRegisterEntry(adress) | 0b00010000));
+			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) | 0b00010000));
 			break;
 		}
 		case 5: {
-			setRegisterEntry(adress, (getRegisterEntry(adress) | 0b00100000));
+			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) | 0b00100000));
 			break;
 		}
 		case 6: {
-			setRegisterEntry(adress, (getRegisterEntry(adress) | 0b01000000));
+			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) | 0b01000000));
 			break;
 		}
 		case 7: {
-			setRegisterEntry(adress, (getRegisterEntry(adress) | 0b10000000));
+			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) | 0b10000000));
 			break;
 		}
 		default: {
@@ -862,35 +876,35 @@ public class PicSimModel {
 	public void clear_Bit(int position, int adress) {
 		switch (position) {
 		case 0: {
-			setRegisterEntry(adress, (getRegisterEntry(adress) & 0b00000001));
+			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) & 0b00000001));
 			break;
 		}
 		case 1: {
-			setRegisterEntry(adress, (getRegisterEntry(adress) & 0b00000010));
+			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) & 0b00000010));
 			break;
 		}
 		case 2: {
-			setRegisterEntry(adress, (getRegisterEntry(adress) & 0b00000100));
+			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) & 0b00000100));
 			break;
 		}
 		case 3: {
-			setRegisterEntry(adress, (getRegisterEntry(adress) & 0b00001000));
+			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) & 0b00001000));
 			break;
 		}
 		case 4: {
-			setRegisterEntry(adress, (getRegisterEntry(adress) & 0b00010000));
+			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) & 0b00010000));
 			break;
 		}
 		case 5: {
-			setRegisterEntry(adress, (getRegisterEntry(adress) & 0b00100000));
+			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) & 0b00100000));
 			break;
 		}
 		case 6: {
-			setRegisterEntry(adress, (getRegisterEntry(adress) & 0b01000000));
+			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) & 0b01000000));
 			break;
 		}
 		case 7: {
-			setRegisterEntry(adress, (getRegisterEntry(adress) & 0b10000000));
+			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) & 0b10000000));
 			break;
 		}
 		default: {
