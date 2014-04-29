@@ -134,6 +134,11 @@ public class PicSimController {
 		/*Ports aktualisieren*/
 		view.setPortALabels(model.getRegisterEntry(5));
 		 view.setPortBLabels(model.getRegisterEntry(6));
+		 view.setTrisALabels(model.getRegisterEntry(0x85));
+		 view.setTrisBLabels(model.getRegisterEntry(0x86));
+		 
+		 /*Wuerfel setzen*/
+		 view.setWuerfel(false, false, false, false, false, false, false, false, false);
 	}
 
 	public void ReloadElements() {
@@ -1003,6 +1008,8 @@ public class PicSimController {
 		 model.register_array[6] = model.getPortB();
 		 ReloadGUI();
 	 }
+	 
+	 
 	 
 
 }
