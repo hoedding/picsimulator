@@ -7,6 +7,7 @@ import java.awt.Label;
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 
 import javax.swing.DefaultListModel;
@@ -27,7 +28,6 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeListener;
-
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
@@ -37,6 +37,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.KeyEvent;
 
 public class PicSimView extends JFrame {
 
@@ -250,6 +251,12 @@ public class PicSimView extends JFrame {
 				"06", "07" };
 		table_model = new DefaultTableModel(titles, 32);
 		table = new JTable(table_model);
+		table.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+					
+			}
+		});
 		
 		table.setToolTipText("Zweifaches Dr��cken von 'Enter' ��bertr��gt den eingetragenen Zahlenwert direkt in den Speicher. ");
 
@@ -353,10 +360,16 @@ public class PicSimView extends JFrame {
 		contentPane.add(lbl_DC_value);
 
 		lblErrorMsgs = new JLabel("Error.");
+		lblErrorMsgs.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				lblErrorMsgs.setVisible(false);
+			}
+		});
 		lblErrorMsgs.setVisible(false);
 		lblErrorMsgs.setIcon(new ImageIcon(PicSimView.class
 				.getResource("/javax/swing/plaf/metal/icons/Warn.gif")));
-		lblErrorMsgs.setBounds(10, 315, 233, 29);
+		lblErrorMsgs.setBounds(10, 315, 458, 29);
 		contentPane.add(lblErrorMsgs);
 
 		JPanel panel_4 = new JPanel();
@@ -768,6 +781,7 @@ public class PicSimView extends JFrame {
 	}
 
 	public void set_ErrorMsgs(String error) {
+		lblErrorMsgs.setText(error);
 		lblErrorMsgs.setVisible(true);
 	}
 
@@ -854,7 +868,7 @@ public class PicSimView extends JFrame {
 		rdbtnWrfel.addActionListener(l);
 	}
 
-	public void setChangeTableEntryListener(KeyAdapter l) {
+	public void setChangeTableEntryListener(KeyListener l) {
 		table.addKeyListener(l);
 	}
 
@@ -923,7 +937,7 @@ public class PicSimView extends JFrame {
 	public void setChangePortBBit7(MouseListener l) {
 		label_38.addMouseListener(l);
 	}
-
+	
 	public void setTrisALabels(int t) {
 		// t = t & 0b11111111;
 		int a = t & 0b00000001;

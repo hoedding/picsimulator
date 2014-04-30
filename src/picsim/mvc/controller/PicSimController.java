@@ -2,6 +2,8 @@ package picsim.mvc.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.BufferedReader;
@@ -58,6 +60,7 @@ public class PicSimController {
 		view.setChangePortBBit5(new ChangePortBBit5());
 		view.setChangePortBBit6(new ChangePortBBit6());
 		view.setChangePortBBit7(new ChangePortBBit7());
+		view.setChangeTableEntryListener(new ChangeTableEntryListener());
 	}
 
 	public boolean get_running() {
@@ -210,24 +213,22 @@ public class PicSimController {
 	}
 
 	public void run_all_functions() {
-		
+
 		if (view.getListModelSize() > 0) {
 			model.setStartTime(System.currentTimeMillis());
 			start();
 
-			if (view.getListModelSize() != 0) {
-				set_running(true);
-				view.setVisibilityButtons(false, true, true);
-				Thread t1 = new Thread(new PicSimControllerThread(this));
+			set_running(true);
+			view.setVisibilityButtons(false, true, true);
+			Thread t1 = new Thread(new PicSimControllerThread(this));
 
-				t1.start();
+			t1.start();
 
-			} else {
-				view.set_ErrorMsgs("Kein Programm ge��ffnet.");
-				set_running(false);
-			}
-
+		} else {
+			view.set_ErrorMsgs("Kein Programm geöffnet.");
+			set_running(false);
 		}
+
 	}
 
 	class PauseListener implements ActionListener {
@@ -403,13 +404,31 @@ public class PicSimController {
 
 	}
 
-	class ChangeTableEntryListener implements ActionListener {
+	class ChangeTableEntryListener implements KeyListener {
 
 		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-
+		public void keyTyped(KeyEvent e) {
+			
+			
 		}
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			// TODO Auto-generated method stub
+			if(e.getKeyCode()==KeyEvent.VK_ENTER){
+				writeTableToRegister();
+			}
+			
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+			
+		}
+
+		
 
 	}
 
@@ -425,7 +444,7 @@ public class PicSimController {
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			changeTheRegisterFromPortA(0);
-			System.out.println("klick!!A0");
+			
 		}
 
 		@Override
@@ -460,7 +479,7 @@ public class PicSimController {
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			changeTheRegisterFromPortA(1);
-			System.out.println("klick!!a1");
+			
 		}
 
 		@Override
@@ -495,7 +514,7 @@ public class PicSimController {
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			changeTheRegisterFromPortA(2);
-			System.out.println("klick!!a2");
+			
 		}
 
 		@Override
@@ -530,7 +549,7 @@ public class PicSimController {
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			changeTheRegisterFromPortA(3);
-			System.out.println("klick!!a3");
+			
 		}
 
 		@Override
@@ -565,7 +584,7 @@ public class PicSimController {
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			changeTheRegisterFromPortA(4);
-			System.out.println("klick!!a4");
+			
 		}
 
 		@Override
@@ -600,7 +619,7 @@ public class PicSimController {
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			changeTheRegisterFromPortA(5);
-			System.out.println("klick!!a5");
+			
 		}
 
 		@Override
@@ -635,7 +654,7 @@ public class PicSimController {
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			changeTheRegisterFromPortA(6);
-			System.out.println("klick!!a6");
+			
 		}
 
 		@Override
@@ -670,7 +689,7 @@ public class PicSimController {
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			changeTheRegisterFromPortA(7);
-			System.out.println("klick!!a7");
+			
 		}
 
 		@Override
@@ -705,7 +724,7 @@ public class PicSimController {
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			changeTheRegisterFromPortB(0);
-			System.out.println("klick!!b0");
+			
 		}
 
 		@Override
@@ -740,7 +759,7 @@ public class PicSimController {
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			changeTheRegisterFromPortB(1);
-			System.out.println("klick!!b1");
+			
 		}
 
 		@Override
@@ -775,7 +794,7 @@ public class PicSimController {
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			changeTheRegisterFromPortB(2);
-			System.out.println("klick!!b2");
+			
 		}
 
 		@Override
@@ -810,7 +829,7 @@ public class PicSimController {
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			changeTheRegisterFromPortB(3);
-			System.out.println("klick!!b3");
+			
 		}
 
 		@Override
@@ -845,7 +864,7 @@ public class PicSimController {
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			changeTheRegisterFromPortB(4);
-			System.out.println("klick!!b4");
+			
 		}
 
 		@Override
@@ -880,7 +899,7 @@ public class PicSimController {
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			changeTheRegisterFromPortB(5);
-			System.out.println("klick!!b5");
+			
 		}
 
 		@Override
@@ -915,7 +934,7 @@ public class PicSimController {
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			changeTheRegisterFromPortB(6);
-			System.out.println("klick!!b6");
+			
 		}
 
 		@Override
@@ -1026,5 +1045,24 @@ public class PicSimController {
 		 
 		 System.out.println(model.getSteps());
 	 }
+	 
+	public void writeTableToRegister() {
+	if(running == false ){
+		int i, m;
+		for (i = 0; i <= 31; i++) {
+			for (m = 0; m <= 7; m++) {
+				int adress = i * 8 + m;
+				// TODO bisher nur decimal möglich
+				String temp = String.valueOf(view.get_TableEntry(i, m));
+				int value = Integer.parseInt(temp);
+				if (model.getRegisterEntry(adress) != value) {
+					
+					model.register_array[adress] = value;
+					System.out.println("adresse: " + adress + " neuer wert: " + value);
+				}
+			}
+			}
+		} else {view.set_ErrorMsgs("Direkte Registeränderung nicht während der Laufzeit möglich.");}
+	}
 
 }
