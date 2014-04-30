@@ -12,11 +12,12 @@ public class PicSimControllerThread implements Runnable {
 	public void run() {
 
 		try {
-
+			
 			controller.set_running(true);
 			while (controller.get_running()) {
 				controller.start_programm(controller.get_Frequency() / 10);
-
+				controller.setTime();
+				controller.countSteps();
 			}
 		} catch (InterruptedException e) {
 

@@ -10,19 +10,45 @@ public class PicSimModel {
 	public int w_register = 0b0;
 	public int sprung;
 	private int PC = 0;
-
+	private long runningTime = 0; 
+	private long startTime = 0;
 	private Deque<Integer> STACK = new ArrayDeque<Integer>();
 	public int[] register_array = new int[256];
 	public List<Integer> code_list = new ArrayList<Integer>();
 	private int takt;
 	private String path_of_programfile;
 	private String path_of_registerfile;
+	private int steps;
 	
 	private int portA;
 	private int portB;
 
 	public PicSimModel() {
 		// Konstruktor
+	}
+
+	public int getSteps() {
+		return steps;
+	}
+
+	public void setSteps() {
+		this.steps = steps+1;
+	}
+
+	public long getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(long startTime) {
+		this.startTime = startTime;
+	}
+
+	public long getRunningTime() {
+		return runningTime;
+	}
+
+	public void setRunningTime(long runningTime) {
+		this.runningTime = runningTime;
 	}
 
 	// Stack löschen
@@ -154,6 +180,8 @@ public class PicSimModel {
 		path_of_programfile = "";
 		path_of_registerfile = "";
 		takt = 4000;
+		steps = 0;
+		runningTime = 0;
 	}
 
 	/* LISTE MIT EINZELNEN CODE-ELEMENTEN */

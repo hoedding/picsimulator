@@ -139,6 +139,12 @@ public class PicSimController {
 		 
 		 /*Wuerfel setzen*/
 		 view.setWuerfel(false, false, false, false, false, false, false, false, false);
+		 
+		 /*Laufzeit aktualisieren*/
+		 view.txtLaufzeit.setText(String.valueOf(model.getRunningTime()));
+		 
+		 /*Programmschritte aktualisieren*/
+		 view.txtSteps.setText(String.valueOf(model.getSteps()));
 	}
 
 	public void ReloadElements() {
@@ -169,7 +175,7 @@ public class PicSimController {
 	}
 
 	public void run_one_function() {
-
+		
 		Thread t1 = new Thread(new PicSimControllerThread_Once(this));
 		t1.start();
 	}
@@ -204,9 +210,9 @@ public class PicSimController {
 	}
 
 	public void run_all_functions() {
-
+		
 		if (view.getListModelSize() > 0) {
-
+			model.setStartTime(System.currentTimeMillis());
 			start();
 
 			if (view.getListModelSize() != 0) {
@@ -1009,7 +1015,16 @@ public class PicSimController {
 		 ReloadGUI();
 	 }
 	 
+	 public void setTime(){
+		 model.setRunningTime((System.currentTimeMillis()) - (model.getStartTime()));
+		 System.out.println("start" + model.getStartTime());
+		 System.out.println("running: "+model.getRunningTime());
+	 }
 	 
-	 
+	 public void countSteps(){
+		 model.setSteps();
+		 
+		 System.out.println(model.getSteps());
+	 }
 
 }

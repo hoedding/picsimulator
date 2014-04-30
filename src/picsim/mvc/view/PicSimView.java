@@ -27,18 +27,24 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeListener;
+
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PicSimView extends JFrame {
 
 	private static final long serialVersionUID = -6310686304585590231L;
-	private JTextField txtZeit;
-	private JTextField txtLaufzeit;
+
+	
+	public JTextField txtSteps;
+	public JTextField txtLaufzeit;
 	private JTextField txtTakt;
 
 	private JLabel lbl_wreg_value;
@@ -121,6 +127,7 @@ public class PicSimView extends JFrame {
 	private JTextField textField;
 
 	public PicSimView() {
+		setTitle("Simulator PIC12F84");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1112, 599);
 		JPanel contentPane = new JPanel();
@@ -177,16 +184,16 @@ public class PicSimView extends JFrame {
 		btnPause.setEnabled(false);
 		contentPane.add(btnPause);
 
-		txtZeit = new JTextField();
-		txtZeit.setEditable(false);
-		txtZeit.setText("Zeit");
-		txtZeit.setBounds(205, 28, 88, 28);
-		contentPane.add(txtZeit);
-		txtZeit.setColumns(10);
+		txtSteps = new JTextField();
+		txtSteps.setEditable(false);
+		txtSteps.setText("0");
+		txtSteps.setBounds(205, 28, 88, 28);
+		contentPane.add(txtSteps);
+		txtSteps.setColumns(10);
 
 		txtLaufzeit = new JTextField();
 		txtLaufzeit.setEditable(false);
-		txtLaufzeit.setText("Laufzeit");
+		txtLaufzeit.setText("0");
 		txtLaufzeit.setBounds(205, 105, 88, 28);
 		contentPane.add(txtLaufzeit);
 		txtLaufzeit.setColumns(10);
@@ -204,7 +211,7 @@ public class PicSimView extends JFrame {
 		contentPane.add(txtTakt);
 		txtTakt.setColumns(10);
 
-		Label label = new Label("Zeit:");
+		Label label = new Label("Schritte: ");
 		label.setBounds(119, 39, 66, 17);
 		contentPane.add(label);
 
@@ -217,8 +224,23 @@ public class PicSimView extends JFrame {
 		label_3.setBounds(119, 156, 66, 17);
 		contentPane.add(label_3);
 
+		
 		listModel = new DefaultListModel<String>();
 		list_code = new JList<String>(listModel);
+		list_code.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				if(e.getClickCount()==2){
+				 String temp = list_code.getSelectedValue();
+				 
+				 System.out.println(temp);
+				// list_code.setSelectionBackground(Color.black);
+				 
+				}
+			}
+		});
 
 		scrollpane_code = new JScrollPane(list_code);
 		scrollpane_code.setBounds(10, 356, 781, 215);
@@ -228,7 +250,7 @@ public class PicSimView extends JFrame {
 				"06", "07" };
 		table_model = new DefaultTableModel(titles, 32);
 		table = new JTable(table_model);
-
+		
 		table.setToolTipText("Zweifaches Dr��cken von 'Enter' ��bertr��gt den eingetragenen Zahlenwert direkt in den Speicher. ");
 
 		JScrollPane scrollpane_table = new JScrollPane(table);
