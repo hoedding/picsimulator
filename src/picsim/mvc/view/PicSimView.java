@@ -43,7 +43,6 @@ public class PicSimView extends JFrame {
 
 	private static final long serialVersionUID = -6310686304585590231L;
 
-	
 	public JTextField txtSteps;
 	public JTextField txtLaufzeit;
 	private JTextField txtTakt;
@@ -113,13 +112,13 @@ public class PicSimView extends JFrame {
 
 	private JLabel label_47;
 	private JLabel label_23;
-	
+
 	private JLabel label_PD_value;
 	private JLabel label_T0_value;
 	private JLabel label_IRP_value;
 	private JLabel label_RP1_value;
 	private JLabel label_RP0_value;
-	
+
 	private JLabel label_58;
 	private JLabel label_57;
 	private JLabel label_56;
@@ -128,7 +127,7 @@ public class PicSimView extends JFrame {
 	private JLabel label_53;
 	private JLabel label_52;
 	private JLabel label_51;
-	
+
 	private JRadioButton radioButton;
 	private JRadioButton radioButton_1;
 	private JRadioButton radioButton_2;
@@ -238,20 +237,19 @@ public class PicSimView extends JFrame {
 		label_3.setBounds(119, 112, 66, 17);
 		contentPane.add(label_3);
 
-		
 		listModel = new DefaultListModel<String>();
 		list_code = new JList<String>(listModel);
 		list_code.addMouseListener(new MouseAdapter() {
-			
+
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
-				if(e.getClickCount()==2){
-				 String temp = list_code.getSelectedValue();
-				 
-				 System.out.println(temp);
-				// list_code.setSelectionBackground(Color.black);
-				 
+
+				if (e.getClickCount() == 2) {
+					String temp = list_code.getSelectedValue();
+
+					System.out.println(temp);
+					// list_code.setSelectionBackground(Color.black);
+
 				}
 			}
 		});
@@ -267,10 +265,10 @@ public class PicSimView extends JFrame {
 		table.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-					
+
 			}
 		});
-		
+
 		table.setToolTipText("Zweifaches Dr��cken von 'Enter' ��bertr��gt den eingetragenen Zahlenwert direkt in den Speicher. ");
 
 		JScrollPane scrollpane_table = new JScrollPane(table);
@@ -565,7 +563,7 @@ public class PicSimView extends JFrame {
 
 		label_47 = new JLabel("0");
 		panel_9.add(label_47);
-		
+
 		JPanel panel_10 = new JPanel();
 		panel_10.setBorder(UIManager.getBorder("FormattedTextField.border"));
 		panel_10.setBackground(UIManager.getColor("Button.background"));
@@ -573,15 +571,17 @@ public class PicSimView extends JFrame {
 		panel_10.setBounds(477, 227, 108, 117);
 		contentPane.add(panel_10);
 		GridBagLayout gbl_panel_10 = new GridBagLayout();
-		gbl_panel_10.columnWidths = new int[]{0, 0, 0, 0};
-		gbl_panel_10.rowHeights = new int[]{0, 0, 0, 0, 0};
-		gbl_panel_10.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_10.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_10.columnWidths = new int[] { 0, 0, 0, 0 };
+		gbl_panel_10.rowHeights = new int[] { 0, 0, 0, 0, 0 };
+		gbl_panel_10.columnWeights = new double[] { 0.0, 1.0, 0.0,
+				Double.MIN_VALUE };
+		gbl_panel_10.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0,
+				Double.MIN_VALUE };
 		panel_10.setLayout(gbl_panel_10);
-		
-		 radioButton = new JRadioButton("");
-		 radioButton.setEnabled(false);
-		 radioButton.setToolTipText("not implemented yet. ");
+
+		radioButton = new JRadioButton("");
+		radioButton.setEnabled(false);
+		radioButton.setToolTipText("not implemented yet. ");
 		radioButton.setContentAreaFilled(false);
 		radioButton.setForeground(Color.BLACK);
 		radioButton.setBackground(Color.GRAY);
@@ -590,10 +590,10 @@ public class PicSimView extends JFrame {
 		gbc_radioButton.gridx = 0;
 		gbc_radioButton.gridy = 0;
 		panel_10.add(radioButton, gbc_radioButton);
-		
-		 radioButton_1 = new JRadioButton("");
-		 radioButton_1.setEnabled(false);
-		 radioButton_1.setToolTipText("not implemented yet. ");
+
+		radioButton_1 = new JRadioButton("");
+		radioButton_1.setEnabled(false);
+		radioButton_1.setToolTipText("not implemented yet. ");
 		radioButton_1.setContentAreaFilled(false);
 		radioButton_1.setForeground(Color.BLACK);
 		GridBagConstraints gbc_radioButton_1 = new GridBagConstraints();
@@ -601,10 +601,10 @@ public class PicSimView extends JFrame {
 		gbc_radioButton_1.gridx = 1;
 		gbc_radioButton_1.gridy = 0;
 		panel_10.add(radioButton_1, gbc_radioButton_1);
-		
-		 radioButton_2 = new JRadioButton("");
-		 radioButton_2.setEnabled(false);
-		 radioButton_2.setToolTipText("not implemented yet. ");
+
+		radioButton_2 = new JRadioButton("");
+		radioButton_2.setEnabled(false);
+		radioButton_2.setToolTipText("not implemented yet. ");
 		radioButton_2.setContentAreaFilled(false);
 		radioButton_2.setForeground(Color.BLACK);
 		GridBagConstraints gbc_radioButton_2 = new GridBagConstraints();
@@ -612,10 +612,10 @@ public class PicSimView extends JFrame {
 		gbc_radioButton_2.gridx = 2;
 		gbc_radioButton_2.gridy = 0;
 		panel_10.add(radioButton_2, gbc_radioButton_2);
-		
-		 radioButton_3 = new JRadioButton("");
-		 radioButton_3.setEnabled(false);
-		 radioButton_3.setToolTipText("not implemented yet. ");
+
+		radioButton_3 = new JRadioButton("");
+		radioButton_3.setEnabled(false);
+		radioButton_3.setToolTipText("not implemented yet. ");
 		radioButton_3.setContentAreaFilled(false);
 		radioButton_3.setForeground(Color.BLACK);
 		GridBagConstraints gbc_radioButton_3 = new GridBagConstraints();
@@ -623,10 +623,10 @@ public class PicSimView extends JFrame {
 		gbc_radioButton_3.gridx = 0;
 		gbc_radioButton_3.gridy = 1;
 		panel_10.add(radioButton_3, gbc_radioButton_3);
-		
-		 radioButton_4 = new JRadioButton("");
-		 radioButton_4.setEnabled(false);
-		 radioButton_4.setToolTipText("not implemented yet. ");
+
+		radioButton_4 = new JRadioButton("");
+		radioButton_4.setEnabled(false);
+		radioButton_4.setToolTipText("not implemented yet. ");
 		radioButton_4.setContentAreaFilled(false);
 		radioButton_4.setForeground(Color.BLACK);
 		GridBagConstraints gbc_radioButton_4 = new GridBagConstraints();
@@ -634,10 +634,10 @@ public class PicSimView extends JFrame {
 		gbc_radioButton_4.gridx = 1;
 		gbc_radioButton_4.gridy = 1;
 		panel_10.add(radioButton_4, gbc_radioButton_4);
-		
-		 radioButton_5 = new JRadioButton("");
-		 radioButton_5.setEnabled(false);
-		 radioButton_5.setToolTipText("not implemented yet. ");
+
+		radioButton_5 = new JRadioButton("");
+		radioButton_5.setEnabled(false);
+		radioButton_5.setToolTipText("not implemented yet. ");
 		radioButton_5.setContentAreaFilled(false);
 		radioButton_5.setForeground(Color.BLACK);
 		GridBagConstraints gbc_radioButton_5 = new GridBagConstraints();
@@ -645,10 +645,10 @@ public class PicSimView extends JFrame {
 		gbc_radioButton_5.gridx = 2;
 		gbc_radioButton_5.gridy = 1;
 		panel_10.add(radioButton_5, gbc_radioButton_5);
-		
-		 radioButton_6 = new JRadioButton("");
-		 radioButton_6.setEnabled(false);
-		 radioButton_6.setToolTipText("not implemented yet. ");
+
+		radioButton_6 = new JRadioButton("");
+		radioButton_6.setEnabled(false);
+		radioButton_6.setToolTipText("not implemented yet. ");
 		radioButton_6.setContentAreaFilled(false);
 		radioButton_6.setForeground(Color.BLACK);
 		GridBagConstraints gbc_radioButton_6 = new GridBagConstraints();
@@ -656,10 +656,10 @@ public class PicSimView extends JFrame {
 		gbc_radioButton_6.gridx = 0;
 		gbc_radioButton_6.gridy = 2;
 		panel_10.add(radioButton_6, gbc_radioButton_6);
-		
-		 radioButton_7 = new JRadioButton("");
-		 radioButton_7.setEnabled(false);
-		 radioButton_7.setToolTipText("not implemented yet. ");
+
+		radioButton_7 = new JRadioButton("");
+		radioButton_7.setEnabled(false);
+		radioButton_7.setToolTipText("not implemented yet. ");
 		radioButton_7.setContentAreaFilled(false);
 		radioButton_7.setForeground(Color.BLACK);
 		GridBagConstraints gbc_radioButton_7 = new GridBagConstraints();
@@ -667,10 +667,10 @@ public class PicSimView extends JFrame {
 		gbc_radioButton_7.gridx = 1;
 		gbc_radioButton_7.gridy = 2;
 		panel_10.add(radioButton_7, gbc_radioButton_7);
-		
-		 radioButton_8 = new JRadioButton("");
-		 radioButton_8.setEnabled(false);
-		 radioButton_8.setToolTipText("not implemented yet. ");
+
+		radioButton_8 = new JRadioButton("");
+		radioButton_8.setEnabled(false);
+		radioButton_8.setToolTipText("not implemented yet. ");
 		radioButton_8.setContentAreaFilled(false);
 		radioButton_8.setForeground(Color.BLACK);
 		GridBagConstraints gbc_radioButton_8 = new GridBagConstraints();
@@ -678,7 +678,7 @@ public class PicSimView extends JFrame {
 		gbc_radioButton_8.gridx = 2;
 		gbc_radioButton_8.gridy = 2;
 		panel_10.add(radioButton_8, gbc_radioButton_8);
-		
+
 		textField = new JTextField("");
 		textField.setEnabled(false);
 		textField.setToolTipText("not implemented yet. ");
@@ -690,338 +690,341 @@ public class PicSimView extends JFrame {
 		gbc_textField.gridy = 3;
 		panel_10.add(textField, gbc_textField);
 		textField.setColumns(10);
-		
+
 		JPanel panel_11 = new JPanel();
 		panel_11.setBounds(10, 163, 423, 147);
 		contentPane.add(panel_11);
 		GridBagLayout gbl_panel_11 = new GridBagLayout();
-		gbl_panel_11.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_panel_11.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_panel_11.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_11.rowWeights = new double[]{1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_11.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+				0, 0, 0 };
+		gbl_panel_11.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 };
+		gbl_panel_11.columnWeights = new double[] { 0.0, 0.0, 1.0, 0.0, 0.0,
+				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_panel_11.rowWeights = new double[] { 1.0, 1.0, 1.0, 1.0, 0.0, 0.0,
+				0.0, Double.MIN_VALUE };
 		panel_11.setLayout(gbl_panel_11);
-		
-				JLabel lblWreg = new JLabel("W-Reg");
-				GridBagConstraints gbc_lblWreg = new GridBagConstraints();
-				gbc_lblWreg.insets = new Insets(0, 0, 5, 5);
-				gbc_lblWreg.gridx = 0;
-				gbc_lblWreg.gridy = 0;
-				panel_11.add(lblWreg, gbc_lblWreg);
-						
-								lbl_wreg_value = new JLabel("00");
-								GridBagConstraints gbc_lbl_wreg_value = new GridBagConstraints();
-								gbc_lbl_wreg_value.insets = new Insets(0, 0, 5, 5);
-								gbc_lbl_wreg_value.gridx = 1;
-								gbc_lbl_wreg_value.gridy = 0;
-								panel_11.add(lbl_wreg_value, gbc_lbl_wreg_value);
-								
-								JLabel lblIrp = new JLabel("IRP");
-								GridBagConstraints gbc_lblIrp = new GridBagConstraints();
-								gbc_lblIrp.insets = new Insets(0, 0, 5, 5);
-								gbc_lblIrp.gridx = 4;
-								gbc_lblIrp.gridy = 0;
-								panel_11.add(lblIrp, gbc_lblIrp);
-								
-								JLabel lblRp_1 = new JLabel("RP1");
-								GridBagConstraints gbc_lblRp_1 = new GridBagConstraints();
-								gbc_lblRp_1.insets = new Insets(0, 0, 5, 5);
-								gbc_lblRp_1.gridx = 5;
-								gbc_lblRp_1.gridy = 0;
-								panel_11.add(lblRp_1, gbc_lblRp_1);
-								
-								JLabel lblRp = new JLabel("RP0");
-								GridBagConstraints gbc_lblRp = new GridBagConstraints();
-								gbc_lblRp.insets = new Insets(0, 0, 5, 5);
-								gbc_lblRp.gridx = 6;
-								gbc_lblRp.gridy = 0;
-								panel_11.add(lblRp, gbc_lblRp);
-								
-								JLabel lblTo = new JLabel("T0");
-								GridBagConstraints gbc_lblTo = new GridBagConstraints();
-								gbc_lblTo.insets = new Insets(0, 0, 5, 5);
-								gbc_lblTo.gridx = 7;
-								gbc_lblTo.gridy = 0;
-								panel_11.add(lblTo, gbc_lblTo);
-								
-								JLabel lblPd = new JLabel("PD");
-								GridBagConstraints gbc_lblPd = new GridBagConstraints();
-								gbc_lblPd.insets = new Insets(0, 0, 5, 5);
-								gbc_lblPd.gridx = 8;
-								gbc_lblPd.gridy = 0;
-								panel_11.add(lblPd, gbc_lblPd);
-						
-								JLabel lblZ = new JLabel("Z");
-								GridBagConstraints gbc_lblZ = new GridBagConstraints();
-								gbc_lblZ.insets = new Insets(0, 0, 5, 5);
-								gbc_lblZ.gridx = 9;
-								gbc_lblZ.gridy = 0;
-								panel_11.add(lblZ, gbc_lblZ);
-						
-								JLabel lblDc = new JLabel("DC");
-								GridBagConstraints gbc_lblDc = new GridBagConstraints();
-								gbc_lblDc.insets = new Insets(0, 0, 5, 5);
-								gbc_lblDc.gridx = 10;
-								gbc_lblDc.gridy = 0;
-								panel_11.add(lblDc, gbc_lblDc);
-						
-								JLabel lblC = new JLabel("C");
-								GridBagConstraints gbc_lblC = new GridBagConstraints();
-								gbc_lblC.insets = new Insets(0, 0, 5, 0);
-								gbc_lblC.gridx = 11;
-								gbc_lblC.gridy = 0;
-								panel_11.add(lblC, gbc_lblC);
-				
-						JLabel lblFSR = new JLabel("FSR");
-						GridBagConstraints gbc_lblFSR = new GridBagConstraints();
-						gbc_lblFSR.insets = new Insets(0, 0, 5, 5);
-						gbc_lblFSR.gridx = 0;
-						gbc_lblFSR.gridy = 1;
-						panel_11.add(lblFSR, gbc_lblFSR);
-								
-										JLabel lbl_FRS_value = new JLabel("00");
-										GridBagConstraints gbc_lbl_FRS_value = new GridBagConstraints();
-										gbc_lbl_FRS_value.insets = new Insets(0, 0, 5, 5);
-										gbc_lbl_FRS_value.gridx = 1;
-										gbc_lbl_FRS_value.gridy = 1;
-										panel_11.add(lbl_FRS_value, gbc_lbl_FRS_value);
-										
-										 label_IRP_value = new JLabel("0");
-										GridBagConstraints gbc_label_50 = new GridBagConstraints();
-										gbc_label_50.insets = new Insets(0, 0, 5, 5);
-										gbc_label_50.gridx = 4;
-										gbc_label_50.gridy = 1;
-										panel_11.add(label_IRP_value, gbc_label_50);
-										
-										 label_RP1_value = new JLabel("0");
-										GridBagConstraints gbc_label_49 = new GridBagConstraints();
-										gbc_label_49.insets = new Insets(0, 0, 5, 5);
-										gbc_label_49.gridx = 5;
-										gbc_label_49.gridy = 1;
-										panel_11.add(label_RP1_value, gbc_label_49);
-										
-										 label_RP0_value = new JLabel("0");
-										GridBagConstraints gbc_label_48 = new GridBagConstraints();
-										gbc_label_48.insets = new Insets(0, 0, 5, 5);
-										gbc_label_48.gridx = 6;
-										gbc_label_48.gridy = 1;
-										panel_11.add(label_RP0_value, gbc_label_48);
-										
-										 label_T0_value = new JLabel("0");
-										GridBagConstraints gbc_label_26 = new GridBagConstraints();
-										gbc_label_26.insets = new Insets(0, 0, 5, 5);
-										gbc_label_26.gridx = 7;
-										gbc_label_26.gridy = 1;
-										panel_11.add(label_T0_value, gbc_label_26);
-										
-										 label_PD_value = new JLabel("0");
-										GridBagConstraints gbc_label_4 = new GridBagConstraints();
-										gbc_label_4.insets = new Insets(0, 0, 5, 5);
-										gbc_label_4.gridx = 8;
-										gbc_label_4.gridy = 1;
-										panel_11.add(label_PD_value, gbc_label_4);
-								
-										lbl_Z_value = new JLabel("00");
-										GridBagConstraints gbc_lbl_Z_value = new GridBagConstraints();
-										gbc_lbl_Z_value.insets = new Insets(0, 0, 5, 5);
-										gbc_lbl_Z_value.gridx = 9;
-										gbc_lbl_Z_value.gridy = 1;
-										panel_11.add(lbl_Z_value, gbc_lbl_Z_value);
-								
-										lbl_DC_value = new JLabel("00");
-										GridBagConstraints gbc_lbl_DC_value = new GridBagConstraints();
-										gbc_lbl_DC_value.insets = new Insets(0, 0, 5, 5);
-										gbc_lbl_DC_value.gridx = 10;
-										gbc_lbl_DC_value.gridy = 1;
-										panel_11.add(lbl_DC_value, gbc_lbl_DC_value);
-								
-										lbl_C_value = new JLabel("00");
-										GridBagConstraints gbc_lbl_C_value = new GridBagConstraints();
-										gbc_lbl_C_value.insets = new Insets(0, 0, 5, 0);
-										gbc_lbl_C_value.gridx = 11;
-										gbc_lbl_C_value.gridy = 1;
-										panel_11.add(lbl_C_value, gbc_lbl_C_value);
-						
-								JLabel lblPcl = new JLabel("PCL");
-								GridBagConstraints gbc_lblPcl = new GridBagConstraints();
-								gbc_lblPcl.insets = new Insets(0, 0, 5, 5);
-								gbc_lblPcl.gridx = 0;
-								gbc_lblPcl.gridy = 2;
-								panel_11.add(lblPcl, gbc_lblPcl);
-								
-										JLabel lbl_PCL_value = new JLabel("00");
-										GridBagConstraints gbc_lbl_PCL_value = new GridBagConstraints();
-										gbc_lbl_PCL_value.insets = new Insets(0, 0, 5, 5);
-										gbc_lbl_PCL_value.gridx = 1;
-										gbc_lbl_PCL_value.gridy = 2;
-										panel_11.add(lbl_PCL_value, gbc_lbl_PCL_value);
-												
-												JLabel lblGie = new JLabel("GIE");
-												GridBagConstraints gbc_lblGie = new GridBagConstraints();
-												gbc_lblGie.insets = new Insets(0, 0, 5, 5);
-												gbc_lblGie.gridx = 4;
-												gbc_lblGie.gridy = 2;
-												panel_11.add(lblGie, gbc_lblGie);
-												
-												JLabel lblPie = new JLabel("PIE");
-												GridBagConstraints gbc_lblPie = new GridBagConstraints();
-												gbc_lblPie.insets = new Insets(0, 0, 5, 5);
-												gbc_lblPie.gridx = 5;
-												gbc_lblPie.gridy = 2;
-												panel_11.add(lblPie, gbc_lblPie);
-												
-												JLabel lblTie = new JLabel("T0IE");
-												GridBagConstraints gbc_lblTie = new GridBagConstraints();
-												gbc_lblTie.insets = new Insets(0, 0, 5, 5);
-												gbc_lblTie.gridx = 6;
-												gbc_lblTie.gridy = 2;
-												panel_11.add(lblTie, gbc_lblTie);
-												
-												JLabel lblInte = new JLabel("INTE");
-												GridBagConstraints gbc_lblInte = new GridBagConstraints();
-												gbc_lblInte.insets = new Insets(0, 0, 5, 5);
-												gbc_lblInte.gridx = 7;
-												gbc_lblInte.gridy = 2;
-												panel_11.add(lblInte, gbc_lblInte);
-												
-												JLabel lblRbie = new JLabel("RBIE");
-												GridBagConstraints gbc_lblRbie = new GridBagConstraints();
-												gbc_lblRbie.insets = new Insets(0, 0, 5, 5);
-												gbc_lblRbie.gridx = 8;
-												gbc_lblRbie.gridy = 2;
-												panel_11.add(lblRbie, gbc_lblRbie);
-												
-												JLabel lblTif = new JLabel("T0IF");
-												GridBagConstraints gbc_lblTif = new GridBagConstraints();
-												gbc_lblTif.insets = new Insets(0, 0, 5, 5);
-												gbc_lblTif.gridx = 9;
-												gbc_lblTif.gridy = 2;
-												panel_11.add(lblTif, gbc_lblTif);
-												
-												JLabel lblIntf = new JLabel("INTF");
-												GridBagConstraints gbc_lblIntf = new GridBagConstraints();
-												gbc_lblIntf.insets = new Insets(0, 0, 5, 5);
-												gbc_lblIntf.gridx = 10;
-												gbc_lblIntf.gridy = 2;
-												panel_11.add(lblIntf, gbc_lblIntf);
-												
-												JLabel lblRbif = new JLabel("RBIF");
-												GridBagConstraints gbc_lblRbif = new GridBagConstraints();
-												gbc_lblRbif.insets = new Insets(0, 0, 5, 0);
-												gbc_lblRbif.gridx = 11;
-												gbc_lblRbif.gridy = 2;
-												panel_11.add(lblRbif, gbc_lblRbif);
-										
-												JLabel lblPclath = new JLabel("PCLATH");
-												GridBagConstraints gbc_lblPclath = new GridBagConstraints();
-												gbc_lblPclath.insets = new Insets(0, 0, 5, 5);
-												gbc_lblPclath.gridx = 0;
-												gbc_lblPclath.gridy = 3;
-												panel_11.add(lblPclath, gbc_lblPclath);
-												
-														JLabel lbl_PCLATH_value = new JLabel("00");
-														GridBagConstraints gbc_lbl_PCLATH_value = new GridBagConstraints();
-														gbc_lbl_PCLATH_value.insets = new Insets(0, 0, 5, 5);
-														gbc_lbl_PCLATH_value.gridx = 1;
-														gbc_lbl_PCLATH_value.gridy = 3;
-														panel_11.add(lbl_PCLATH_value, gbc_lbl_PCLATH_value);
-																
-																 label_51 = new JLabel("0");
-																GridBagConstraints gbc_label_51 = new GridBagConstraints();
-																gbc_label_51.insets = new Insets(0, 0, 5, 5);
-																gbc_label_51.gridx = 4;
-																gbc_label_51.gridy = 3;
-																panel_11.add(label_51, gbc_label_51);
-																
-																 label_52 = new JLabel("0");
-																GridBagConstraints gbc_label_52 = new GridBagConstraints();
-																gbc_label_52.insets = new Insets(0, 0, 5, 5);
-																gbc_label_52.gridx = 5;
-																gbc_label_52.gridy = 3;
-																panel_11.add(label_52, gbc_label_52);
-																
-																 label_53 = new JLabel("0");
-																GridBagConstraints gbc_label_53 = new GridBagConstraints();
-																gbc_label_53.insets = new Insets(0, 0, 5, 5);
-																gbc_label_53.gridx = 6;
-																gbc_label_53.gridy = 3;
-																panel_11.add(label_53, gbc_label_53);
-																
-																 label_54 = new JLabel("0");
-																GridBagConstraints gbc_label_54 = new GridBagConstraints();
-																gbc_label_54.insets = new Insets(0, 0, 5, 5);
-																gbc_label_54.gridx = 7;
-																gbc_label_54.gridy = 3;
-																panel_11.add(label_54, gbc_label_54);
-																
-																 label_55 = new JLabel("0");
-																GridBagConstraints gbc_label_55 = new GridBagConstraints();
-																gbc_label_55.insets = new Insets(0, 0, 5, 5);
-																gbc_label_55.gridx = 8;
-																gbc_label_55.gridy = 3;
-																panel_11.add(label_55, gbc_label_55);
-																
-																 label_56 = new JLabel("0");
-																GridBagConstraints gbc_label_56 = new GridBagConstraints();
-																gbc_label_56.insets = new Insets(0, 0, 5, 5);
-																gbc_label_56.gridx = 9;
-																gbc_label_56.gridy = 3;
-																panel_11.add(label_56, gbc_label_56);
-																
-																 label_57 = new JLabel("0");
-																GridBagConstraints gbc_label_57 = new GridBagConstraints();
-																gbc_label_57.insets = new Insets(0, 0, 5, 5);
-																gbc_label_57.gridx = 10;
-																gbc_label_57.gridy = 3;
-																panel_11.add(label_57, gbc_label_57);
-																
-																 label_58 = new JLabel("0");
-																GridBagConstraints gbc_label_58 = new GridBagConstraints();
-																gbc_label_58.insets = new Insets(0, 0, 5, 0);
-																gbc_label_58.gridx = 11;
-																gbc_label_58.gridy = 3;
-																panel_11.add(label_58, gbc_label_58);
-														
-																JLabel lblPc = new JLabel("PC");
-																GridBagConstraints gbc_lblPc = new GridBagConstraints();
-																gbc_lblPc.insets = new Insets(0, 0, 5, 5);
-																gbc_lblPc.gridx = 0;
-																gbc_lblPc.gridy = 4;
-																panel_11.add(lblPc, gbc_lblPc);
-																
-																		lbl_PC_value = new JLabel("0000");
-																		GridBagConstraints gbc_lbl_PC_value = new GridBagConstraints();
-																		gbc_lbl_PC_value.insets = new Insets(0, 0, 5, 5);
-																		gbc_lbl_PC_value.gridx = 1;
-																		gbc_lbl_PC_value.gridy = 4;
-																		panel_11.add(lbl_PC_value, gbc_lbl_PC_value);
-																		
-																				JLabel lblStatus = new JLabel("Status");
-																				GridBagConstraints gbc_lblStatus = new GridBagConstraints();
-																				gbc_lblStatus.insets = new Insets(0, 0, 5, 5);
-																				gbc_lblStatus.gridx = 0;
-																				gbc_lblStatus.gridy = 5;
-																				panel_11.add(lblStatus, gbc_lblStatus);
-																				
-																						lbl_Status_value = new JLabel("00");
-																						GridBagConstraints gbc_lbl_Status_value = new GridBagConstraints();
-																						gbc_lbl_Status_value.insets = new Insets(0, 0, 5, 5);
-																						gbc_lbl_Status_value.gridx = 1;
-																						gbc_lbl_Status_value.gridy = 5;
-																						panel_11.add(lbl_Status_value, gbc_lbl_Status_value);
-																						
-																						JLabel lblOption = new JLabel("Option");
-																						GridBagConstraints gbc_lblOption = new GridBagConstraints();
-																						gbc_lblOption.insets = new Insets(0, 0, 0, 5);
-																						gbc_lblOption.gridx = 0;
-																						gbc_lblOption.gridy = 6;
-																						panel_11.add(lblOption, gbc_lblOption);
-																						
-																						JLabel label_59 = new JLabel("00");
-																						GridBagConstraints gbc_label_59 = new GridBagConstraints();
-																						gbc_label_59.insets = new Insets(0, 0, 0, 5);
-																						gbc_label_59.gridx = 1;
-																						gbc_label_59.gridy = 6;
-																						panel_11.add(label_59, gbc_label_59);
+
+		JLabel lblWreg = new JLabel("W-Reg");
+		GridBagConstraints gbc_lblWreg = new GridBagConstraints();
+		gbc_lblWreg.insets = new Insets(0, 0, 5, 5);
+		gbc_lblWreg.gridx = 0;
+		gbc_lblWreg.gridy = 0;
+		panel_11.add(lblWreg, gbc_lblWreg);
+
+		lbl_wreg_value = new JLabel("00");
+		GridBagConstraints gbc_lbl_wreg_value = new GridBagConstraints();
+		gbc_lbl_wreg_value.insets = new Insets(0, 0, 5, 5);
+		gbc_lbl_wreg_value.gridx = 1;
+		gbc_lbl_wreg_value.gridy = 0;
+		panel_11.add(lbl_wreg_value, gbc_lbl_wreg_value);
+
+		JLabel lblIrp = new JLabel("IRP");
+		GridBagConstraints gbc_lblIrp = new GridBagConstraints();
+		gbc_lblIrp.insets = new Insets(0, 0, 5, 5);
+		gbc_lblIrp.gridx = 4;
+		gbc_lblIrp.gridy = 0;
+		panel_11.add(lblIrp, gbc_lblIrp);
+
+		JLabel lblRp_1 = new JLabel("RP1");
+		GridBagConstraints gbc_lblRp_1 = new GridBagConstraints();
+		gbc_lblRp_1.insets = new Insets(0, 0, 5, 5);
+		gbc_lblRp_1.gridx = 5;
+		gbc_lblRp_1.gridy = 0;
+		panel_11.add(lblRp_1, gbc_lblRp_1);
+
+		JLabel lblRp = new JLabel("RP0");
+		GridBagConstraints gbc_lblRp = new GridBagConstraints();
+		gbc_lblRp.insets = new Insets(0, 0, 5, 5);
+		gbc_lblRp.gridx = 6;
+		gbc_lblRp.gridy = 0;
+		panel_11.add(lblRp, gbc_lblRp);
+
+		JLabel lblTo = new JLabel("T0");
+		GridBagConstraints gbc_lblTo = new GridBagConstraints();
+		gbc_lblTo.insets = new Insets(0, 0, 5, 5);
+		gbc_lblTo.gridx = 7;
+		gbc_lblTo.gridy = 0;
+		panel_11.add(lblTo, gbc_lblTo);
+
+		JLabel lblPd = new JLabel("PD");
+		GridBagConstraints gbc_lblPd = new GridBagConstraints();
+		gbc_lblPd.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPd.gridx = 8;
+		gbc_lblPd.gridy = 0;
+		panel_11.add(lblPd, gbc_lblPd);
+
+		JLabel lblZ = new JLabel("Z");
+		GridBagConstraints gbc_lblZ = new GridBagConstraints();
+		gbc_lblZ.insets = new Insets(0, 0, 5, 5);
+		gbc_lblZ.gridx = 9;
+		gbc_lblZ.gridy = 0;
+		panel_11.add(lblZ, gbc_lblZ);
+
+		JLabel lblDc = new JLabel("DC");
+		GridBagConstraints gbc_lblDc = new GridBagConstraints();
+		gbc_lblDc.insets = new Insets(0, 0, 5, 5);
+		gbc_lblDc.gridx = 10;
+		gbc_lblDc.gridy = 0;
+		panel_11.add(lblDc, gbc_lblDc);
+
+		JLabel lblC = new JLabel("C");
+		GridBagConstraints gbc_lblC = new GridBagConstraints();
+		gbc_lblC.insets = new Insets(0, 0, 5, 0);
+		gbc_lblC.gridx = 11;
+		gbc_lblC.gridy = 0;
+		panel_11.add(lblC, gbc_lblC);
+
+		JLabel lblFSR = new JLabel("FSR");
+		GridBagConstraints gbc_lblFSR = new GridBagConstraints();
+		gbc_lblFSR.insets = new Insets(0, 0, 5, 5);
+		gbc_lblFSR.gridx = 0;
+		gbc_lblFSR.gridy = 1;
+		panel_11.add(lblFSR, gbc_lblFSR);
+
+		JLabel lbl_FRS_value = new JLabel("00");
+		GridBagConstraints gbc_lbl_FRS_value = new GridBagConstraints();
+		gbc_lbl_FRS_value.insets = new Insets(0, 0, 5, 5);
+		gbc_lbl_FRS_value.gridx = 1;
+		gbc_lbl_FRS_value.gridy = 1;
+		panel_11.add(lbl_FRS_value, gbc_lbl_FRS_value);
+
+		label_IRP_value = new JLabel("0");
+		GridBagConstraints gbc_label_50 = new GridBagConstraints();
+		gbc_label_50.insets = new Insets(0, 0, 5, 5);
+		gbc_label_50.gridx = 4;
+		gbc_label_50.gridy = 1;
+		panel_11.add(label_IRP_value, gbc_label_50);
+
+		label_RP1_value = new JLabel("0");
+		GridBagConstraints gbc_label_49 = new GridBagConstraints();
+		gbc_label_49.insets = new Insets(0, 0, 5, 5);
+		gbc_label_49.gridx = 5;
+		gbc_label_49.gridy = 1;
+		panel_11.add(label_RP1_value, gbc_label_49);
+
+		label_RP0_value = new JLabel("0");
+		GridBagConstraints gbc_label_48 = new GridBagConstraints();
+		gbc_label_48.insets = new Insets(0, 0, 5, 5);
+		gbc_label_48.gridx = 6;
+		gbc_label_48.gridy = 1;
+		panel_11.add(label_RP0_value, gbc_label_48);
+
+		label_T0_value = new JLabel("0");
+		GridBagConstraints gbc_label_26 = new GridBagConstraints();
+		gbc_label_26.insets = new Insets(0, 0, 5, 5);
+		gbc_label_26.gridx = 7;
+		gbc_label_26.gridy = 1;
+		panel_11.add(label_T0_value, gbc_label_26);
+
+		label_PD_value = new JLabel("0");
+		GridBagConstraints gbc_label_4 = new GridBagConstraints();
+		gbc_label_4.insets = new Insets(0, 0, 5, 5);
+		gbc_label_4.gridx = 8;
+		gbc_label_4.gridy = 1;
+		panel_11.add(label_PD_value, gbc_label_4);
+
+		lbl_Z_value = new JLabel("00");
+		GridBagConstraints gbc_lbl_Z_value = new GridBagConstraints();
+		gbc_lbl_Z_value.insets = new Insets(0, 0, 5, 5);
+		gbc_lbl_Z_value.gridx = 9;
+		gbc_lbl_Z_value.gridy = 1;
+		panel_11.add(lbl_Z_value, gbc_lbl_Z_value);
+
+		lbl_DC_value = new JLabel("00");
+		GridBagConstraints gbc_lbl_DC_value = new GridBagConstraints();
+		gbc_lbl_DC_value.insets = new Insets(0, 0, 5, 5);
+		gbc_lbl_DC_value.gridx = 10;
+		gbc_lbl_DC_value.gridy = 1;
+		panel_11.add(lbl_DC_value, gbc_lbl_DC_value);
+
+		lbl_C_value = new JLabel("00");
+		GridBagConstraints gbc_lbl_C_value = new GridBagConstraints();
+		gbc_lbl_C_value.insets = new Insets(0, 0, 5, 0);
+		gbc_lbl_C_value.gridx = 11;
+		gbc_lbl_C_value.gridy = 1;
+		panel_11.add(lbl_C_value, gbc_lbl_C_value);
+
+		JLabel lblPcl = new JLabel("PCL");
+		GridBagConstraints gbc_lblPcl = new GridBagConstraints();
+		gbc_lblPcl.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPcl.gridx = 0;
+		gbc_lblPcl.gridy = 2;
+		panel_11.add(lblPcl, gbc_lblPcl);
+
+		JLabel lbl_PCL_value = new JLabel("00");
+		GridBagConstraints gbc_lbl_PCL_value = new GridBagConstraints();
+		gbc_lbl_PCL_value.insets = new Insets(0, 0, 5, 5);
+		gbc_lbl_PCL_value.gridx = 1;
+		gbc_lbl_PCL_value.gridy = 2;
+		panel_11.add(lbl_PCL_value, gbc_lbl_PCL_value);
+
+		JLabel lblGie = new JLabel("GIE");
+		GridBagConstraints gbc_lblGie = new GridBagConstraints();
+		gbc_lblGie.insets = new Insets(0, 0, 5, 5);
+		gbc_lblGie.gridx = 4;
+		gbc_lblGie.gridy = 2;
+		panel_11.add(lblGie, gbc_lblGie);
+
+		JLabel lblPie = new JLabel("PIE");
+		GridBagConstraints gbc_lblPie = new GridBagConstraints();
+		gbc_lblPie.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPie.gridx = 5;
+		gbc_lblPie.gridy = 2;
+		panel_11.add(lblPie, gbc_lblPie);
+
+		JLabel lblTie = new JLabel("T0IE");
+		GridBagConstraints gbc_lblTie = new GridBagConstraints();
+		gbc_lblTie.insets = new Insets(0, 0, 5, 5);
+		gbc_lblTie.gridx = 6;
+		gbc_lblTie.gridy = 2;
+		panel_11.add(lblTie, gbc_lblTie);
+
+		JLabel lblInte = new JLabel("INTE");
+		GridBagConstraints gbc_lblInte = new GridBagConstraints();
+		gbc_lblInte.insets = new Insets(0, 0, 5, 5);
+		gbc_lblInte.gridx = 7;
+		gbc_lblInte.gridy = 2;
+		panel_11.add(lblInte, gbc_lblInte);
+
+		JLabel lblRbie = new JLabel("RBIE");
+		GridBagConstraints gbc_lblRbie = new GridBagConstraints();
+		gbc_lblRbie.insets = new Insets(0, 0, 5, 5);
+		gbc_lblRbie.gridx = 8;
+		gbc_lblRbie.gridy = 2;
+		panel_11.add(lblRbie, gbc_lblRbie);
+
+		JLabel lblTif = new JLabel("T0IF");
+		GridBagConstraints gbc_lblTif = new GridBagConstraints();
+		gbc_lblTif.insets = new Insets(0, 0, 5, 5);
+		gbc_lblTif.gridx = 9;
+		gbc_lblTif.gridy = 2;
+		panel_11.add(lblTif, gbc_lblTif);
+
+		JLabel lblIntf = new JLabel("INTF");
+		GridBagConstraints gbc_lblIntf = new GridBagConstraints();
+		gbc_lblIntf.insets = new Insets(0, 0, 5, 5);
+		gbc_lblIntf.gridx = 10;
+		gbc_lblIntf.gridy = 2;
+		panel_11.add(lblIntf, gbc_lblIntf);
+
+		JLabel lblRbif = new JLabel("RBIF");
+		GridBagConstraints gbc_lblRbif = new GridBagConstraints();
+		gbc_lblRbif.insets = new Insets(0, 0, 5, 0);
+		gbc_lblRbif.gridx = 11;
+		gbc_lblRbif.gridy = 2;
+		panel_11.add(lblRbif, gbc_lblRbif);
+
+		JLabel lblPclath = new JLabel("PCLATH");
+		GridBagConstraints gbc_lblPclath = new GridBagConstraints();
+		gbc_lblPclath.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPclath.gridx = 0;
+		gbc_lblPclath.gridy = 3;
+		panel_11.add(lblPclath, gbc_lblPclath);
+
+		JLabel lbl_PCLATH_value = new JLabel("00");
+		GridBagConstraints gbc_lbl_PCLATH_value = new GridBagConstraints();
+		gbc_lbl_PCLATH_value.insets = new Insets(0, 0, 5, 5);
+		gbc_lbl_PCLATH_value.gridx = 1;
+		gbc_lbl_PCLATH_value.gridy = 3;
+		panel_11.add(lbl_PCLATH_value, gbc_lbl_PCLATH_value);
+
+		label_51 = new JLabel("0");
+		GridBagConstraints gbc_label_51 = new GridBagConstraints();
+		gbc_label_51.insets = new Insets(0, 0, 5, 5);
+		gbc_label_51.gridx = 4;
+		gbc_label_51.gridy = 3;
+		panel_11.add(label_51, gbc_label_51);
+
+		label_52 = new JLabel("0");
+		GridBagConstraints gbc_label_52 = new GridBagConstraints();
+		gbc_label_52.insets = new Insets(0, 0, 5, 5);
+		gbc_label_52.gridx = 5;
+		gbc_label_52.gridy = 3;
+		panel_11.add(label_52, gbc_label_52);
+
+		label_53 = new JLabel("0");
+		GridBagConstraints gbc_label_53 = new GridBagConstraints();
+		gbc_label_53.insets = new Insets(0, 0, 5, 5);
+		gbc_label_53.gridx = 6;
+		gbc_label_53.gridy = 3;
+		panel_11.add(label_53, gbc_label_53);
+
+		label_54 = new JLabel("0");
+		GridBagConstraints gbc_label_54 = new GridBagConstraints();
+		gbc_label_54.insets = new Insets(0, 0, 5, 5);
+		gbc_label_54.gridx = 7;
+		gbc_label_54.gridy = 3;
+		panel_11.add(label_54, gbc_label_54);
+
+		label_55 = new JLabel("0");
+		GridBagConstraints gbc_label_55 = new GridBagConstraints();
+		gbc_label_55.insets = new Insets(0, 0, 5, 5);
+		gbc_label_55.gridx = 8;
+		gbc_label_55.gridy = 3;
+		panel_11.add(label_55, gbc_label_55);
+
+		label_56 = new JLabel("0");
+		GridBagConstraints gbc_label_56 = new GridBagConstraints();
+		gbc_label_56.insets = new Insets(0, 0, 5, 5);
+		gbc_label_56.gridx = 9;
+		gbc_label_56.gridy = 3;
+		panel_11.add(label_56, gbc_label_56);
+
+		label_57 = new JLabel("0");
+		GridBagConstraints gbc_label_57 = new GridBagConstraints();
+		gbc_label_57.insets = new Insets(0, 0, 5, 5);
+		gbc_label_57.gridx = 10;
+		gbc_label_57.gridy = 3;
+		panel_11.add(label_57, gbc_label_57);
+
+		label_58 = new JLabel("0");
+		GridBagConstraints gbc_label_58 = new GridBagConstraints();
+		gbc_label_58.insets = new Insets(0, 0, 5, 0);
+		gbc_label_58.gridx = 11;
+		gbc_label_58.gridy = 3;
+		panel_11.add(label_58, gbc_label_58);
+
+		JLabel lblPc = new JLabel("PC");
+		GridBagConstraints gbc_lblPc = new GridBagConstraints();
+		gbc_lblPc.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPc.gridx = 0;
+		gbc_lblPc.gridy = 4;
+		panel_11.add(lblPc, gbc_lblPc);
+
+		lbl_PC_value = new JLabel("0000");
+		GridBagConstraints gbc_lbl_PC_value = new GridBagConstraints();
+		gbc_lbl_PC_value.insets = new Insets(0, 0, 5, 5);
+		gbc_lbl_PC_value.gridx = 1;
+		gbc_lbl_PC_value.gridy = 4;
+		panel_11.add(lbl_PC_value, gbc_lbl_PC_value);
+
+		JLabel lblStatus = new JLabel("Status");
+		GridBagConstraints gbc_lblStatus = new GridBagConstraints();
+		gbc_lblStatus.insets = new Insets(0, 0, 5, 5);
+		gbc_lblStatus.gridx = 0;
+		gbc_lblStatus.gridy = 5;
+		panel_11.add(lblStatus, gbc_lblStatus);
+
+		lbl_Status_value = new JLabel("00");
+		GridBagConstraints gbc_lbl_Status_value = new GridBagConstraints();
+		gbc_lbl_Status_value.insets = new Insets(0, 0, 5, 5);
+		gbc_lbl_Status_value.gridx = 1;
+		gbc_lbl_Status_value.gridy = 5;
+		panel_11.add(lbl_Status_value, gbc_lbl_Status_value);
+
+		JLabel lblOption = new JLabel("Option");
+		GridBagConstraints gbc_lblOption = new GridBagConstraints();
+		gbc_lblOption.insets = new Insets(0, 0, 0, 5);
+		gbc_lblOption.gridx = 0;
+		gbc_lblOption.gridy = 6;
+		panel_11.add(lblOption, gbc_lblOption);
+
+		JLabel label_59 = new JLabel("00");
+		GridBagConstraints gbc_label_59 = new GridBagConstraints();
+		gbc_label_59.insets = new Insets(0, 0, 0, 5);
+		gbc_label_59.gridx = 1;
+		gbc_label_59.gridy = 6;
+		panel_11.add(label_59, gbc_label_59);
 	}
 
 	public void set_W_value(String s) {
@@ -1037,30 +1040,93 @@ public class PicSimView extends JFrame {
 	}
 
 	public void set_Status_value(int s) {
-		
-		
-			lbl_Status_value.setText(String.valueOf(s));
-			if((s&0b00000001) == 1 ){	lbl_C_value.setText("1"); } else { lbl_C_value.setText("0"); }
-			if((s&0b00000010) == 2 ){	lbl_DC_value.setText("1"); } else { lbl_DC_value.setText("0"); }
-			if((s&0b00000100) == 4 ){	lbl_Z_value.setText("1"); } else { lbl_Z_value.setText("0"); }
-			if((s&0b00001000) == 8 ){	label_PD_value.setText("1"); } else { label_PD_value.setText("0"); }
-			if((s&0b00010000) == 16 ){	label_T0_value.setText("1"); } else { label_T0_value.setText("0"); }
-			if((s&0b00100000) == 32 ){	label_RP0_value.setText("1"); } else { label_RP0_value.setText("0"); }
-			if((s&0b01000000) == 64 ){	label_RP1_value.setText("1"); } else { label_RP1_value.setText("0"); }
-			if((s&0b10000000) == 128 ){	label_IRP_value.setText("1"); } else { label_IRP_value.setText("0"); }
-			
+
+		lbl_Status_value.setText(String.valueOf(s));
+		if ((s & 0b00000001) == 1) {
+			lbl_C_value.setText("1");
+		} else {
+			lbl_C_value.setText("0");
+		}
+		if ((s & 0b00000010) == 2) {
+			lbl_DC_value.setText("1");
+		} else {
+			lbl_DC_value.setText("0");
+		}
+		if ((s & 0b00000100) == 4) {
+			lbl_Z_value.setText("1");
+		} else {
+			lbl_Z_value.setText("0");
+		}
+		if ((s & 0b00001000) == 8) {
+			label_PD_value.setText("1");
+		} else {
+			label_PD_value.setText("0");
+		}
+		if ((s & 0b00010000) == 16) {
+			label_T0_value.setText("1");
+		} else {
+			label_T0_value.setText("0");
+		}
+		if ((s & 0b00100000) == 32) {
+			label_RP0_value.setText("1");
+		} else {
+			label_RP0_value.setText("0");
+		}
+		if ((s & 0b01000000) == 64) {
+			label_RP1_value.setText("1");
+		} else {
+			label_RP1_value.setText("0");
+		}
+		if ((s & 0b10000000) == 128) {
+			label_IRP_value.setText("1");
+		} else {
+			label_IRP_value.setText("0");
+		}
+
 	}
-	
-	public void set_Intcon_value(int s){
-		if((s&0b00000001) == 1 ){	label_58.setText("1"); } else { label_58.setText("0"); }
-		if((s&0b00000010) == 2 ){	label_57.setText("1"); } else { label_57.setText("0"); }
-		if((s&0b00000100) == 4 ){	label_56.setText("1"); } else { label_56.setText("0"); }
-		if((s&0b00001000) == 8 ){	label_55.setText("1"); } else { label_55.setText("0"); }
-		if((s&0b00010000) == 16 ){	label_54.setText("1"); } else { label_54.setText("0"); }
-		if((s&0b00100000) == 32 ){	label_53.setText("1"); } else { label_53.setText("0"); }
-		if((s&0b01000000) == 64 ){	label_52.setText("1"); } else { label_52.setText("0"); }
-		if((s&0b10000000) == 128 ){	label_51.setText("1"); } else { label_51.setText("0"); }
-		
+
+	public void set_Intcon_value(int s) {
+		if ((s & 0b00000001) == 1) {
+			label_58.setText("1");
+		} else {
+			label_58.setText("0");
+		}
+		if ((s & 0b00000010) == 2) {
+			label_57.setText("1");
+		} else {
+			label_57.setText("0");
+		}
+		if ((s & 0b00000100) == 4) {
+			label_56.setText("1");
+		} else {
+			label_56.setText("0");
+		}
+		if ((s & 0b00001000) == 8) {
+			label_55.setText("1");
+		} else {
+			label_55.setText("0");
+		}
+		if ((s & 0b00010000) == 16) {
+			label_54.setText("1");
+		} else {
+			label_54.setText("0");
+		}
+		if ((s & 0b00100000) == 32) {
+			label_53.setText("1");
+		} else {
+			label_53.setText("0");
+		}
+		if ((s & 0b01000000) == 64) {
+			label_52.setText("1");
+		} else {
+			label_52.setText("0");
+		}
+		if ((s & 0b10000000) == 128) {
+			label_51.setText("1");
+		} else {
+			label_51.setText("0");
+		}
+
 	}
 
 	public void set_PC_value(String s) {
@@ -1155,8 +1221,6 @@ public class PicSimView extends JFrame {
 		btnRegisterLaden.addActionListener(l);
 	}
 
-	
-
 	public void setChangeTableEntryListener(KeyListener l) {
 		table.addKeyListener(l);
 	}
@@ -1226,7 +1290,7 @@ public class PicSimView extends JFrame {
 	public void setChangePortBBit7(MouseListener l) {
 		label_38.addMouseListener(l);
 	}
-	
+
 	public void setTrisALabels(int t) {
 		// t = t & 0b11111111;
 		int a = t & 0b00000001;
@@ -1461,19 +1525,57 @@ public class PicSimView extends JFrame {
 		return binary;
 
 	}
-	
-	public void setWuerfel(boolean a11, boolean a12, boolean a13, boolean a21, boolean a22, boolean a23, boolean a31, boolean a32, boolean a33){
-		if(a11){radioButton.setSelected(true);} else {radioButton.setSelected(false);}
-		if(a12){radioButton.setSelected(true);} else {radioButton.setSelected(false);}
-		if(a13){radioButton.setSelected(true);} else {radioButton.setSelected(false);}
-		if(a21){radioButton.setSelected(true);} else {radioButton.setSelected(false);}
-		if(a22){radioButton.setSelected(true);} else {radioButton.setSelected(false);}
-		if(a23){radioButton.setSelected(true);} else {radioButton.setSelected(false);}
-		if(a31){radioButton.setSelected(true);} else {radioButton.setSelected(false);}
-		if(a32){radioButton.setSelected(true);} else {radioButton.setSelected(false);}
-		if(a33){radioButton.setSelected(true);} else {radioButton.setSelected(false);}
+
+	public void setWuerfel(boolean a11, boolean a12, boolean a13, boolean a21,
+			boolean a22, boolean a23, boolean a31, boolean a32, boolean a33) {
+		if (a11) {
+			radioButton.setSelected(true);
+		} else {
+			radioButton.setSelected(false);
+		}
+		if (a12) {
+			radioButton.setSelected(true);
+		} else {
+			radioButton.setSelected(false);
+		}
+		if (a13) {
+			radioButton.setSelected(true);
+		} else {
+			radioButton.setSelected(false);
+		}
+		if (a21) {
+			radioButton.setSelected(true);
+		} else {
+			radioButton.setSelected(false);
+		}
+		if (a22) {
+			radioButton.setSelected(true);
+		} else {
+			radioButton.setSelected(false);
+		}
+		if (a23) {
+			radioButton.setSelected(true);
+		} else {
+			radioButton.setSelected(false);
+		}
+		if (a31) {
+			radioButton.setSelected(true);
+		} else {
+			radioButton.setSelected(false);
+		}
+		if (a32) {
+			radioButton.setSelected(true);
+		} else {
+			radioButton.setSelected(false);
+		}
+		if (a33) {
+			radioButton.setSelected(true);
+		} else {
+			radioButton.setSelected(false);
+		}
 	}
-	public int getAdressOfWuerfel(){
+
+	public int getAdressOfWuerfel() {
 		String temp = textField.getText();
 		int result = Integer.parseInt(temp);
 		return result;

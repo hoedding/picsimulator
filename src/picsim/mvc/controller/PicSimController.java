@@ -75,12 +75,12 @@ public class PicSimController {
 		return model.get_takt();
 	}
 
-	/* ARRAY F��R DAS REGISTER */
+	/* ARRAY FÜR DAS REGISTER */
 
 	public void start_programm(int takt) throws InterruptedException {
 		/*
-		 * ��berpr��fung ob Ende des Programms erreicht wird kann am Ende
-		 * gel��scht werden !!
+		 * Überprüfung ob Ende des Programms erreicht wird kann am Ende
+		 * gelöscht werden !!
 		 */// TODO l��schen
 		if (model.getProgrammCounter() == model.code_list.size()) {
 			Thread.sleep(takt);
