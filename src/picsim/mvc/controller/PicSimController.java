@@ -32,7 +32,6 @@ public class PicSimController {
 		model.reset_model();
 		addListener();
 		ReloadGUI();
-		
 
 	}
 
@@ -109,27 +108,28 @@ public class PicSimController {
 		/* aktuell ausgef��hrten Code markieren */
 		view.select_code(model.getProgrammCounter());
 		view.set_W_value(String.valueOf(model.w_register));
-		
+
 		/* Aktualisieren der Tabelle mit den Werten aus Register_Array */
 		ReloadTable();
-		
+
 		/* Status setzen */
 		view.set_Status_value(model.get_status());
-		
-		/*Ports aktualisieren*/
+		view.set_Intcon_value(model.get_intcon());
+		/* Ports aktualisieren */
 		view.setPortALabels(model.getRegisterEntry(5));
-		 view.setPortBLabels(model.getRegisterEntry(6));
-		 view.setTrisALabels(model.getRegisterEntry(0x85));
-		 view.setTrisBLabels(model.getRegisterEntry(0x86));
-		 
-		 /*Wuerfel setzen*/
-		 view.setWuerfel(false, false, false, false, false, false, false, false, false);
-		 
-		 /*Laufzeit aktualisieren*/
-		 view.txtLaufzeit.setText(String.valueOf(model.getRunningTime()));
-		 
-		 /*Programmschritte aktualisieren*/
-		 view.txtSteps.setText(String.valueOf(model.getSteps()));
+		view.setPortBLabels(model.getRegisterEntry(6));
+		view.setTrisALabels(model.getRegisterEntry(0x85));
+		view.setTrisBLabels(model.getRegisterEntry(0x86));
+
+		/* Wuerfel setzen */
+		view.setWuerfel(false, false, false, false, false, false, false, false,
+				false);
+
+		/* Laufzeit aktualisieren */
+		view.txtLaufzeit.setText(String.valueOf(model.getRunningTime()));
+
+		/* Programmschritte aktualisieren */
+		view.txtSteps.setText(String.valueOf(model.getSteps()));
 	}
 
 	public void ReloadElements() {
@@ -160,7 +160,7 @@ public class PicSimController {
 	}
 
 	public void run_one_function() {
-		
+
 		Thread t1 = new Thread(new PicSimControllerThread_Once(this));
 		t1.start();
 	}
@@ -390,27 +390,23 @@ public class PicSimController {
 
 		@Override
 		public void keyTyped(KeyEvent e) {
-			
-			
+
 		}
 
 		@Override
 		public void keyPressed(KeyEvent e) {
 			// TODO Auto-generated method stub
-			if(e.getKeyCode()==KeyEvent.VK_ENTER){
+			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 				writeTableToRegister();
 			}
-			
+
 		}
 
 		@Override
 		public void keyReleased(KeyEvent e) {
 			// TODO Auto-generated method stub
-			
-			
-		}
 
-		
+		}
 
 	}
 
@@ -426,7 +422,7 @@ public class PicSimController {
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			changeTheRegisterFromPortA(0);
-			
+
 		}
 
 		@Override
@@ -461,7 +457,7 @@ public class PicSimController {
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			changeTheRegisterFromPortA(1);
-			
+
 		}
 
 		@Override
@@ -496,7 +492,7 @@ public class PicSimController {
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			changeTheRegisterFromPortA(2);
-			
+
 		}
 
 		@Override
@@ -531,7 +527,7 @@ public class PicSimController {
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			changeTheRegisterFromPortA(3);
-			
+
 		}
 
 		@Override
@@ -566,7 +562,7 @@ public class PicSimController {
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			changeTheRegisterFromPortA(4);
-			
+
 		}
 
 		@Override
@@ -601,7 +597,7 @@ public class PicSimController {
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			changeTheRegisterFromPortA(5);
-			
+
 		}
 
 		@Override
@@ -636,7 +632,7 @@ public class PicSimController {
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			changeTheRegisterFromPortA(6);
-			
+
 		}
 
 		@Override
@@ -671,7 +667,7 @@ public class PicSimController {
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			changeTheRegisterFromPortA(7);
-			
+
 		}
 
 		@Override
@@ -706,7 +702,7 @@ public class PicSimController {
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			changeTheRegisterFromPortB(0);
-			
+
 		}
 
 		@Override
@@ -741,7 +737,7 @@ public class PicSimController {
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			changeTheRegisterFromPortB(1);
-			
+
 		}
 
 		@Override
@@ -776,7 +772,7 @@ public class PicSimController {
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			changeTheRegisterFromPortB(2);
-			
+
 		}
 
 		@Override
@@ -811,7 +807,7 @@ public class PicSimController {
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			changeTheRegisterFromPortB(3);
-			
+
 		}
 
 		@Override
@@ -846,7 +842,7 @@ public class PicSimController {
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			changeTheRegisterFromPortB(4);
-			
+
 		}
 
 		@Override
@@ -881,7 +877,7 @@ public class PicSimController {
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			changeTheRegisterFromPortB(5);
-			
+
 		}
 
 		@Override
@@ -916,7 +912,7 @@ public class PicSimController {
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 			changeTheRegisterFromPortB(6);
-			
+
 		}
 
 		@Override
@@ -944,14 +940,12 @@ public class PicSimController {
 		}
 
 	}
-		
-		
-	
-	 class ChangePortBBit7 implements MouseListener{
+
+	class ChangePortBBit7 implements MouseListener {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			
+
 			// TODO Auto-generated method stub
 			changeTheRegisterFromPortB(7);
 			System.out.println("klick!!b7");
@@ -981,70 +975,205 @@ public class PicSimController {
 
 		}
 
-	 }
-	
-	 
-	 private void changeTheRegisterFromPortA(int ID){
-		 switch(ID){
-		 case 0:{int temp = view.getValuePortA() & 0b00000001; if(temp==0) { model.setPortA(model.getPortA()+1); }else { model.setPortA(model.getPortA()-1); }  break;}
-		 case 1:{int temp = view.getValuePortA() & 0b00000010; if(temp==0) { model.setPortA(model.getPortA()+2); }else { model.setPortA(model.getPortA()-2); }  break;}
-		 case 2:{int temp = view.getValuePortA() & 0b00000100; if(temp==0) { model.setPortA(model.getPortA()+4); }else { model.setPortA(model.getPortA()-4); }  break;}
-		 case 3:{int temp = view.getValuePortA() & 0b00001000; if(temp==0) { model.setPortA(model.getPortA()+8); }else { model.setPortA(model.getPortA()-8); }  break;}
-		 case 4:{int temp = view.getValuePortA() & 0b00010000; if(temp==0) { model.setPortA(model.getPortA()+16); }else { model.setPortA(model.getPortA()-16); }  break;}
-		 case 5:{int temp = view.getValuePortA() & 0b00100000; if(temp==0) { model.setPortA(model.getPortA()+32); }else { model.setPortA(model.getPortA()-32); }  break;}
-		 case 6:{int temp = view.getValuePortA() & 0b01000000; if(temp==0) { model.setPortA(model.getPortA()+64); }else { model.setPortA(model.getPortA()-64); }  break;}
-		 case 7:{int temp = view.getValuePortA() & 0b10000000; if(temp==0) { model.setPortA(model.getPortA()+128); }else { model.setPortA(model.getPortA()-128); }  break;}
-		 default:{break;}
-		 }
-		 model.register_array[5] = model.getPortA();
-		 ReloadGUI();
-	 }
-	 
-	 private void changeTheRegisterFromPortB(int ID){
-		 switch(ID){
-		 case 0:{int temp = view.getValuePortB() & 0b00000001; if(temp==0) {  model.setPortB(model.getPortB()+1); }else { model.setPortB(model.getPortB()-1); } break;}
-		 case 1:{int temp = view.getValuePortB() & 0b00000010; if(temp==0) {  model.setPortB(model.getPortB()+2); }else { model.setPortB(model.getPortB()-2); } break;}
-		 case 2:{int temp = view.getValuePortB() & 0b00000100; if(temp==0) {  model.setPortB(model.getPortB()+4); }else { model.setPortB(model.getPortB()-4); } break;}
-		 case 3:{int temp = view.getValuePortB() & 0b00001000; if(temp==0) {  model.setPortB(model.getPortB()+8); }else { model.setPortB(model.getPortB()-8); } break;}
-		 case 4:{int temp = view.getValuePortB() & 0b00010000; if(temp==0) {  model.setPortB(model.getPortB()+16); }else { model.setPortB(model.getPortB()-16); } break;}
-		 case 5:{int temp = view.getValuePortB() & 0b00100000; if(temp==0) {  model.setPortB(model.getPortB()+32); }else { model.setPortB(model.getPortB()-32); } break;}
-		 case 6:{int temp = view.getValuePortB() & 0b01000000; if(temp==0) {  model.setPortB(model.getPortB()+64); }else { model.setPortB(model.getPortB()-64); } break;}
-		 case 7:{int temp = view.getValuePortB() & 0b10000000; if(temp==0) {  model.setPortB(model.getPortB()+128); }else { model.setPortB(model.getPortB()-128); } break;}
-		 default:{break;}
-		  }
-		 model.register_array[6] = model.getPortB();
-		 ReloadGUI();
-	 }
-	 
-	 public void setTime(){
-		 model.setRunningTime((System.currentTimeMillis()) - (model.getStartTime()));
-		 System.out.println("start" + model.getStartTime());
-		 System.out.println("running: "+model.getRunningTime());
-	 }
-	 
-	 public void countSteps(){
-		 model.setSteps();
-		 
-		 System.out.println(model.getSteps());
-	 }
-	 
+	}
+
+	private void changeTheRegisterFromPortA(int ID) {
+		switch (ID) {
+		case 0: {
+			int temp = view.getValuePortA() & 0b00000001;
+			if (temp == 0) {
+				model.setPortA(model.getPortA() + 1);
+			} else {
+				model.setPortA(model.getPortA() - 1);
+			}
+			break;
+		}
+		case 1: {
+			int temp = view.getValuePortA() & 0b00000010;
+			if (temp == 0) {
+				model.setPortA(model.getPortA() + 2);
+			} else {
+				model.setPortA(model.getPortA() - 2);
+			}
+			break;
+		}
+		case 2: {
+			int temp = view.getValuePortA() & 0b00000100;
+			if (temp == 0) {
+				model.setPortA(model.getPortA() + 4);
+			} else {
+				model.setPortA(model.getPortA() - 4);
+			}
+			break;
+		}
+		case 3: {
+			int temp = view.getValuePortA() & 0b00001000;
+			if (temp == 0) {
+				model.setPortA(model.getPortA() + 8);
+			} else {
+				model.setPortA(model.getPortA() - 8);
+			}
+			break;
+		}
+		case 4: {
+			int temp = view.getValuePortA() & 0b00010000;
+			if (temp == 0) {
+				model.setPortA(model.getPortA() + 16);
+			} else {
+				model.setPortA(model.getPortA() - 16);
+			}
+			break;
+		}
+		case 5: {
+			int temp = view.getValuePortA() & 0b00100000;
+			if (temp == 0) {
+				model.setPortA(model.getPortA() + 32);
+			} else {
+				model.setPortA(model.getPortA() - 32);
+			}
+			break;
+		}
+		case 6: {
+			int temp = view.getValuePortA() & 0b01000000;
+			if (temp == 0) {
+				model.setPortA(model.getPortA() + 64);
+			} else {
+				model.setPortA(model.getPortA() - 64);
+			}
+			break;
+		}
+		case 7: {
+			int temp = view.getValuePortA() & 0b10000000;
+			if (temp == 0) {
+				model.setPortA(model.getPortA() + 128);
+			} else {
+				model.setPortA(model.getPortA() - 128);
+			}
+			break;
+		}
+		default: {
+			break;
+		}
+		}
+		model.register_array[5] = model.getPortA();
+		ReloadGUI();
+	}
+
+	private void changeTheRegisterFromPortB(int ID) {
+		switch (ID) {
+		case 0: {
+			int temp = view.getValuePortB() & 0b00000001;
+			if (temp == 0) {
+				model.setPortB(model.getPortB() + 1);
+			} else {
+				model.setPortB(model.getPortB() - 1);
+			}
+			break;
+		}
+		case 1: {
+			int temp = view.getValuePortB() & 0b00000010;
+			if (temp == 0) {
+				model.setPortB(model.getPortB() + 2);
+			} else {
+				model.setPortB(model.getPortB() - 2);
+			}
+			break;
+		}
+		case 2: {
+			int temp = view.getValuePortB() & 0b00000100;
+			if (temp == 0) {
+				model.setPortB(model.getPortB() + 4);
+			} else {
+				model.setPortB(model.getPortB() - 4);
+			}
+			break;
+		}
+		case 3: {
+			int temp = view.getValuePortB() & 0b00001000;
+			if (temp == 0) {
+				model.setPortB(model.getPortB() + 8);
+			} else {
+				model.setPortB(model.getPortB() - 8);
+			}
+			break;
+		}
+		case 4: {
+			int temp = view.getValuePortB() & 0b00010000;
+			if (temp == 0) {
+				model.setPortB(model.getPortB() + 16);
+			} else {
+				model.setPortB(model.getPortB() - 16);
+			}
+			break;
+		}
+		case 5: {
+			int temp = view.getValuePortB() & 0b00100000;
+			if (temp == 0) {
+				model.setPortB(model.getPortB() + 32);
+			} else {
+				model.setPortB(model.getPortB() - 32);
+			}
+			break;
+		}
+		case 6: {
+			int temp = view.getValuePortB() & 0b01000000;
+			if (temp == 0) {
+				model.setPortB(model.getPortB() + 64);
+			} else {
+				model.setPortB(model.getPortB() - 64);
+			}
+			break;
+		}
+		case 7: {
+			int temp = view.getValuePortB() & 0b10000000;
+			if (temp == 0) {
+				model.setPortB(model.getPortB() + 128);
+			} else {
+				model.setPortB(model.getPortB() - 128);
+			}
+			break;
+		}
+		default: {
+			break;
+		}
+		}
+		model.register_array[6] = model.getPortB();
+		ReloadGUI();
+	}
+
+	public void setTime() {
+		model.setRunningTime((System.currentTimeMillis())
+				- (model.getStartTime()));
+		System.out.println("start" + model.getStartTime());
+		System.out.println("running: " + model.getRunningTime());
+	}
+
+	public void countSteps() {
+		model.setSteps();
+
+		System.out.println(model.getSteps());
+	}
+
 	public void writeTableToRegister() {
-	if(running == false ){
-		int i, m;
-		for (i = 0; i <= 31; i++) {
-			for (m = 0; m <= 7; m++) {
-				int adress = i * 8 + m;
-				// TODO bisher nur decimal möglich
-				String temp = String.valueOf(view.get_TableEntry(i, m));
-				int value = Integer.parseInt(temp);
-				if (model.getRegisterEntry(adress) != value) {
-					
-					model.register_array[adress] = value;
-					System.out.println("adresse: " + adress + " neuer wert: " + value);
+		if (running == false) {
+			int i, m;
+			for (i = 0; i <= 31; i++) {
+				for (m = 0; m <= 7; m++) {
+					int adress = i * 8 + m;
+					// TODO bisher nur decimal möglich
+					String temp = String.valueOf(view.get_TableEntry(i, m));
+					int value = Integer.parseInt(temp);
+					if (model.getRegisterEntry(adress) != value) {
+
+						model.register_array[adress] = value;
+						System.out.println("adresse: " + adress
+								+ " neuer wert: " + value);
+					}
 				}
 			}
-			}
-		} else {view.set_ErrorMsgs("Direkte Registeränderung nicht während der Laufzeit möglich.");}
+		} else {
+			view.set_ErrorMsgs("Direkte Registeränderung nicht während der Laufzeit möglich.");
+		}
 	}
 
 }

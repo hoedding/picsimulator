@@ -120,6 +120,15 @@ public class PicSimView extends JFrame {
 	private JLabel label_RP1_value;
 	private JLabel label_RP0_value;
 	
+	private JLabel label_58;
+	private JLabel label_57;
+	private JLabel label_56;
+	private JLabel label_55;
+	private JLabel label_54;
+	private JLabel label_53;
+	private JLabel label_52;
+	private JLabel label_51;
+	
 	private JRadioButton radioButton;
 	private JRadioButton radioButton_1;
 	private JRadioButton radioButton_2;
@@ -916,56 +925,56 @@ public class PicSimView extends JFrame {
 														gbc_lbl_PCLATH_value.gridy = 3;
 														panel_11.add(lbl_PCLATH_value, gbc_lbl_PCLATH_value);
 																
-																JLabel label_51 = new JLabel("0");
+																 label_51 = new JLabel("0");
 																GridBagConstraints gbc_label_51 = new GridBagConstraints();
 																gbc_label_51.insets = new Insets(0, 0, 5, 5);
 																gbc_label_51.gridx = 4;
 																gbc_label_51.gridy = 3;
 																panel_11.add(label_51, gbc_label_51);
 																
-																JLabel label_52 = new JLabel("0");
+																 label_52 = new JLabel("0");
 																GridBagConstraints gbc_label_52 = new GridBagConstraints();
 																gbc_label_52.insets = new Insets(0, 0, 5, 5);
 																gbc_label_52.gridx = 5;
 																gbc_label_52.gridy = 3;
 																panel_11.add(label_52, gbc_label_52);
 																
-																JLabel label_53 = new JLabel("0");
+																 label_53 = new JLabel("0");
 																GridBagConstraints gbc_label_53 = new GridBagConstraints();
 																gbc_label_53.insets = new Insets(0, 0, 5, 5);
 																gbc_label_53.gridx = 6;
 																gbc_label_53.gridy = 3;
 																panel_11.add(label_53, gbc_label_53);
 																
-																JLabel label_54 = new JLabel("0");
+																 label_54 = new JLabel("0");
 																GridBagConstraints gbc_label_54 = new GridBagConstraints();
 																gbc_label_54.insets = new Insets(0, 0, 5, 5);
 																gbc_label_54.gridx = 7;
 																gbc_label_54.gridy = 3;
 																panel_11.add(label_54, gbc_label_54);
 																
-																JLabel label_55 = new JLabel("0");
+																 label_55 = new JLabel("0");
 																GridBagConstraints gbc_label_55 = new GridBagConstraints();
 																gbc_label_55.insets = new Insets(0, 0, 5, 5);
 																gbc_label_55.gridx = 8;
 																gbc_label_55.gridy = 3;
 																panel_11.add(label_55, gbc_label_55);
 																
-																JLabel label_56 = new JLabel("0");
+																 label_56 = new JLabel("0");
 																GridBagConstraints gbc_label_56 = new GridBagConstraints();
 																gbc_label_56.insets = new Insets(0, 0, 5, 5);
 																gbc_label_56.gridx = 9;
 																gbc_label_56.gridy = 3;
 																panel_11.add(label_56, gbc_label_56);
 																
-																JLabel label_57 = new JLabel("0");
+																 label_57 = new JLabel("0");
 																GridBagConstraints gbc_label_57 = new GridBagConstraints();
 																gbc_label_57.insets = new Insets(0, 0, 5, 5);
 																gbc_label_57.gridx = 10;
 																gbc_label_57.gridy = 3;
 																panel_11.add(label_57, gbc_label_57);
 																
-																JLabel label_58 = new JLabel("0");
+																 label_58 = new JLabel("0");
 																GridBagConstraints gbc_label_58 = new GridBagConstraints();
 																gbc_label_58.insets = new Insets(0, 0, 5, 0);
 																gbc_label_58.gridx = 11;
@@ -1029,7 +1038,7 @@ public class PicSimView extends JFrame {
 
 	public void set_Status_value(int s) {
 		
-		try {
+		
 			lbl_Status_value.setText(String.valueOf(s));
 			if((s&0b00000001) == 1 ){	lbl_C_value.setText("1"); } else { lbl_C_value.setText("0"); }
 			if((s&0b00000010) == 2 ){	lbl_DC_value.setText("1"); } else { lbl_DC_value.setText("0"); }
@@ -1039,13 +1048,18 @@ public class PicSimView extends JFrame {
 			if((s&0b00100000) == 32 ){	label_RP0_value.setText("1"); } else { label_RP0_value.setText("0"); }
 			if((s&0b01000000) == 64 ){	label_RP1_value.setText("1"); } else { label_RP1_value.setText("0"); }
 			if((s&0b10000000) == 128 ){	label_IRP_value.setText("1"); } else { label_IRP_value.setText("0"); }
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		
+			
+	}
+	
+	public void set_Intcon_value(int s){
+		if((s&0b00000001) == 1 ){	label_58.setText("1"); } else { label_58.setText("0"); }
+		if((s&0b00000010) == 2 ){	label_57.setText("1"); } else { label_57.setText("0"); }
+		if((s&0b00000100) == 4 ){	label_56.setText("1"); } else { label_56.setText("0"); }
+		if((s&0b00001000) == 8 ){	label_55.setText("1"); } else { label_55.setText("0"); }
+		if((s&0b00010000) == 16 ){	label_54.setText("1"); } else { label_54.setText("0"); }
+		if((s&0b00100000) == 32 ){	label_53.setText("1"); } else { label_53.setText("0"); }
+		if((s&0b01000000) == 64 ){	label_52.setText("1"); } else { label_52.setText("0"); }
+		if((s&0b10000000) == 128 ){	label_51.setText("1"); } else { label_51.setText("0"); }
 		
 	}
 

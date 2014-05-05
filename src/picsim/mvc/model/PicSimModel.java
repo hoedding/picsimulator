@@ -1012,4 +1012,8 @@ public class PicSimModel {
 		}
 	}
 
+	public int get_intcon() {
+		return register_array[0xb];
+	}
+
 }
