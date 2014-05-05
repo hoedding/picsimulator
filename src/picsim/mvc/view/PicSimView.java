@@ -114,6 +114,12 @@ public class PicSimView extends JFrame {
 	private JLabel label_47;
 	private JLabel label_23;
 	
+	private JLabel label_PD_value;
+	private JLabel label_T0_value;
+	private JLabel label_IRP_value;
+	private JLabel label_RP1_value;
+	private JLabel label_RP0_value;
+	
 	private JRadioButton radioButton;
 	private JRadioButton radioButton_1;
 	private JRadioButton radioButton_2;
@@ -677,13 +683,13 @@ public class PicSimView extends JFrame {
 		textField.setColumns(10);
 		
 		JPanel panel_11 = new JPanel();
-		panel_11.setBounds(10, 163, 423, 137);
+		panel_11.setBounds(10, 163, 423, 147);
 		contentPane.add(panel_11);
 		GridBagLayout gbl_panel_11 = new GridBagLayout();
 		gbl_panel_11.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_panel_11.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
-		gbl_panel_11.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_11.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_11.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_panel_11.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_11.rowWeights = new double[]{1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_11.setLayout(gbl_panel_11);
 		
 				JLabel lblWreg = new JLabel("W-Reg");
@@ -770,40 +776,40 @@ public class PicSimView extends JFrame {
 										gbc_lbl_FRS_value.gridy = 1;
 										panel_11.add(lbl_FRS_value, gbc_lbl_FRS_value);
 										
-										JLabel label_50 = new JLabel("0");
+										 label_IRP_value = new JLabel("0");
 										GridBagConstraints gbc_label_50 = new GridBagConstraints();
 										gbc_label_50.insets = new Insets(0, 0, 5, 5);
 										gbc_label_50.gridx = 4;
 										gbc_label_50.gridy = 1;
-										panel_11.add(label_50, gbc_label_50);
+										panel_11.add(label_IRP_value, gbc_label_50);
 										
-										JLabel label_49 = new JLabel("0");
+										 label_RP1_value = new JLabel("0");
 										GridBagConstraints gbc_label_49 = new GridBagConstraints();
 										gbc_label_49.insets = new Insets(0, 0, 5, 5);
 										gbc_label_49.gridx = 5;
 										gbc_label_49.gridy = 1;
-										panel_11.add(label_49, gbc_label_49);
+										panel_11.add(label_RP1_value, gbc_label_49);
 										
-										JLabel label_48 = new JLabel("0");
+										 label_RP0_value = new JLabel("0");
 										GridBagConstraints gbc_label_48 = new GridBagConstraints();
 										gbc_label_48.insets = new Insets(0, 0, 5, 5);
 										gbc_label_48.gridx = 6;
 										gbc_label_48.gridy = 1;
-										panel_11.add(label_48, gbc_label_48);
+										panel_11.add(label_RP0_value, gbc_label_48);
 										
-										JLabel label_26 = new JLabel("0");
+										 label_T0_value = new JLabel("0");
 										GridBagConstraints gbc_label_26 = new GridBagConstraints();
 										gbc_label_26.insets = new Insets(0, 0, 5, 5);
 										gbc_label_26.gridx = 7;
 										gbc_label_26.gridy = 1;
-										panel_11.add(label_26, gbc_label_26);
+										panel_11.add(label_T0_value, gbc_label_26);
 										
-										JLabel label_4 = new JLabel("0");
+										 label_PD_value = new JLabel("0");
 										GridBagConstraints gbc_label_4 = new GridBagConstraints();
 										gbc_label_4.insets = new Insets(0, 0, 5, 5);
 										gbc_label_4.gridx = 8;
 										gbc_label_4.gridy = 1;
-										panel_11.add(label_4, gbc_label_4);
+										panel_11.add(label_PD_value, gbc_label_4);
 								
 										lbl_Z_value = new JLabel("00");
 										GridBagConstraints gbc_lbl_Z_value = new GridBagConstraints();
@@ -982,17 +988,31 @@ public class PicSimView extends JFrame {
 																		
 																				JLabel lblStatus = new JLabel("Status");
 																				GridBagConstraints gbc_lblStatus = new GridBagConstraints();
-																				gbc_lblStatus.insets = new Insets(0, 0, 0, 5);
+																				gbc_lblStatus.insets = new Insets(0, 0, 5, 5);
 																				gbc_lblStatus.gridx = 0;
 																				gbc_lblStatus.gridy = 5;
 																				panel_11.add(lblStatus, gbc_lblStatus);
 																				
 																						lbl_Status_value = new JLabel("00");
 																						GridBagConstraints gbc_lbl_Status_value = new GridBagConstraints();
-																						gbc_lbl_Status_value.insets = new Insets(0, 0, 0, 5);
+																						gbc_lbl_Status_value.insets = new Insets(0, 0, 5, 5);
 																						gbc_lbl_Status_value.gridx = 1;
 																						gbc_lbl_Status_value.gridy = 5;
 																						panel_11.add(lbl_Status_value, gbc_lbl_Status_value);
+																						
+																						JLabel lblOption = new JLabel("Option");
+																						GridBagConstraints gbc_lblOption = new GridBagConstraints();
+																						gbc_lblOption.insets = new Insets(0, 0, 0, 5);
+																						gbc_lblOption.gridx = 0;
+																						gbc_lblOption.gridy = 6;
+																						panel_11.add(lblOption, gbc_lblOption);
+																						
+																						JLabel label_59 = new JLabel("00");
+																						GridBagConstraints gbc_label_59 = new GridBagConstraints();
+																						gbc_label_59.insets = new Insets(0, 0, 0, 5);
+																						gbc_label_59.gridx = 1;
+																						gbc_label_59.gridy = 6;
+																						panel_11.add(label_59, gbc_label_59);
 	}
 
 	public void set_W_value(String s) {
@@ -1007,8 +1027,26 @@ public class PicSimView extends JFrame {
 		lbl_C_value.setText(s);
 	}
 
-	public void set_Status_value(String s) {
-		lbl_Status_value.setText(s);
+	public void set_Status_value(int s) {
+		
+		try {
+			lbl_Status_value.setText(String.valueOf(s));
+			if((s&0b00000001) == 1 ){	lbl_C_value.setText("1"); } else { lbl_C_value.setText("0"); }
+			if((s&0b00000010) == 2 ){	lbl_DC_value.setText("1"); } else { lbl_DC_value.setText("0"); }
+			if((s&0b00000100) == 4 ){	lbl_Z_value.setText("1"); } else { lbl_Z_value.setText("0"); }
+			if((s&0b00001000) == 8 ){	label_PD_value.setText("1"); } else { label_PD_value.setText("0"); }
+			if((s&0b00010000) == 16 ){	label_T0_value.setText("1"); } else { label_T0_value.setText("0"); }
+			if((s&0b00100000) == 32 ){	label_RP0_value.setText("1"); } else { label_RP0_value.setText("0"); }
+			if((s&0b01000000) == 64 ){	label_RP1_value.setText("1"); } else { label_RP1_value.setText("0"); }
+			if((s&0b10000000) == 128 ){	label_IRP_value.setText("1"); } else { label_IRP_value.setText("0"); }
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		
 	}
 
 	public void set_PC_value(String s) {

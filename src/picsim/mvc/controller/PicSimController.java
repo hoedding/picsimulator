@@ -108,32 +108,14 @@ public class PicSimController {
 		ReloadElements();
 		/* aktuell ausgef��hrten Code markieren */
 		view.select_code(model.getProgrammCounter());
-		/* W-Register in GUI setzen */
-		view.set_W_value("1");
-		// frame.lbl_wreg_value.setText(String.valueOf(w_register).toString());
+		view.set_W_value(String.valueOf(model.w_register));
+		
 		/* Aktualisieren der Tabelle mit den Werten aus Register_Array */
 		ReloadTable();
-		/* z ��berpr��fen ob true/false */
-		if (model.get_Z() == 1) {
-
-			view.set_Z_value(String.valueOf(model.get_Z()));
-		} else {
-
-			view.set_Z_value(String.valueOf(model.get_Z()));
-		}
-
-		/* PC setzen in Frame */
-		view.set_PC_value(String.valueOf(model.getProgrammCounter()));
-
-		/* C setzen in Frame */
-		view.set_C_value(String.valueOf(model.get_C()));
-
+		
 		/* Status setzen */
-		view.set_Status_value(String.valueOf(model.get_status()));
-
-		/* DC setzen */
-		view.set_DC_value(String.valueOf(model.get_DC()));
-
+		view.set_Status_value(model.get_status());
+		
 		/*Ports aktualisieren*/
 		view.setPortALabels(model.getRegisterEntry(5));
 		 view.setPortBLabels(model.getRegisterEntry(6));
