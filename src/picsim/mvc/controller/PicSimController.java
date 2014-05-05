@@ -24,6 +24,7 @@ public class PicSimController {
 	private PicSimView view;
 	private PicSimModel model;
 	private boolean running;
+	private int prescaler_count;
 
 	public PicSimController(PicSimView view, PicSimModel model) {
 		this.view = view;
@@ -197,6 +198,7 @@ public class PicSimController {
 	public void run_all_functions() {
 
 		if (view.getListModelSize() > 0) {
+			if(model.is_bit_set(5, 0x81)){/*CounterMode*/ countermode();} else {/*TimerMode*/ timermode();}
 			model.setStartTime(System.currentTimeMillis());
 			start();
 
@@ -211,6 +213,25 @@ public class PicSimController {
 			set_running(false);
 		}
 
+	}
+	
+	public void timermode(){
+		int prescaler = model.register_array[0x81] & 0b00000111;
+		
+		switch(prescaler){
+		case 0:   model.register_array[1] = model.register_array[1] + 1;
+		case 1: if(prescaler_count == 2){ model.register_array[1] = model.register_array[1] + 1; prescaler_count = 0; } else { prescaler_count++;}
+		case 2: if(prescaler_count == 4){ model.register_array[1] = model.register_array[1] + 1; prescaler_count = 0;} else { prescaler_count++;}
+		case 3: if(prescaler_count == 16){ model.register_array[1] = model.register_array[1] + 1; prescaler_count = 0;} else { prescaler_count++;}
+		case 4: if(prescaler_count == 32){ model.register_array[1] = model.register_array[1] + 1; prescaler_count = 0;} else { prescaler_count++;}
+		case 5: if(prescaler_count == 64){ model.register_array[1] = model.register_array[1] + 1; prescaler_count = 0;} else { prescaler_count++;}
+		case 6: if(prescaler_count == 128){ model.register_array[1] = model.register_array[1] + 1; prescaler_count = 0;} else { prescaler_count++;}
+		case 7: if(prescaler_count == 256){ model.register_array[1] = model.register_array[1] + 1; prescaler_count = 0;} else { prescaler_count++;}
+		}
+		model.register_array[1] = model.register_array[1] + 1;  
+	}
+	public void countermode(){
+		int prescaler = 2 ^ (model.register_array[0x81] & 0b00000111) ;
 	}
 
 	class PauseListener implements ActionListener {
@@ -1068,6 +1089,7 @@ public class PicSimController {
 			} else {
 				model.setPortB(model.getPortB() - 1);
 			}
+			model.do_interrupt(1);
 			break;
 		}
 		case 1: {
@@ -1104,6 +1126,7 @@ public class PicSimController {
 			} else {
 				model.setPortB(model.getPortB() - 16);
 			}
+			model.do_interrupt(3);
 			break;
 		}
 		case 5: {
@@ -1113,6 +1136,7 @@ public class PicSimController {
 			} else {
 				model.setPortB(model.getPortB() - 32);
 			}
+			model.do_interrupt(3);
 			break;
 		}
 		case 6: {
@@ -1122,6 +1146,7 @@ public class PicSimController {
 			} else {
 				model.setPortB(model.getPortB() - 64);
 			}
+			model.do_interrupt(3);
 			break;
 		}
 		case 7: {
@@ -1131,12 +1156,14 @@ public class PicSimController {
 			} else {
 				model.setPortB(model.getPortB() - 128);
 			}
+			model.do_interrupt(3);
 			break;
 		}
 		default: {
 			break;
 		}
 		}
+		
 		model.register_array[6] = model.getPortB();
 		ReloadGUI();
 	}

@@ -146,6 +146,8 @@ public class PicSimModel {
 	}
 	
 	private void setRegisterEntryOneBit(int index, int value){
+		
+		
 		if (index == 0) {
 			value = value & 0b11111111;
 			register_array[register_array[4]] = value;
@@ -381,7 +383,7 @@ public class PicSimModel {
 
 		setProgramCounter(adress);
 		// Global Interrupt auf enable
-		set_Bit(8, 8);
+		set_Bit(7, 0xb);
 
 	}
 
@@ -799,6 +801,21 @@ public class PicSimModel {
 		set_Z(true);
 
 	}
+	
+	public void do_interrupt(int ID){
+		if(is_bit_set(7, 0xb)){
+		switch (ID){
+		//RB0 Interrupt
+		case 1:	if(is_bit_set(4, 0xb)){STACK.add(getProgrammCounter()); setProgramCounter(4); set_Bit(1, 0xb);}System.out.println("RB0 Interrupt"); break;
+		//Timer Interrupt
+		case 2: if(is_bit_set(5, 0xb)){STACK.add(getProgrammCounter()); setProgramCounter(4); set_Bit(2, 0xb);}break;
+		//Port B Interrupt
+		case 3: if(is_bit_set(3, 0xb)){STACK.add(getProgrammCounter()); setProgramCounter(4); set_Bit(0, 0xb);}System.out.println("RB4-7 Interrupt");  break;
+		//EEPROM Interrupt
+		case 4: if(is_bit_set(6, 0xb)){STACK.add(getProgrammCounter()); setProgramCounter(4);}break;
+		}
+		}
+	}
 
 	/* Getter und Setter für C,DC,Z */
 	public int get_C() {
@@ -810,7 +827,7 @@ public class PicSimModel {
 	}
 
 	public void set_C(boolean s) {
-		if (s = true) {
+		if (s) {
 			set_Bit(1, 3);
 		} else {
 			clear_Bit(1, 3);
@@ -826,7 +843,7 @@ public class PicSimModel {
 	}
 
 	public void set_DC(boolean s) {
-		if (s = true) {
+		if (s) {
 			set_Bit(2, 3);
 		} else {
 			clear_Bit(2, 3);
@@ -842,7 +859,7 @@ public class PicSimModel {
 	}
 
 	public void set_Z(boolean s) {
-		if (s = true) {
+		if (s) {
 			set_Bit(3, 3);
 		} else {
 			clear_Bit(3, 3);
@@ -1015,5 +1032,7 @@ public class PicSimModel {
 	public int get_intcon() {
 		return register_array[0xb];
 	}
+
+	
 
 }
