@@ -80,8 +80,8 @@ public class PicSimController {
 
 	public void start_programm(int takt) throws InterruptedException {
 		/*
-		 * Überprüfung ob Ende des Programms erreicht wird kann am Ende
-		 * gelöscht werden !!
+		 * Überprüfung ob Ende des Programms erreicht wird kann am Ende gelöscht
+		 * werden !!
 		 */// TODO l��schen
 		if (model.getProgrammCounter() == model.code_list.size()) {
 			Thread.sleep(takt);
@@ -98,6 +98,18 @@ public class PicSimController {
 	 * Funktion what_to_do() aus #######
 	 */
 	public void start_function() throws InterruptedException {
+		
+		for (int i = 0; i < view.breakpoint_list.size(); i++) {
+			if (model.getProgrammCounter() == view.breakpoint_list.get(i)-1) {
+				
+				running=false;
+				
+
+			}
+		}
+		
+		
+		
 		model.what_to_do(model.code_list.get(model.getProgrammCounter()));
 		model.setProgramCounter(model.getProgrammCounter() + 1);
 		ReloadGUI();
@@ -198,7 +210,11 @@ public class PicSimController {
 	public void run_all_functions() {
 
 		if (view.getListModelSize() > 0) {
-			if(model.is_bit_set(5, 0x81)){/*CounterMode*/ countermode();} else {/*TimerMode*/ timermode();}
+			if (model.is_bit_set(5, 0x81)) {/* CounterMode */
+				countermode();
+			} else {/* TimerMode */
+				timermode();
+			}
 			model.setStartTime(System.currentTimeMillis());
 			start();
 
@@ -214,24 +230,68 @@ public class PicSimController {
 		}
 
 	}
-	
-	public void timermode(){
+
+	public void timermode() {
 		int prescaler = model.register_array[0x81] & 0b00000111;
-		
-		switch(prescaler){
-		case 0:   model.register_array[1] = model.register_array[1] + 1;
-		case 1: if(prescaler_count == 2){ model.register_array[1] = model.register_array[1] + 1; prescaler_count = 0; } else { prescaler_count++;}
-		case 2: if(prescaler_count == 4){ model.register_array[1] = model.register_array[1] + 1; prescaler_count = 0;} else { prescaler_count++;}
-		case 3: if(prescaler_count == 16){ model.register_array[1] = model.register_array[1] + 1; prescaler_count = 0;} else { prescaler_count++;}
-		case 4: if(prescaler_count == 32){ model.register_array[1] = model.register_array[1] + 1; prescaler_count = 0;} else { prescaler_count++;}
-		case 5: if(prescaler_count == 64){ model.register_array[1] = model.register_array[1] + 1; prescaler_count = 0;} else { prescaler_count++;}
-		case 6: if(prescaler_count == 128){ model.register_array[1] = model.register_array[1] + 1; prescaler_count = 0;} else { prescaler_count++;}
-		case 7: if(prescaler_count == 256){ model.register_array[1] = model.register_array[1] + 1; prescaler_count = 0;} else { prescaler_count++;}
+
+		switch (prescaler) {
+		case 0:
+			model.register_array[1] = model.register_array[1] + 1;
+		case 1:
+			if (prescaler_count == 2) {
+				model.register_array[1] = model.register_array[1] + 1;
+				prescaler_count = 0;
+			} else {
+				prescaler_count++;
+			}
+		case 2:
+			if (prescaler_count == 4) {
+				model.register_array[1] = model.register_array[1] + 1;
+				prescaler_count = 0;
+			} else {
+				prescaler_count++;
+			}
+		case 3:
+			if (prescaler_count == 16) {
+				model.register_array[1] = model.register_array[1] + 1;
+				prescaler_count = 0;
+			} else {
+				prescaler_count++;
+			}
+		case 4:
+			if (prescaler_count == 32) {
+				model.register_array[1] = model.register_array[1] + 1;
+				prescaler_count = 0;
+			} else {
+				prescaler_count++;
+			}
+		case 5:
+			if (prescaler_count == 64) {
+				model.register_array[1] = model.register_array[1] + 1;
+				prescaler_count = 0;
+			} else {
+				prescaler_count++;
+			}
+		case 6:
+			if (prescaler_count == 128) {
+				model.register_array[1] = model.register_array[1] + 1;
+				prescaler_count = 0;
+			} else {
+				prescaler_count++;
+			}
+		case 7:
+			if (prescaler_count == 256) {
+				model.register_array[1] = model.register_array[1] + 1;
+				prescaler_count = 0;
+			} else {
+				prescaler_count++;
+			}
 		}
-		model.register_array[1] = model.register_array[1] + 1;  
+		model.register_array[1] = model.register_array[1] + 1;
 	}
-	public void countermode(){
-		int prescaler = 2 ^ (model.register_array[0x81] & 0b00000111) ;
+
+	public void countermode() {
+		int prescaler = 2 ^ (model.register_array[0x81] & 0b00000111);
 	}
 
 	class PauseListener implements ActionListener {
@@ -1163,7 +1223,7 @@ public class PicSimController {
 			break;
 		}
 		}
-		
+
 		model.register_array[6] = model.getPortB();
 		ReloadGUI();
 	}
@@ -1203,4 +1263,7 @@ public class PicSimController {
 		}
 	}
 
+	class Breakpoints {
+
+	}
 }

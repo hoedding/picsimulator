@@ -32,16 +32,23 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
+import picsim.mvc.model.PicSimModel;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
+import java.awt.event.ActionEvent;
 
 public class PicSimView extends JFrame {
 
 	private static final long serialVersionUID = -6310686304585590231L;
+
+	private PicSimModel model;
 
 	public JTextField txtSteps;
 	public JTextField txtLaufzeit;
@@ -73,6 +80,8 @@ public class PicSimView extends JFrame {
 
 	private JList<String> list_code;
 	private DefaultListModel<String> listModel;
+	
+	public List<Integer> breakpoint_list = new ArrayList<Integer>();
 
 	/* LABEL TRIS A und PORT A */
 	private JLabel lblI;
@@ -239,17 +248,16 @@ public class PicSimView extends JFrame {
 
 		listModel = new DefaultListModel<String>();
 		list_code = new JList<String>(listModel);
+
 		list_code.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
 				if (e.getClickCount() == 2) {
-					String temp = list_code.getSelectedValue();
-
+					int temp = list_code.getSelectedIndex();
 					System.out.println(temp);
-					// list_code.setSelectionBackground(Color.black);
-
+					breakpoint_list.add(temp);
 				}
 			}
 		});
@@ -1025,6 +1033,17 @@ public class PicSimView extends JFrame {
 		gbc_label_59.gridx = 1;
 		gbc_label_59.gridy = 6;
 		panel_11.add(label_59, gbc_label_59);
+
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				for (int i = 0; i < breakpoint_list.size(); i++) {
+					System.out.println(breakpoint_list.get(i));
+				}
+			}
+		});
+		btnNewButton.setBounds(335, 33, 89, 23);
+		contentPane.add(btnNewButton);
 	}
 
 	public void set_W_value(String s) {

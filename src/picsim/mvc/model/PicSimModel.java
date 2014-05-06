@@ -22,6 +22,8 @@ public class PicSimModel {
 	
 	private int portA;
 	private int portB;
+	
+	
 
 	public PicSimModel() {
 		// Konstruktor
