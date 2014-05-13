@@ -2,22 +2,13 @@ package picsim.mvc.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.Label;
 import java.awt.SystemColor;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -41,11 +32,32 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
+import picsim.mvc.model.PicSimModel;
+
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
+import java.awt.event.ActionEvent;
+
+import javax.swing.JPopupMenu;
+
+import java.awt.Component;
+import java.awt.Choice;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeEvent;
+
+import javax.swing.JComboBox;
 
 public class PicSimView extends JFrame {
 
 	private static final long serialVersionUID = -6310686304585590231L;
 
+	private PicSimModel model;
 
 	public JTextField txtSteps;
 	public JTextField txtLaufzeit;
@@ -134,6 +146,8 @@ public class PicSimView extends JFrame {
 	private JLabel label_52;
 	private JLabel label_51;
 
+	private JLabel lblDisconnected;
+
 	private JRadioButton radioButton;
 	private JRadioButton radioButton_1;
 	private JRadioButton radioButton_2;
@@ -145,6 +159,9 @@ public class PicSimView extends JFrame {
 	private JRadioButton radioButton_8;
 	private JTextField textField;
 
+	private JComboBox choice;
+
+	@SuppressWarnings("rawtypes")
 	public PicSimView() {
 		setTitle("Simulator PIC12F84");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -253,18 +270,8 @@ public class PicSimView extends JFrame {
 
 				if (e.getClickCount() == 2) {
 					int temp = list_code.getSelectedIndex();
-
-					if (breakpoint_list.contains(temp)) {
-						
-						
-						breakpoint_list.remove(breakpoint_list.indexOf(temp));
-						
-					} 
-					else {
-						
-						breakpoint_list.add(temp);
-						
-					}
+					System.out.println(temp);
+					breakpoint_list.add(temp);
 				}
 			}
 		});
@@ -1041,7 +1048,7 @@ public class PicSimView extends JFrame {
 		gbc_label_59.gridy = 6;
 		panel_11.add(label_59, gbc_label_59);
 
-		JButton btnNewButton = new JButton("Breakpoints anzeigen");
+		JButton btnNewButton = new JButton("New button");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				for (int i = 0; i < breakpoint_list.size(); i++) {
@@ -1051,18 +1058,27 @@ public class PicSimView extends JFrame {
 		});
 		btnNewButton.setBounds(335, 33, 89, 23);
 		contentPane.add(btnNewButton);
-		
-		
-	
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
+		JLabel lblSerielleVerbindung = new JLabel("Serielle Verbindung:");
+		lblSerielleVerbindung.setBounds(10, 148, 124, 14);
+		contentPane.add(lblSerielleVerbindung);
+
+		lblDisconnected = new JLabel("disconnected");
+		lblDisconnected.setForeground(Color.RED);
+		lblDisconnected.setBounds(144, 148, 78, 14);
+		contentPane.add(lblDisconnected);
+
+		choice = new JComboBox();
+		choice.setBounds(335, 106, 98, 20);
+		contentPane.add(choice);
+	}
+
+	@SuppressWarnings("unchecked")
+	public void initializeComMenu(String port) {
+		choice.addItem(port);
+	}
+	public String selectedComPort(){
+		return (String) choice.getSelectedItem();
 	}
 
 	public void set_W_value(String s) {
@@ -1327,6 +1343,10 @@ public class PicSimView extends JFrame {
 
 	public void setChangePortBBit7(MouseListener l) {
 		label_38.addMouseListener(l);
+	}
+
+	public void setComPortChange(ActionListener l) {
+		choice.addActionListener(l);
 	}
 
 	public void setTrisALabels(int t) {
@@ -1617,5 +1637,35 @@ public class PicSimView extends JFrame {
 		String temp = textField.getText();
 		int result = Integer.parseInt(temp);
 		return result;
+	}
+
+	public void setSerialConnected() {
+		lblDisconnected.setText("connected");
+		lblDisconnected.setForeground(Color.black);
+	}
+
+	public void setSerialDisconnected() {
+		lblDisconnected.setText("disconnected");
+		lblDisconnected.setForeground(Color.red);
+	}
+
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
 	}
 }
