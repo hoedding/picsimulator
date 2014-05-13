@@ -2,13 +2,22 @@ package picsim.mvc.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.Label;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -32,23 +41,11 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
-import picsim.mvc.model.PicSimModel;
-
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.List;
-import java.awt.event.ActionEvent;
 
 public class PicSimView extends JFrame {
 
 	private static final long serialVersionUID = -6310686304585590231L;
 
-	private PicSimModel model;
 
 	public JTextField txtSteps;
 	public JTextField txtLaufzeit;
@@ -80,7 +77,7 @@ public class PicSimView extends JFrame {
 
 	private JList<String> list_code;
 	private DefaultListModel<String> listModel;
-	
+
 	public List<Integer> breakpoint_list = new ArrayList<Integer>();
 
 	/* LABEL TRIS A und PORT A */
@@ -256,8 +253,18 @@ public class PicSimView extends JFrame {
 
 				if (e.getClickCount() == 2) {
 					int temp = list_code.getSelectedIndex();
-					System.out.println(temp);
-					breakpoint_list.add(temp);
+
+					if (breakpoint_list.contains(temp)) {
+						
+						
+						breakpoint_list.remove(breakpoint_list.indexOf(temp));
+						
+					} 
+					else {
+						
+						breakpoint_list.add(temp);
+						
+					}
 				}
 			}
 		});
@@ -1034,7 +1041,7 @@ public class PicSimView extends JFrame {
 		gbc_label_59.gridy = 6;
 		panel_11.add(label_59, gbc_label_59);
 
-		JButton btnNewButton = new JButton("New button");
+		JButton btnNewButton = new JButton("Breakpoints anzeigen");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				for (int i = 0; i < breakpoint_list.size(); i++) {
@@ -1044,6 +1051,18 @@ public class PicSimView extends JFrame {
 		});
 		btnNewButton.setBounds(335, 33, 89, 23);
 		contentPane.add(btnNewButton);
+		
+		
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 
 	public void set_W_value(String s) {

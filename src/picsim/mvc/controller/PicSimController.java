@@ -179,7 +179,6 @@ public class PicSimController {
 	}
 
 	private void start() {
-		filter_code();
 		int i;
 		for (i = 0; i < view.getListModelSize(); i++) {
 			model.analyze_code(view.getElementListModel(i));
@@ -347,6 +346,7 @@ public class PicSimController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			loadFile();
+			filter_code();
 		}
 
 	}
