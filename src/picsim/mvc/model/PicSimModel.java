@@ -22,7 +22,6 @@ public class PicSimModel {
 	
 	private int portA;
 	private int portB;
-	private String defaultSerialPort;
 	
 	
 
@@ -1034,14 +1033,6 @@ public class PicSimModel {
 
 	public int get_intcon() {
 		return register_array[0xb];
-	}
-
-	public String getDefaultSerialPort() {
-		return defaultSerialPort;
-	}
-
-	public void setDefaultSerialPort(String defaultSerialPort) {
-		this.defaultSerialPort = defaultSerialPort;
 	}
 
 	

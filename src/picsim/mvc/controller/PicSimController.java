@@ -1,7 +1,5 @@
 package picsim.mvc.controller;
 
-import gnu.io.CommPortIdentifier;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -11,8 +9,6 @@ import java.awt.event.MouseListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Enumeration;
 
 import javax.swing.JFileChooser;
 import javax.swing.event.ChangeEvent;
@@ -21,7 +17,6 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import picsim.mvc.model.PicSimModel;
-import picsim.mvc.model.serial.PicSimSerialConnection;
 import picsim.mvc.view.PicSimCalculatorView;
 import picsim.mvc.view.PicSimView;
 
@@ -30,10 +25,6 @@ public class PicSimController {
 	private PicSimModel model;
 	private boolean running;
 	private int prescaler_count;
-	private PicSimSerialConnection serial;
-	private boolean serialConnected = false;
-	
-	private ArrayList<String> arrayOfComPorts = null;
 
 	public PicSimController(PicSimView view, PicSimModel model) {
 		this.view = view;
@@ -41,28 +32,8 @@ public class PicSimController {
 		this.running = false;
 		model.reset_model();
 		addListener();
-		searchForComPorts();
 		ReloadGUI();
-		
 
-	}
-	
-	private void searchForComPorts(){
-		Enumeration portIdentifiers = CommPortIdentifier.getPortIdentifiers();
-		if(portIdentifiers!=null){
-			while (portIdentifiers.hasMoreElements()) {
-				CommPortIdentifier pid = (CommPortIdentifier) portIdentifiers
-						.nextElement();
-				if (pid.getPortType() == CommPortIdentifier.PORT_SERIAL) {
-					view.initializeComMenu(pid.getName());
-
-					System.out.println(pid.getName());
-				}
-			}
-		}else {
-			view.set_ErrorMsgs("Keine COM-Ports gefunden.");
-		}
-		
 	}
 
 	private void addListener() {
@@ -90,24 +61,6 @@ public class PicSimController {
 		view.setChangePortBBit6(new ChangePortBBit6());
 		view.setChangePortBBit7(new ChangePortBBit7());
 		view.setChangeTableEntryListener(new ChangeTableEntryListener());
-		view.setComPortChange(new ComPortChange());
-	}
-
-	public void reloadSerial() {
-		if (serialConnected) {
-			try {
-				serial.sendRS232();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		try {
-			System.out.println(serial.read());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	public boolean get_running() {
@@ -145,15 +98,18 @@ public class PicSimController {
 	 * Funktion what_to_do() aus #######
 	 */
 	public void start_function() throws InterruptedException {
-
+		
 		for (int i = 0; i < view.breakpoint_list.size(); i++) {
-			if (model.getProgrammCounter() == view.breakpoint_list.get(i) - 1) {
-
-				running = false;
+			if (model.getProgrammCounter() == view.breakpoint_list.get(i)-1) {
+				
+				running=false;
+				
 
 			}
 		}
-
+		
+		
+		
 		model.what_to_do(model.code_list.get(model.getProgrammCounter()));
 		model.setProgramCounter(model.getProgrammCounter() + 1);
 		ReloadGUI();
@@ -187,9 +143,6 @@ public class PicSimController {
 
 		/* Programmschritte aktualisieren */
 		view.txtSteps.setText(String.valueOf(model.getSteps()));
-
-		/* Serielle Schnittstelle */
-		reloadSerial();
 	}
 
 	public void ReloadElements() {
@@ -226,7 +179,6 @@ public class PicSimController {
 	}
 
 	private void start() {
-		filter_code();
 		int i;
 		for (i = 0; i < view.getListModelSize(); i++) {
 			model.analyze_code(view.getElementListModel(i));
@@ -266,16 +218,6 @@ public class PicSimController {
 			start();
 
 			set_running(true);
-
-			serial = new PicSimSerialConnection(model);
-			
-			if (serial.open(model.getDefaultSerialPort())) {
-				serialConnected = true;
-				view.setSerialConnected();
-			} else {
-				serialConnected = false;
-				view.setSerialDisconnected();
-			}
 			view.setVisibilityButtons(false, true, true);
 			Thread t1 = new Thread(new PicSimControllerThread(this));
 
@@ -355,14 +297,7 @@ public class PicSimController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			try {
-				serial.close();
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			serialConnected = false;
-			view.setSerialDisconnected();
+
 			set_running(false);
 
 		}
@@ -411,6 +346,7 @@ public class PicSimController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			loadFile();
+			filter_code();
 		}
 
 	}
@@ -553,16 +489,6 @@ public class PicSimController {
 
 		}
 
-	}
-	
-	class ComPortChange implements ActionListener{
-
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			model.setDefaultSerialPort(view.selectedComPort());
-			
-		}
-		
 	}
 
 	public void writeToRegister(int adress, int value) {

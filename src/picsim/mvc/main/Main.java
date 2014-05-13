@@ -2,7 +2,6 @@ package picsim.mvc.main;
 
 import picsim.mvc.controller.PicSimController;
 import picsim.mvc.model.PicSimModel;
-import picsim.mvc.model.serial.PicSimSerialConnection;
 import picsim.mvc.view.PicSimView;
 
 public class Main {
@@ -19,7 +18,7 @@ public class Main {
 		model = new PicSimModel();
 		view = new PicSimView();
 		 controller = new PicSimController(view, model);
-		 
+
 		view.setVisible(true);
 	}
 
