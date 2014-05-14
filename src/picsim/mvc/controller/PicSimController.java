@@ -456,6 +456,7 @@ public class PicSimController {
 		running = false;
 		view.clear_ListModel();
 		model.reset_model();
+		valueOnPowerUp();
 		ReloadGUI();
 
 		/* Auswählen der Datei */

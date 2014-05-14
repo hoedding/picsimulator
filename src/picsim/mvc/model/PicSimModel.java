@@ -924,35 +924,35 @@ public class PicSimModel {
 	public void clear_Bit(int position, int adress) {
 		switch (position) {
 		case 0: {
-			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) & 0b00000001));
+			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) & 0b11111110));
 			break;
 		}
 		case 1: {
-			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) & 0b00000010));
+			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) & 0b11111101));
 			break;
 		}
 		case 2: {
-			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) & 0b00000100));
+			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) & 0b11111011));
 			break;
 		}
 		case 3: {
-			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) & 0b00001000));
+			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) & 0b11110111));
 			break;
 		}
 		case 4: {
-			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) & 0b00010000));
+			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) & 0b11101111));
 			break;
 		}
 		case 5: {
-			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) & 0b00100000));
+			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) & 0b11011111));
 			break;
 		}
 		case 6: {
-			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) & 0b01000000));
+			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) & 0b10111111));
 			break;
 		}
 		case 7: {
-			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) & 0b10000000));
+			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) & 0b01111111));
 			break;
 		}
 		default: {
