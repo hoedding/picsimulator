@@ -147,7 +147,7 @@ public class PicSimController {
 	public void start_function() throws InterruptedException {
 
 		for (int i = 0; i < view.breakpoint_list.size(); i++) {
-			if (model.getProgrammCounter() == view.breakpoint_list.get(i) - 1) {
+			if (view.getSelectedLineNumb() == view.breakpoint_list.get(i) - 1) {
 
 				running = false;
 

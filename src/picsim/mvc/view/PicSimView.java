@@ -1239,6 +1239,9 @@ public class PicSimView extends JFrame {
 	public void remove_ElementListModel(int index) {
 		listModel.remove(index);
 	}
+	public int getSelectedLineNumb() {
+		return list_code.getSelectedIndex();
+	}
 
 	public void set_TableEntry(int aValue, int row, int column) {
 		table_model.setValueAt(aValue, row, column);
