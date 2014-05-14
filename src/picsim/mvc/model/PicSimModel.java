@@ -23,7 +23,8 @@ public class PicSimModel {
 	private int portA;
 	private int portB;
 	private String defaultSerialPort;
-	
+	private boolean mode; //false=timermode, true=countermode
+	private int prescaler;
 	
 
 	public PicSimModel() {
@@ -1042,6 +1043,26 @@ public class PicSimModel {
 
 	public void setDefaultSerialPort(String defaultSerialPort) {
 		this.defaultSerialPort = defaultSerialPort;
+	}
+
+	public boolean getMode() {
+		return mode;
+	}
+
+	public void setMode(boolean mode) {
+		this.mode = mode;
+	}
+
+	public int getPrescaler() {
+		return prescaler;
+	}
+
+	public void setPrescaler(int prescaler) {
+		this.prescaler = prescaler;
+	}
+	public void incrPrescaler(){
+		prescaler++;
+		System.out.println("increment prescaler");
 	}
 
 	

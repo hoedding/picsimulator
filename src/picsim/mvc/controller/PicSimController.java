@@ -29,11 +29,9 @@ public class PicSimController {
 	private PicSimView view;
 	private PicSimModel model;
 	private boolean running;
-	private int prescaler_count;
+
 	private PicSimSerialConnection serial;
 	private boolean serialConnected = false;
-	
-	private ArrayList<String> arrayOfComPorts = null;
 
 	public PicSimController(PicSimView view, PicSimModel model) {
 		this.view = view;
@@ -44,22 +42,22 @@ public class PicSimController {
 		valueOnPowerUp();
 		searchForComPorts();
 		ReloadGUI();
-		
 
 	}
 
-	private void valueOnPowerUp(){
-		/*Vorbelegung einiger Werte*/
+	private void valueOnPowerUp() {
+		/* Vorbelegung einiger Werte */
 		model.setRegisterEntry(0x3, 24);
 		model.setRegisterEntry(0x81, 255);
 		model.setRegisterEntry(0x83, 24);
 		model.setRegisterEntry(0x85, 31);
 		model.setRegisterEntry(0x86, 255);
 	}
-	
-	private void searchForComPorts(){
+
+	private void searchForComPorts() {
+		@SuppressWarnings("rawtypes")
 		Enumeration portIdentifiers = CommPortIdentifier.getPortIdentifiers();
-		if(portIdentifiers!=null){
+		if (portIdentifiers != null) {
 			while (portIdentifiers.hasMoreElements()) {
 				CommPortIdentifier pid = (CommPortIdentifier) portIdentifiers
 						.nextElement();
@@ -69,10 +67,10 @@ public class PicSimController {
 					System.out.println(pid.getName());
 				}
 			}
-		}else {
+		} else {
 			view.set_ErrorMsgs("Keine COM-Ports gefunden.");
 		}
-		
+
 	}
 
 	private void addListener() {
@@ -106,11 +104,11 @@ public class PicSimController {
 	public void reloadSerial() {
 		if (serialConnected) {
 			try {
-			//	serial.sendRS232();
+				// serial.sendRS232();
 				String temp = serial.read();
 				System.out.println("empfangen: " + temp);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+
 				e.printStackTrace();
 			}
 		}
@@ -141,7 +139,8 @@ public class PicSimController {
 		/*
 		 * Überprüfung ob Ende des Programms erreicht wird kann am Ende gelöscht
 		 * werden !!
-		 */// TODO l��schen
+		 */
+
 		if (model.getProgrammCounter() == model.code_list.size()) {
 			Thread.sleep(takt);
 			model.setProgramCounter(0);
@@ -150,25 +149,30 @@ public class PicSimController {
 			Thread.sleep(takt);
 			start_function();
 		}
+		// Timermode, Countermode überprüfen und setzen
+		chooseMode();
+
 	}
 
-	/*
-	 * ######## F��hrt f��r jedes in der code_list enthaltene Elemente die
-	 * Funktion what_to_do() aus #######
-	 */
 	public void start_function() throws InterruptedException {
 
 		for (int i = 0; i < view.breakpoint_list.size(); i++) {
 			if (view.getSelectedLineNumb() == view.breakpoint_list.get(i) - 1) {
-
 				running = false;
-
 			}
 		}
+		if (running) {
+			model.what_to_do(model.code_list.get(model.getProgrammCounter()));
+			model.setProgramCounter(model.getProgrammCounter() + 1);
+			if (model.getMode()) {
+				countermode();
 
-		model.what_to_do(model.code_list.get(model.getProgrammCounter()));
-		model.setProgramCounter(model.getProgrammCounter() + 1);
-		ReloadGUI();
+			} else {
+				timermode();
+			}
+			ReloadGUI();
+		}
+
 	}
 
 	public void ReloadGUI() {
@@ -202,12 +206,13 @@ public class PicSimController {
 
 		/* Serielle Schnittstelle */
 		reloadSerial();
-		/*int m;
-		for(m=0; m < view.breakpoint_list.size(); m++){
-			
-			view.addBreakpoints(view.breakpoint_list.get(m));
-			
-		}*/
+		/*
+		 * int m; for(m=0; m < view.breakpoint_list.size(); m++){
+		 * 
+		 * view.addBreakpoints(view.breakpoint_list.get(m));
+		 * 
+		 * }
+		 */
 	}
 
 	public void ReloadElements() {
@@ -241,6 +246,7 @@ public class PicSimController {
 
 		Thread t1 = new Thread(new PicSimControllerThread_Once(this));
 		t1.start();
+		// TODO serielle verbindung bei einem schritt
 	}
 
 	private void start() {
@@ -274,14 +280,14 @@ public class PicSimController {
 	public void run_all_functions() {
 
 		if (view.getListModelSize() > 0) {
-			
+
 			model.setStartTime(System.currentTimeMillis());
 			start();
 
 			set_running(true);
 
 			serial = new PicSimSerialConnection(model);
-			
+
 			if (serial.open(model.getDefaultSerialPort())) {
 				serialConnected = true;
 				view.setSerialConnected();
@@ -300,89 +306,103 @@ public class PicSimController {
 		}
 
 	}
-	
-	public void chooseMode(){
+
+	public void chooseMode() {
 		if (model.is_bit_set(5, 0x81)) {/* CounterMode */
-			countermode();
+
+			model.setMode(true);
 		} else {/* TimerMode */
-			timermode();
+
+			model.setMode(false);
 		}
 	}
 
 	public void timermode() {
-		
-		
-		
-		if(model.is_bit_set(3, 0x81)){
+		if (model.is_bit_set(3, 0x81)) {
 			model.register_array[1] = model.register_array[1] + 1;
-	} else {
-		int prescaler = model.register_array[0x81] & 0b00000111;
-		switch (prescaler) {
-		
-		case 0:
-			if (prescaler_count == 2) {
-				model.register_array[1] = model.register_array[1] + 1;
-				prescaler_count = 0;
-			} else {
-				prescaler_count++;
+		} else {
+
+			int prescaler = model.register_array[0x81] & 0b00000111;
+			switch (prescaler) {
+
+			case 0:
+				if (model.getPrescaler() == 2) {
+					model.register_array[1] = model.register_array[1] + 1;
+					model.setPrescaler(0);
+				} else {
+					model.incrPrescaler();
+				}
+				break;
+
+			case 1:
+
+				if (model.getPrescaler() == 4) {
+					model.register_array[1] = model.register_array[1] + 1;
+					model.setPrescaler(0);
+
+				} else {
+					model.incrPrescaler();
+
+				}
+				break;
+			case 2:
+				if (model.getPrescaler() == 8) {
+					model.register_array[1] = model.register_array[1] + 1;
+					model.setPrescaler(0);
+				} else {
+					model.incrPrescaler();
+				}
+				break;
+			case 3:
+				if (model.getPrescaler() == 16) {
+					model.register_array[1] = model.register_array[1] + 1;
+					model.setPrescaler(0);
+				} else {
+					model.incrPrescaler();
+				}
+				break;
+			case 4:
+				if (model.getPrescaler() == 32) {
+					model.register_array[1] = model.register_array[1] + 1;
+					model.setPrescaler(0);
+				} else {
+					model.incrPrescaler();
+				}
+				break;
+			case 5:
+				if (model.getPrescaler() == 64) {
+					model.register_array[1] = model.register_array[1] + 1;
+					model.setPrescaler(0);
+				} else {
+					model.incrPrescaler();
+				}
+				break;
+			case 6:
+				if (model.getPrescaler() == 128) {
+					model.register_array[1] = model.register_array[1] + 1;
+					model.setPrescaler(0);
+				} else {
+					model.incrPrescaler();
+				}
+				break;
+			case 7:
+				if (model.getPrescaler() == 256) {
+					model.register_array[1] = model.register_array[1] + 1;
+					model.setPrescaler(0);
+				} else {
+					model.incrPrescaler();
+				}
+				break;
+			default: {
+				break;
 			}
-			
-		case 1:
-			if (prescaler_count == 4) {
-				model.register_array[1] = model.register_array[1] + 1;
-				prescaler_count = 0;
-			} else {
-				prescaler_count++;
 			}
-		case 2:
-			if (prescaler_count == 8) {
-				model.register_array[1] = model.register_array[1] + 1;
-				prescaler_count = 0;
-			} else {
-				prescaler_count++;
-			}
-		case 3:
-			if (prescaler_count == 16) {
-				model.register_array[1] = model.register_array[1] + 1;
-				prescaler_count = 0;
-			} else {
-				prescaler_count++;
-			}
-		case 4:
-			if (prescaler_count == 32) {
-				model.register_array[1] = model.register_array[1] + 1;
-				prescaler_count = 0;
-			} else {
-				prescaler_count++;
-			}
-		case 5:
-			if (prescaler_count == 64) {
-				model.register_array[1] = model.register_array[1] + 1;
-				prescaler_count = 0;
-			} else {
-				prescaler_count++;
-			}
-		case 6:
-			if (prescaler_count == 128) {
-				model.register_array[1] = model.register_array[1] + 1;
-				prescaler_count = 0;
-			} else {
-				prescaler_count++;
-			}
-		case 7:
-			if (prescaler_count == 256) {
-				model.register_array[1] = model.register_array[1] + 1;
-				prescaler_count = 0;
-			} else {
-				prescaler_count++;
-			}
+
 		}
-	}
-	//	
 	}
 
 	public void countermode() {
-		int prescaler = 2 ^ (model.register_array[0x81] & 0b00000111);
+
 	}
 
 	class PauseListener implements ActionListener {
@@ -590,15 +610,15 @@ public class PicSimController {
 		}
 
 	}
-	
-	class ComPortChange implements ActionListener{
+
+	class ComPortChange implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			model.setDefaultSerialPort(view.selectedComPort());
-			
+
 		}
-		
+
 	}
 
 	public void writeToRegister(int adress, int value) {
@@ -1139,7 +1159,7 @@ public class PicSimController {
 
 			// TODO Auto-generated method stub
 			changeTheRegisterFromPortB(7);
-			System.out.println("klick!!b7");
+
 		}
 
 		@Override
@@ -1341,14 +1361,11 @@ public class PicSimController {
 	public void setTime() {
 		model.setRunningTime((System.currentTimeMillis())
 				- (model.getStartTime()));
-		System.out.println("start" + model.getStartTime());
-		System.out.println("running: " + model.getRunningTime());
+
 	}
 
 	public void countSteps() {
 		model.setSteps();
-
-		System.out.println(model.getSteps());
 	}
 
 	public void writeTableToRegister() {
