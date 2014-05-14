@@ -221,10 +221,13 @@ public class PicSimView extends JFrame {
 		JMenuItem mntmDoku = new JMenuItem("Dokumentation");
 		mntmDoku.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				InputStream is = getClass().getResourceAsStream("/flug_barcelona.pdf");/*Test PDF*/
-				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
+				InputStream is = getClass().getResourceAsStream(
+						"/flug_barcelona.pdf");/* Test PDF */
+				BufferedReader bufferedReader = new BufferedReader(
+						new InputStreamReader(is));
 				String homepath = System.getProperty("user.home");
-						System.out.println(homepath);
+				System.out.println(homepath);
+
 			}
 		});
 		mnHelp.add(mntmDoku);
@@ -295,15 +298,13 @@ public class PicSimView extends JFrame {
 					int temp = list_code.getSelectedIndex();
 
 					if (breakpoint_list.contains(temp)) {
-						
-						
+
 						breakpoint_list.remove(breakpoint_list.indexOf(temp));
-						
-					} 
-					else {                                                                                                           
-						
+
+					} else {
+
 						breakpoint_list.add(temp);
-						
+
 					}
 				}
 			}
@@ -1110,7 +1111,8 @@ public class PicSimView extends JFrame {
 	public void initializeComMenu(String port) {
 		choice.addItem(port);
 	}
-	public String selectedComPort(){
+
+	public String selectedComPort() {
 		return (String) choice.getSelectedItem();
 
 	}
@@ -1253,6 +1255,7 @@ public class PicSimView extends JFrame {
 	public void remove_ElementListModel(int index) {
 		listModel.remove(index);
 	}
+
 	public int getSelectedLineNumb() {
 		return list_code.getSelectedIndex();
 	}

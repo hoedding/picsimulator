@@ -202,6 +202,12 @@ public class PicSimController {
 
 		/* Serielle Schnittstelle */
 		reloadSerial();
+		/*int m;
+		for(m=0; m < view.breakpoint_list.size(); m++){
+			
+			view.addBreakpoints(view.breakpoint_list.get(m));
+			
+		}*/
 	}
 
 	public void ReloadElements() {
