@@ -274,11 +274,7 @@ public class PicSimController {
 	public void run_all_functions() {
 
 		if (view.getListModelSize() > 0) {
-			if (model.is_bit_set(5, 0x81)) {/* CounterMode */
-				countermode();
-			} else {/* TimerMode */
-				timermode();
-			}
+			
 			model.setStartTime(System.currentTimeMillis());
 			start();
 
@@ -304,22 +300,42 @@ public class PicSimController {
 		}
 
 	}
+	
+	public void chooseMode(){
+		if (model.is_bit_set(5, 0x81)) {/* CounterMode */
+			countermode();
+		} else {/* TimerMode */
+			timermode();
+		}
+	}
 
 	public void timermode() {
-		int prescaler = model.register_array[0x81] & 0b00000111;
-
-		switch (prescaler) {
-		case 0:
+		
+		
+		
+		if(model.is_bit_set(3, 0x81)){
 			model.register_array[1] = model.register_array[1] + 1;
-		case 1:
+	} else {
+		int prescaler = model.register_array[0x81] & 0b00000111;
+		switch (prescaler) {
+		
+		case 0:
 			if (prescaler_count == 2) {
 				model.register_array[1] = model.register_array[1] + 1;
 				prescaler_count = 0;
 			} else {
 				prescaler_count++;
 			}
-		case 2:
+			
+		case 1:
 			if (prescaler_count == 4) {
+				model.register_array[1] = model.register_array[1] + 1;
+				prescaler_count = 0;
+			} else {
+				prescaler_count++;
+			}
+		case 2:
+			if (prescaler_count == 8) {
 				model.register_array[1] = model.register_array[1] + 1;
 				prescaler_count = 0;
 			} else {
@@ -361,7 +377,8 @@ public class PicSimController {
 				prescaler_count++;
 			}
 		}
-		model.register_array[1] = model.register_array[1] + 1;
+	}
+	//	
 	}
 
 	public void countermode() {
