@@ -20,6 +20,7 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -174,9 +175,12 @@ public class PicSimView extends JFrame {
 	private JRadioButton radioButton_8;
 	private JTextField textField;
 
-	private JComboBox choice;
+	private JComboBox<String> choice;
 
-	@SuppressWarnings("rawtypes")
+	private JComboBox<Integer> breakpoints;
+
+	private int indexOfBreakpoint = 0;
+
 	public PicSimView() {
 		setTitle("Simulator PIC12F84");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -298,12 +302,14 @@ public class PicSimView extends JFrame {
 					int temp = list_code.getSelectedIndex();
 
 					if (breakpoint_list.contains(temp)) {
-
 						breakpoint_list.remove(breakpoint_list.indexOf(temp));
+						updateBPCombobox();
 
 					} else {
 
 						breakpoint_list.add(temp);
+						updateBPCombobox();
+						
 
 					}
 				}
@@ -325,7 +331,7 @@ public class PicSimView extends JFrame {
 			}
 		});
 
-		table.setToolTipText("Zweifaches Drücken von 'Enter' überträgt den Wert direkt ins Register. ");
+		table.setToolTipText("Zweifaches Dr�cken von 'Enter' �berträgt den Wert direkt ins Register. ");
 
 		JScrollPane scrollpane_table = new JScrollPane(table);
 
@@ -1082,17 +1088,6 @@ public class PicSimView extends JFrame {
 		gbc_label_59.gridy = 6;
 		panel_11.add(label_59, gbc_label_59);
 
-		JButton btnNewButton = new JButton("Breakpoints anzeigen");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				for (int i = 0; i < breakpoint_list.size(); i++) {
-					System.out.println(breakpoint_list.get(i));
-				}
-			}
-		});
-		btnNewButton.setBounds(335, 33, 89, 23);
-		contentPane.add(btnNewButton);
-
 		JLabel lblSerielleVerbindung = new JLabel("Serielle Verbindung:");
 		lblSerielleVerbindung.setBounds(10, 148, 124, 14);
 		contentPane.add(lblSerielleVerbindung);
@@ -1102,12 +1097,20 @@ public class PicSimView extends JFrame {
 		lblDisconnected.setBounds(144, 148, 78, 14);
 		contentPane.add(lblDisconnected);
 
-		choice = new JComboBox();
+		choice = new JComboBox<String>();
 		choice.setBounds(335, 106, 98, 20);
 		contentPane.add(choice);
+
+		breakpoints = new JComboBox<Integer>();
+		breakpoints.setToolTipText("shows selected Breakpoints!");
+		breakpoints.setBounds(335, 58, 89, 20);
+		contentPane.add(breakpoints);
+
+		JLabel lblBreakpoints = new JLabel("Selected Breakpoints");
+		lblBreakpoints.setBounds(335, 41, 133, 14);
+		contentPane.add(lblBreakpoints);
 	}
 
-	@SuppressWarnings("unchecked")
 	public void initializeComMenu(String port) {
 		choice.addItem(port);
 	}
@@ -1115,6 +1118,10 @@ public class PicSimView extends JFrame {
 	public String selectedComPort() {
 		return (String) choice.getSelectedItem();
 
+	}
+
+	public void updateBPCombobox() {
+		breakpoints.setModel(new DefaultComboBoxModel<Integer>(breakpoint_list.toArray(new Integer[0])));
 	}
 
 	public void set_W_value(String s) {
