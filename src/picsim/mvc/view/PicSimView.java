@@ -106,6 +106,8 @@ public class PicSimView extends JFrame {
 	private JList<String> list_code;
 	private DefaultListModel<String> listModel;
 
+	private BreakpointCellRenderer list_renderer;
+
 	public List<Integer> breakpoint_list = new ArrayList<Integer>();
 
 	/* LABEL TRIS A und PORT A */
@@ -309,12 +311,17 @@ public class PicSimView extends JFrame {
 
 						breakpoint_list.add(temp);
 						updateBPCombobox();
-						
 
 					}
 				}
 			}
 		});
+
+		list_renderer = new BreakpointCellRenderer(list_code);
+
+		list_code.setCellRenderer(list_renderer);
+		
+		
 
 		scrollpane_code = new JScrollPane(list_code);
 		scrollpane_code.setBounds(10, 356, 781, 215);
@@ -331,7 +338,7 @@ public class PicSimView extends JFrame {
 			}
 		});
 
-		table.setToolTipText("Zweifaches Drücken von 'Enter' übertrÃ¤gt den Wert direkt ins Register. ");
+		table.setToolTipText("Zweifaches Drï¿½cken von 'Enter' ï¿½bertrÃ¤gt den Wert direkt ins Register. ");
 
 		JScrollPane scrollpane_table = new JScrollPane(table);
 
@@ -1121,7 +1128,9 @@ public class PicSimView extends JFrame {
 	}
 
 	public void updateBPCombobox() {
-		breakpoints.setModel(new DefaultComboBoxModel<Integer>(breakpoint_list.toArray(new Integer[0])));
+		breakpoints.setModel(new DefaultComboBoxModel<Integer>(breakpoint_list
+				.toArray(new Integer[0])));
+		list_renderer.setThings(breakpoint_list);
 	}
 
 	public void set_W_value(String s) {
