@@ -44,6 +44,7 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
 import picsim.mvc.model.PicSimModel;
+import sun.misc.IOUtils;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -230,7 +231,7 @@ public class PicSimView extends JFrame {
 				BufferedReader bufferedReader = new BufferedReader(
 						new InputStreamReader(is));
 				String homepath = System.getProperty("user.home");
-				System.out.println(homepath);
+				//IOUtils.
 
 			}
 		});
@@ -331,7 +332,7 @@ public class PicSimView extends JFrame {
 			}
 		});
 
-		table.setToolTipText("Zweifaches Drücken von 'Enter' übertrÃ¤gt den Wert direkt ins Register. ");
+		table.setToolTipText("Zweifaches Drï¿½cken von 'Enter' ï¿½bertrÃ¤gt den Wert direkt ins Register. ");
 
 		JScrollPane scrollpane_table = new JScrollPane(table);
 
