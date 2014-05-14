@@ -488,9 +488,9 @@ public class PicSimModel {
 	}
 
 	private void do_btfss(int _hex3) {
-
+		
 		int adress = _hex3 & 0b0001111111;
-		int bit = _hex3 & 0b1110000000;
+		int bit = (_hex3 & 0b1110000000) / 128;
 		if (is_bit_set(bit, adress)) {
 			setProgramCounter(getProgrammCounter() + 1);
 		}
@@ -500,7 +500,7 @@ public class PicSimModel {
 	private void do_btfsc(int _hex3) {
 
 		int adress = _hex3 & 0b0001111111;
-		int bit = _hex3 & 0b1110000000;
+		int bit = (_hex3 & 0b1110000000) / 128 ;
 		if (!is_bit_set(bit, adress)) {
 			setProgramCounter(getProgrammCounter() + 1);
 		}
