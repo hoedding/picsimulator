@@ -2,6 +2,7 @@ package picsim.mvc.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -59,6 +60,11 @@ import java.awt.Component;
 import java.awt.Choice;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import javax.swing.JComboBox;
 
@@ -213,6 +219,14 @@ public class PicSimView extends JFrame {
 		menuBar.add(mnHelp);
 
 		JMenuItem mntmDoku = new JMenuItem("Dokumentation");
+		mntmDoku.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				InputStream is = getClass().getResourceAsStream("/flug_barcelona.pdf");/*Test PDF*/
+				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
+				String homepath = System.getProperty("user.home");
+						System.out.println(homepath);
+			}
+		});
 		mnHelp.add(mntmDoku);
 
 		final SimpleAttributeSet keyWord = new SimpleAttributeSet();
@@ -286,7 +300,7 @@ public class PicSimView extends JFrame {
 						breakpoint_list.remove(breakpoint_list.indexOf(temp));
 						
 					} 
-					else {
+					else {                                                                                                           
 						
 						breakpoint_list.add(temp);
 						
@@ -310,7 +324,7 @@ public class PicSimView extends JFrame {
 			}
 		});
 
-		table.setToolTipText("Zweifaches Dr��cken von 'Enter' ��bertr��gt den eingetragenen Zahlenwert direkt in den Speicher. ");
+		table.setToolTipText("Zweifaches Drücken von 'Enter' überträgt den Wert direkt ins Register. ");
 
 		JScrollPane scrollpane_table = new JScrollPane(table);
 

@@ -41,10 +41,20 @@ public class PicSimController {
 		this.running = false;
 		model.reset_model();
 		addListener();
+		valueOnPowerUp();
 		searchForComPorts();
 		ReloadGUI();
 		
 
+	}
+
+	private void valueOnPowerUp(){
+		/*Vorbelegung einiger Werte*/
+		model.setRegisterEntry(0x3, 24);
+		model.setRegisterEntry(0x81, 255);
+		model.setRegisterEntry(0x83, 24);
+		model.setRegisterEntry(0x85, 31);
+		model.setRegisterEntry(0x86, 255);
 	}
 	
 	private void searchForComPorts(){
@@ -96,7 +106,9 @@ public class PicSimController {
 	public void reloadSerial() {
 		if (serialConnected) {
 			try {
-				serial.sendRS232();
+			//	serial.sendRS232();
+				String temp = serial.read();
+				System.out.println("empfangen: " + temp);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
