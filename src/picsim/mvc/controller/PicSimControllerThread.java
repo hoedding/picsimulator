@@ -16,6 +16,7 @@ public class PicSimControllerThread implements Runnable {
 			controller.set_running(true);
 			while (controller.get_running()) {
 				controller.start_programm(controller.get_Frequency() / 10);
+				controller.chooseMode();
 				controller.setTime();
 				controller.countSteps();
 			}
