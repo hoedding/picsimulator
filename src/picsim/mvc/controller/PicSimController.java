@@ -161,7 +161,7 @@ public class PicSimController {
 				running = false;
 			}
 		}
-		if (running) {
+		
 			model.what_to_do(model.code_list.get(model.getProgrammCounter()));
 			model.setProgramCounter(model.getProgrammCounter() + 1);
 			if (model.getMode()) {
@@ -171,7 +171,7 @@ public class PicSimController {
 				timermode();
 			}
 			ReloadGUI();
-		}
+		
 
 	}
 
