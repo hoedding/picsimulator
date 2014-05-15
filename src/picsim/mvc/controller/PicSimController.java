@@ -1353,6 +1353,8 @@ public class PicSimController {
 				model.setPortB(model.getPortB() - 1);
 			}
 			
+			model.set_Bit(4,0xb);
+			
 		
 			model.do_interrupt(1);
 			break;

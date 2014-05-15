@@ -10,7 +10,7 @@ public class PicSimModel {
 	public int w_register = 0b0;
 	public int sprung;
 	private int PC = 0;
-	private long runningTime = 0; 
+	private long runningTime = 0;
 	private long startTime = 0;
 	private Deque<Integer> STACK = new ArrayDeque<Integer>();
 	public int[] register_array = new int[256];
@@ -19,13 +19,12 @@ public class PicSimModel {
 	private String path_of_programfile;
 	private String path_of_registerfile;
 	private int steps;
-	
+
 	private int portA;
 	private int portB;
 	private String defaultSerialPort;
-	private boolean mode; //false=timermode, true=countermode
+	private boolean mode; // false=timermode, true=countermode
 	private int prescaler;
-	
 
 	public PicSimModel() {
 		// Konstruktor
@@ -36,7 +35,7 @@ public class PicSimModel {
 	}
 
 	public void setSteps() {
-		this.steps = steps+1;
+		this.steps = steps + 1;
 	}
 
 	public long getStartTime() {
@@ -73,10 +72,10 @@ public class PicSimModel {
 		this.portA = portA;
 	}
 
-
 	public int getPortB() {
 		return portB;
 	}
+
 	public void setPortB(int portB) {
 		this.portB = portB;
 	}
@@ -126,9 +125,9 @@ public class PicSimModel {
 	/* Register schreiben */
 	public void setRegisterEntry(int index, int value) {
 		if (is_bit_set(5, 3)) {
-			
+
 			// Wenn das Bit für Bankumschaltung gesetzt ist
-			
+
 			if (index == 0) {
 				value = value & 0b11111111;
 				register_array[register_array[4] + 128] = value;
@@ -148,10 +147,9 @@ public class PicSimModel {
 			}
 		}
 	}
-	
-	public void setRegisterEntryOneBit(int index, int value){
-		
-		
+
+	public void setRegisterEntryOneBit(int index, int value) {
+
 		if (index == 0) {
 			value = value & 0b11111111;
 			register_array[register_array[4]] = value;
@@ -489,7 +487,7 @@ public class PicSimModel {
 	}
 
 	private void do_btfss(int _hex3) {
-		
+
 		int adress = _hex3 & 0b0001111111;
 		int bit = (_hex3 & 0b1110000000) / 128;
 		if (is_bit_set(bit, adress)) {
@@ -501,7 +499,7 @@ public class PicSimModel {
 	private void do_btfsc(int _hex3) {
 
 		int adress = _hex3 & 0b0001111111;
-		int bit = (_hex3 & 0b1110000000) / 128 ;
+		int bit = (_hex3 & 0b1110000000) / 128;
 		if (!is_bit_set(bit, adress)) {
 			setProgramCounter(getProgrammCounter() + 1);
 		}
@@ -511,9 +509,9 @@ public class PicSimModel {
 	private void do_bsf(int _hex3) {
 		System.out.println("bsf");
 		int bit = (_hex3 & 0b1110000000) / 128;
-		
+
 		int adress = _hex3 & 0b0001111111;
-		System.out.println(bit + ". bit an der "+ adress + ". adresse");
+		System.out.println(bit + ". bit an der " + adress + ". adresse");
 		set_Bit(bit, adress);
 
 	}
@@ -522,7 +520,7 @@ public class PicSimModel {
 		System.out.println("bcf");
 		int bit = (_hex3 & 0b1110000000) / 128;
 		int adress = _hex3 & 0b0001111111;
-		System.out.println(bit + ". bit an der "+ adress + ". adresse");
+		System.out.println(bit + ". bit an der " + adress + ". adresse");
 		clear_Bit(bit, adress);
 
 	}
@@ -706,13 +704,18 @@ public class PicSimModel {
 		int d = _hex1 & 0b10000000;
 		int adress = _hex1 & 0b01111111;
 		int value = getRegisterEntry(adress);
-		if(value==255){
-			set_Z(true);
+		if (get_Z()) {
+			set_Z(false);
+
+		} else {
+			if (value == 255) {
+				set_Z(true);
+			}
 		}
-		
+
 		if (d == 0) {
 			w_register = getRegisterEntry(adress) + 1;
-			
+
 		} else {
 			setRegisterEntry(adress, (getRegisterEntry(adress) + 1));
 		}
@@ -809,20 +812,45 @@ public class PicSimModel {
 		set_Z(true);
 
 	}
-	
-	public void do_interrupt(int ID){
+
+	public void do_interrupt(int ID) {
 		System.out.println("Interrupt");
-		if(is_bit_set(7, 0xb)){
-		switch (ID){
-		//RB0 Interrupt
-		case 1:	if(is_bit_set(4, 0xb)){STACK.add(getProgrammCounter()); setProgramCounter(4); set_Bit(1, 0xb);}System.out.println("RB0 Interrupt"); break;
-		//Timer Interrupt
-		case 2: if(is_bit_set(5, 0xb)){STACK.add(getProgrammCounter()); setProgramCounter(4); set_Bit(2, 0xb);}break;
-		//Port B Interrupt
-		case 3: if(is_bit_set(3, 0xb)){STACK.add(getProgrammCounter()); setProgramCounter(4); set_Bit(0, 0xb);}System.out.println("RB4-7 Interrupt");  break;
-		//EEPROM Interrupt
-		case 4: if(is_bit_set(6, 0xb)){STACK.add(getProgrammCounter()); setProgramCounter(4);}break;
-		}
+		if (is_bit_set(7, 0xb)) {
+			switch (ID) {
+			// RB0 Interrupt
+			case 1:
+				if (is_bit_set(4, 0xb)) {
+					STACK.add(getProgrammCounter());
+					setProgramCounter(4);
+					set_Bit(1, 0xb);
+				}
+				System.out.println("RB0 Interrupt");
+				break;
+			// Timer Interrupt
+			case 2:
+				if (is_bit_set(5, 0xb)) {
+					STACK.add(getProgrammCounter());
+					setProgramCounter(4);
+					set_Bit(2, 0xb);
+				}
+				break;
+			// Port B Interrupt
+			case 3:
+				if (is_bit_set(3, 0xb)) {
+					STACK.add(getProgrammCounter());
+					setProgramCounter(4);
+					set_Bit(0, 0xb);
+				}
+				System.out.println("RB4-7 Interrupt");
+				break;
+			// EEPROM Interrupt
+			case 4:
+				if (is_bit_set(6, 0xb)) {
+					STACK.add(getProgrammCounter());
+					setProgramCounter(4);
+				}
+				break;
+			}
 		}
 	}
 
@@ -859,11 +887,11 @@ public class PicSimModel {
 		}
 	}
 
-	public int get_Z() {
+	public boolean get_Z() {
 		if (is_bit_set(2, 3)) {
-			return 1;
+			return true;
 		} else {
-			return 0;
+			return false;
 		}
 	}
 
@@ -890,35 +918,43 @@ public class PicSimModel {
 	public void set_Bit(int position, int adress) {
 		switch (position) {
 		case 0: {
-			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) | 0b00000001));
+			setRegisterEntryOneBit(adress,
+					(getRegisterEntry(adress) | 0b00000001));
 			break;
 		}
 		case 1: {
-			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) | 0b00000010));
+			setRegisterEntryOneBit(adress,
+					(getRegisterEntry(adress) | 0b00000010));
 			break;
 		}
 		case 2: {
-			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) | 0b00000100));
+			setRegisterEntryOneBit(adress,
+					(getRegisterEntry(adress) | 0b00000100));
 			break;
 		}
 		case 3: {
-			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) | 0b00001000));
+			setRegisterEntryOneBit(adress,
+					(getRegisterEntry(adress) | 0b00001000));
 			break;
 		}
 		case 4: {
-			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) | 0b00010000));
+			setRegisterEntryOneBit(adress,
+					(getRegisterEntry(adress) | 0b00010000));
 			break;
 		}
 		case 5: {
-			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) | 0b00100000));
+			setRegisterEntryOneBit(adress,
+					(getRegisterEntry(adress) | 0b00100000));
 			break;
 		}
 		case 6: {
-			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) | 0b01000000));
+			setRegisterEntryOneBit(adress,
+					(getRegisterEntry(adress) | 0b01000000));
 			break;
 		}
 		case 7: {
-			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) | 0b10000000));
+			setRegisterEntryOneBit(adress,
+					(getRegisterEntry(adress) | 0b10000000));
 			break;
 		}
 		default: {
@@ -930,35 +966,43 @@ public class PicSimModel {
 	public void clear_Bit(int position, int adress) {
 		switch (position) {
 		case 0: {
-			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) & 0b11111110));
+			setRegisterEntryOneBit(adress,
+					(getRegisterEntry(adress) & 0b11111110));
 			break;
 		}
 		case 1: {
-			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) & 0b11111101));
+			setRegisterEntryOneBit(adress,
+					(getRegisterEntry(adress) & 0b11111101));
 			break;
 		}
 		case 2: {
-			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) & 0b11111011));
+			setRegisterEntryOneBit(adress,
+					(getRegisterEntry(adress) & 0b11111011));
 			break;
 		}
 		case 3: {
-			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) & 0b11110111));
+			setRegisterEntryOneBit(adress,
+					(getRegisterEntry(adress) & 0b11110111));
 			break;
 		}
 		case 4: {
-			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) & 0b11101111));
+			setRegisterEntryOneBit(adress,
+					(getRegisterEntry(adress) & 0b11101111));
 			break;
 		}
 		case 5: {
-			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) & 0b11011111));
+			setRegisterEntryOneBit(adress,
+					(getRegisterEntry(adress) & 0b11011111));
 			break;
 		}
 		case 6: {
-			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) & 0b10111111));
+			setRegisterEntryOneBit(adress,
+					(getRegisterEntry(adress) & 0b10111111));
 			break;
 		}
 		case 7: {
-			setRegisterEntryOneBit(adress, (getRegisterEntry(adress) & 0b01111111));
+			setRegisterEntryOneBit(adress,
+					(getRegisterEntry(adress) & 0b01111111));
 			break;
 		}
 		default: {
@@ -1065,11 +1109,10 @@ public class PicSimModel {
 	public void setPrescaler(int prescaler) {
 		this.prescaler = prescaler;
 	}
-	public void incrPrescaler(){
+
+	public void incrPrescaler() {
 		prescaler++;
 		System.out.println("increment prescaler");
 	}
-
-	
 
 }
