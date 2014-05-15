@@ -328,7 +328,7 @@ public class PicSimController {
 			case 0:
 				if (model.getPrescaler() == 2) {
 					model.register_array[1] = model.register_array[1] + 1;
-					model.setPrescaler(0);
+					model.setPrescaler(1);
 				} else {
 					model.incrPrescaler();
 				}
@@ -338,7 +338,7 @@ public class PicSimController {
 
 				if (model.getPrescaler() == 4) {
 					model.register_array[1] = model.register_array[1] + 1;
-					model.setPrescaler(0);
+					model.setPrescaler(1);
 
 				} else {
 					model.incrPrescaler();
@@ -348,7 +348,7 @@ public class PicSimController {
 			case 2:
 				if (model.getPrescaler() == 8) {
 					model.register_array[1] = model.register_array[1] + 1;
-					model.setPrescaler(0);
+					model.setPrescaler(1);
 				} else {
 					model.incrPrescaler();
 				}
@@ -356,7 +356,7 @@ public class PicSimController {
 			case 3:
 				if (model.getPrescaler() == 16) {
 					model.register_array[1] = model.register_array[1] + 1;
-					model.setPrescaler(0);
+					model.setPrescaler(1);
 				} else {
 					model.incrPrescaler();
 				}
@@ -364,7 +364,7 @@ public class PicSimController {
 			case 4:
 				if (model.getPrescaler() == 32) {
 					model.register_array[1] = model.register_array[1] + 1;
-					model.setPrescaler(0);
+					model.setPrescaler(1);
 				} else {
 					model.incrPrescaler();
 				}
@@ -372,7 +372,7 @@ public class PicSimController {
 			case 5:
 				if (model.getPrescaler() == 64) {
 					model.register_array[1] = model.register_array[1] + 1;
-					model.setPrescaler(0);
+					model.setPrescaler(1);
 				} else {
 					model.incrPrescaler();
 				}
@@ -380,7 +380,7 @@ public class PicSimController {
 			case 6:
 				if (model.getPrescaler() == 128) {
 					model.register_array[1] = model.register_array[1] + 1;
-					model.setPrescaler(0);
+					model.setPrescaler(1);
 				} else {
 					model.incrPrescaler();
 				}
@@ -388,7 +388,7 @@ public class PicSimController {
 			case 7:
 				if (model.getPrescaler() == 256) {
 					model.register_array[1] = model.register_array[1] + 1;
-					model.setPrescaler(0);
+					model.setPrescaler(1);
 				} else {
 					model.incrPrescaler();
 				}
