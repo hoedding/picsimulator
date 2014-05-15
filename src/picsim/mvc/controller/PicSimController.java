@@ -161,17 +161,16 @@ public class PicSimController {
 				running = false;
 			}
 		}
-		
-			model.what_to_do(model.code_list.get(model.getProgrammCounter()));
-			model.setProgramCounter(model.getProgrammCounter() + 1);
-			if (model.getMode()) {
-				countermode();
 
-			} else {
-				timermode();
-			}
-			ReloadGUI();
-		
+		model.what_to_do(model.code_list.get(model.getProgrammCounter()));
+		model.setProgramCounter(model.getProgrammCounter() + 1);
+		if (model.getMode()) {
+			countermode();
+
+		} else {
+			timermode();
+		}
+		ReloadGUI();
 
 	}
 
@@ -319,7 +318,8 @@ public class PicSimController {
 
 	public void timermode() {
 		if (model.is_bit_set(3, 0x81)) {
-			model.register_array[1] = model.register_array[1] + 1;
+			model.setRegisterEntryOneBit(1, model.getRegisterEntry(1) + 1);
+			// model.register_array[1] = model.register_array[1] + 1;
 		} else {
 
 			int prescaler = model.register_array[0x81] & 0b00000111;
@@ -327,7 +327,15 @@ public class PicSimController {
 
 			case 0:
 				if (model.getPrescaler() == 2) {
-					model.register_array[1] = model.register_array[1] + 1;
+					model.setRegisterEntryOneBit(1,
+							model.getRegisterEntry(1) + 1);
+					if (model.register_array[1] == 0) {
+
+						model.set_Bit(7, 0xb);
+						model.set_Bit(5, 0xb);
+						model.do_interrupt(2);
+
+					}
 					model.setPrescaler(1);
 				} else {
 					model.incrPrescaler();
@@ -337,7 +345,15 @@ public class PicSimController {
 			case 1:
 
 				if (model.getPrescaler() == 4) {
-					model.register_array[1] = model.register_array[1] + 1;
+					model.setRegisterEntryOneBit(1,
+							model.getRegisterEntry(1) + 1);
+					if (model.register_array[1] == 0) {
+
+						model.set_Bit(7, 0xb);
+						model.set_Bit(5, 0xb);
+						model.do_interrupt(2);
+
+					}
 					model.setPrescaler(1);
 
 				} else {
@@ -347,7 +363,15 @@ public class PicSimController {
 				break;
 			case 2:
 				if (model.getPrescaler() == 8) {
-					model.register_array[1] = model.register_array[1] + 1;
+					model.setRegisterEntryOneBit(1,
+							model.getRegisterEntry(1) + 1);
+					if (model.register_array[1] == 0) {
+
+						model.set_Bit(7, 0xb);
+						model.set_Bit(5, 0xb);
+						model.do_interrupt(2);
+
+					}
 					model.setPrescaler(1);
 				} else {
 					model.incrPrescaler();
@@ -355,7 +379,15 @@ public class PicSimController {
 				break;
 			case 3:
 				if (model.getPrescaler() == 16) {
-					model.register_array[1] = model.register_array[1] + 1;
+					model.setRegisterEntryOneBit(1,
+							model.getRegisterEntry(1) + 1);
+					if (model.register_array[1] == 0) {
+
+						model.set_Bit(7, 0xb);
+						model.set_Bit(5, 0xb);
+						model.do_interrupt(2);
+
+					}
 					model.setPrescaler(1);
 				} else {
 					model.incrPrescaler();
@@ -363,7 +395,15 @@ public class PicSimController {
 				break;
 			case 4:
 				if (model.getPrescaler() == 32) {
-					model.register_array[1] = model.register_array[1] + 1;
+					model.setRegisterEntryOneBit(1,
+							model.getRegisterEntry(1) + 1);
+					if (model.register_array[1] == 0) {
+
+						model.set_Bit(7, 0xb);
+						model.set_Bit(5, 0xb);
+						model.do_interrupt(2);
+
+					}
 					model.setPrescaler(1);
 				} else {
 					model.incrPrescaler();
@@ -371,7 +411,15 @@ public class PicSimController {
 				break;
 			case 5:
 				if (model.getPrescaler() == 64) {
-					model.register_array[1] = model.register_array[1] + 1;
+					model.setRegisterEntryOneBit(1,
+							model.getRegisterEntry(1) + 1);
+					if (model.register_array[1] == 0) {
+
+						model.set_Bit(7, 0xb);
+						model.set_Bit(5, 0xb);
+						model.do_interrupt(2);
+
+					}
 					model.setPrescaler(1);
 				} else {
 					model.incrPrescaler();
@@ -379,7 +427,15 @@ public class PicSimController {
 				break;
 			case 6:
 				if (model.getPrescaler() == 128) {
-					model.register_array[1] = model.register_array[1] + 1;
+					model.setRegisterEntryOneBit(1,
+							model.getRegisterEntry(1) + 1);
+					if (model.register_array[1] == 0) {
+
+						model.set_Bit(7, 0xb);
+						model.set_Bit(5, 0xb);
+						model.do_interrupt(2);
+
+					}
 					model.setPrescaler(1);
 				} else {
 					model.incrPrescaler();
@@ -387,7 +443,16 @@ public class PicSimController {
 				break;
 			case 7:
 				if (model.getPrescaler() == 256) {
-					model.register_array[1] = model.register_array[1] + 1;
+					model.setRegisterEntryOneBit(1,
+							model.getRegisterEntry(1) + 1);
+
+					if (model.register_array[1] == 0) {
+
+						model.set_Bit(7, 0xb);
+						model.set_Bit(5, 0xb);
+						model.do_interrupt(2);
+
+					}
 					model.setPrescaler(1);
 				} else {
 					model.incrPrescaler();

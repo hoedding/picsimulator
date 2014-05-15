@@ -149,7 +149,7 @@ public class PicSimModel {
 		}
 	}
 	
-	private void setRegisterEntryOneBit(int index, int value){
+	public void setRegisterEntryOneBit(int index, int value){
 		
 		
 		if (index == 0) {
@@ -703,12 +703,16 @@ public class PicSimModel {
 	}
 
 	private void do_incf(int _hex1) {
-
 		int d = _hex1 & 0b10000000;
 		int adress = _hex1 & 0b01111111;
+		int value = getRegisterEntry(adress);
+		if(value==255){
+			set_Z(true);
+		}
+		
 		if (d == 0) {
 			w_register = getRegisterEntry(adress) + 1;
-			set_Z(true);
+			
 		} else {
 			setRegisterEntry(adress, (getRegisterEntry(adress) + 1));
 		}
@@ -807,6 +811,7 @@ public class PicSimModel {
 	}
 	
 	public void do_interrupt(int ID){
+		System.out.println("Interrupt");
 		if(is_bit_set(7, 0xb)){
 		switch (ID){
 		//RB0 Interrupt
@@ -855,7 +860,7 @@ public class PicSimModel {
 	}
 
 	public int get_Z() {
-		if (is_bit_set(3, 3)) {
+		if (is_bit_set(2, 3)) {
 			return 1;
 		} else {
 			return 0;
@@ -864,9 +869,9 @@ public class PicSimModel {
 
 	public void set_Z(boolean s) {
 		if (s) {
-			set_Bit(3, 3);
+			set_Bit(2, 3);
 		} else {
-			clear_Bit(3, 3);
+			clear_Bit(2, 3);
 		}
 	}
 
