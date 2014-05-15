@@ -333,6 +333,7 @@ public class PicSimController {
 
 						model.set_Bit(7, 0xb);
 						model.set_Bit(5, 0xb);
+						model.set_Bit(2, 0xb);
 						model.do_interrupt(2);
 
 					}
@@ -351,6 +352,7 @@ public class PicSimController {
 
 						model.set_Bit(7, 0xb);
 						model.set_Bit(5, 0xb);
+						model.set_Bit(2, 0xb);
 						model.do_interrupt(2);
 
 					}
@@ -369,6 +371,7 @@ public class PicSimController {
 
 						model.set_Bit(7, 0xb);
 						model.set_Bit(5, 0xb);
+						model.set_Bit(2, 0xb);
 						model.do_interrupt(2);
 
 					}
@@ -385,6 +388,7 @@ public class PicSimController {
 
 						model.set_Bit(7, 0xb);
 						model.set_Bit(5, 0xb);
+						model.set_Bit(2, 0xb);
 						model.do_interrupt(2);
 
 					}
@@ -401,6 +405,7 @@ public class PicSimController {
 
 						model.set_Bit(7, 0xb);
 						model.set_Bit(5, 0xb);
+						model.set_Bit(2, 0xb);
 						model.do_interrupt(2);
 
 					}
@@ -417,6 +422,7 @@ public class PicSimController {
 
 						model.set_Bit(7, 0xb);
 						model.set_Bit(5, 0xb);
+						model.set_Bit(2, 0xb);
 						model.do_interrupt(2);
 
 					}
@@ -433,6 +439,7 @@ public class PicSimController {
 
 						model.set_Bit(7, 0xb);
 						model.set_Bit(5, 0xb);
+						model.set_Bit(2, 0xb);
 						model.do_interrupt(2);
 
 					}
@@ -450,6 +457,7 @@ public class PicSimController {
 
 						model.set_Bit(7, 0xb);
 						model.set_Bit(5, 0xb);
+						model.set_Bit(2, 0xb);
 						model.do_interrupt(2);
 
 					}
@@ -1344,6 +1352,8 @@ public class PicSimController {
 			} else {
 				model.setPortB(model.getPortB() - 1);
 			}
+			
+		
 			model.do_interrupt(1);
 			break;
 		}
@@ -1381,6 +1391,9 @@ public class PicSimController {
 			} else {
 				model.setPortB(model.getPortB() - 16);
 			}
+			model.set_Bit(7, 0xb);
+			model.set_Bit(3, 0xb);
+			model.set_Bit(0, 0xb);
 			model.do_interrupt(3);
 			break;
 		}
@@ -1391,6 +1404,9 @@ public class PicSimController {
 			} else {
 				model.setPortB(model.getPortB() - 32);
 			}
+			model.set_Bit(7, 0xb);
+			model.set_Bit(3, 0xb);
+			model.set_Bit(0, 0xb);
 			model.do_interrupt(3);
 			break;
 		}
@@ -1401,6 +1417,9 @@ public class PicSimController {
 			} else {
 				model.setPortB(model.getPortB() - 64);
 			}
+			model.set_Bit(7, 0xb);
+			model.set_Bit(3, 0xb);
+			model.set_Bit(0, 0xb);
 			model.do_interrupt(3);
 			break;
 		}
@@ -1411,6 +1430,9 @@ public class PicSimController {
 			} else {
 				model.setPortB(model.getPortB() - 128);
 			}
+			model.set_Bit(7, 0xb);
+			model.set_Bit(3, 0xb);
+			model.set_Bit(0, 0xb);
 			model.do_interrupt(3);
 			break;
 		}
