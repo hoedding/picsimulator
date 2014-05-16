@@ -64,11 +64,13 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import javax.swing.JComboBox;
+import javax.swing.border.LineBorder;
 
 public class PicSimView extends JFrame {
 
@@ -106,6 +108,7 @@ public class PicSimView extends JFrame {
 
 	private JList<String> list_code;
 	private DefaultListModel<String> listModel;
+	private DefaultListModel<Integer> listModelSTACK;
 
 	private BreakpointCellRenderer list_renderer;
 
@@ -165,18 +168,9 @@ public class PicSimView extends JFrame {
 	private JLabel label_52;
 	private JLabel label_51;
 
+	private JList listSTACK;
+	
 	private JLabel lblDisconnected;
-
-	private JRadioButton radioButton;
-	private JRadioButton radioButton_1;
-	private JRadioButton radioButton_2;
-	private JRadioButton radioButton_3;
-	private JRadioButton radioButton_4;
-	private JRadioButton radioButton_5;
-	private JRadioButton radioButton_6;
-	private JRadioButton radioButton_7;
-	private JRadioButton radioButton_8;
-	private JTextField textField;
 
 	private JComboBox<String> choice;
 
@@ -187,7 +181,7 @@ public class PicSimView extends JFrame {
 	public PicSimView() {
 		setTitle("Simulator PIC12F84");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1112, 599);
+		setBounds(100, 100, 1028, 613);
 		JPanel contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -228,13 +222,6 @@ public class PicSimView extends JFrame {
 		JMenuItem mntmDoku = new JMenuItem("Dokumentation");
 		mntmDoku.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				InputStream is = getClass().getResourceAsStream(
-						"/flug_barcelona.pdf");/* Test PDF */
-				BufferedReader bufferedReader = new BufferedReader(
-						new InputStreamReader(is));
-				String homepath = System.getProperty("user.home");
-				//IOUtils.
-
 			}
 		});
 		mnHelp.add(mntmDoku);
@@ -325,7 +312,7 @@ public class PicSimView extends JFrame {
 		
 
 		scrollpane_code = new JScrollPane(list_code);
-		scrollpane_code.setBounds(10, 356, 781, 215);
+		scrollpane_code.setBounds(10, 356, 687, 215);
 		contentPane.add(scrollpane_code);
 
 		String[] titles = new String[] { "00", "01", "02", "03", "04", "05",
@@ -343,7 +330,7 @@ public class PicSimView extends JFrame {
 
 		JScrollPane scrollpane_table = new JScrollPane(table);
 
-		scrollpane_table.setBounds(803, 33, 301, 538);
+		scrollpane_table.setBounds(707, 34, 301, 538);
 
 		mntmDateiffnen = new JMenuItem("Datei \u00F6ffnen");
 		mnDatei.add(mntmDateiffnen);
@@ -351,11 +338,11 @@ public class PicSimView extends JFrame {
 		contentPane.add(scrollpane_table, BorderLayout.CENTER);
 
 		btnRegisterLaden = new JButton("Register laden");
-		btnRegisterLaden.setBounds(653, 34, 141, 29);
+		btnRegisterLaden.setBounds(555, 39, 141, 29);
 		contentPane.add(btnRegisterLaden);
 
 		btnRegisterSpeichern = new JButton("Register speichern");
-		btnRegisterSpeichern.setBounds(653, 61, 141, 29);
+		btnRegisterSpeichern.setBounds(555, 66, 141, 29);
 		contentPane.add(btnRegisterSpeichern);
 
 		btnWeiter = new JButton("Weiter");
@@ -377,7 +364,7 @@ public class PicSimView extends JFrame {
 		contentPane.add(lblErrorMsgs);
 
 		JPanel panel_4 = new JPanel();
-		panel_4.setBounds(597, 105, 194, 108);
+		panel_4.setBounds(501, 106, 194, 108);
 		contentPane.add(panel_4);
 		panel_4.setLayout(null);
 
@@ -507,7 +494,7 @@ public class PicSimView extends JFrame {
 
 		JPanel panel_5 = new JPanel();
 		panel_5.setLayout(null);
-		panel_5.setBounds(597, 236, 194, 108);
+		panel_5.setBounds(501, 237, 194, 108);
 		contentPane.add(panel_5);
 
 		JPanel panel_6 = new JPanel();
@@ -634,135 +621,8 @@ public class PicSimView extends JFrame {
 		label_47 = new JLabel("0");
 		panel_9.add(label_47);
 
-		JPanel panel_10 = new JPanel();
-		panel_10.setBorder(UIManager.getBorder("FormattedTextField.border"));
-		panel_10.setBackground(UIManager.getColor("Button.background"));
-		panel_10.setToolTipText("not implemented yet. ");
-		panel_10.setBounds(477, 227, 108, 117);
-		contentPane.add(panel_10);
-		GridBagLayout gbl_panel_10 = new GridBagLayout();
-		gbl_panel_10.columnWidths = new int[] { 0, 0, 0, 0 };
-		gbl_panel_10.rowHeights = new int[] { 0, 0, 0, 0, 0 };
-		gbl_panel_10.columnWeights = new double[] { 0.0, 1.0, 0.0,
-				Double.MIN_VALUE };
-		gbl_panel_10.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0,
-				Double.MIN_VALUE };
-		panel_10.setLayout(gbl_panel_10);
-
-		radioButton = new JRadioButton("");
-		radioButton.setEnabled(false);
-		radioButton.setToolTipText("not implemented yet. ");
-		radioButton.setContentAreaFilled(false);
-		radioButton.setForeground(Color.BLACK);
-		radioButton.setBackground(Color.GRAY);
-		GridBagConstraints gbc_radioButton = new GridBagConstraints();
-		gbc_radioButton.insets = new Insets(0, 0, 5, 5);
-		gbc_radioButton.gridx = 0;
-		gbc_radioButton.gridy = 0;
-		panel_10.add(radioButton, gbc_radioButton);
-
-		radioButton_1 = new JRadioButton("");
-		radioButton_1.setEnabled(false);
-		radioButton_1.setToolTipText("not implemented yet. ");
-		radioButton_1.setContentAreaFilled(false);
-		radioButton_1.setForeground(Color.BLACK);
-		GridBagConstraints gbc_radioButton_1 = new GridBagConstraints();
-		gbc_radioButton_1.insets = new Insets(0, 0, 5, 5);
-		gbc_radioButton_1.gridx = 1;
-		gbc_radioButton_1.gridy = 0;
-		panel_10.add(radioButton_1, gbc_radioButton_1);
-
-		radioButton_2 = new JRadioButton("");
-		radioButton_2.setEnabled(false);
-		radioButton_2.setToolTipText("not implemented yet. ");
-		radioButton_2.setContentAreaFilled(false);
-		radioButton_2.setForeground(Color.BLACK);
-		GridBagConstraints gbc_radioButton_2 = new GridBagConstraints();
-		gbc_radioButton_2.insets = new Insets(0, 0, 5, 0);
-		gbc_radioButton_2.gridx = 2;
-		gbc_radioButton_2.gridy = 0;
-		panel_10.add(radioButton_2, gbc_radioButton_2);
-
-		radioButton_3 = new JRadioButton("");
-		radioButton_3.setEnabled(false);
-		radioButton_3.setToolTipText("not implemented yet. ");
-		radioButton_3.setContentAreaFilled(false);
-		radioButton_3.setForeground(Color.BLACK);
-		GridBagConstraints gbc_radioButton_3 = new GridBagConstraints();
-		gbc_radioButton_3.insets = new Insets(0, 0, 5, 5);
-		gbc_radioButton_3.gridx = 0;
-		gbc_radioButton_3.gridy = 1;
-		panel_10.add(radioButton_3, gbc_radioButton_3);
-
-		radioButton_4 = new JRadioButton("");
-		radioButton_4.setEnabled(false);
-		radioButton_4.setToolTipText("not implemented yet. ");
-		radioButton_4.setContentAreaFilled(false);
-		radioButton_4.setForeground(Color.BLACK);
-		GridBagConstraints gbc_radioButton_4 = new GridBagConstraints();
-		gbc_radioButton_4.insets = new Insets(0, 0, 5, 5);
-		gbc_radioButton_4.gridx = 1;
-		gbc_radioButton_4.gridy = 1;
-		panel_10.add(radioButton_4, gbc_radioButton_4);
-
-		radioButton_5 = new JRadioButton("");
-		radioButton_5.setEnabled(false);
-		radioButton_5.setToolTipText("not implemented yet. ");
-		radioButton_5.setContentAreaFilled(false);
-		radioButton_5.setForeground(Color.BLACK);
-		GridBagConstraints gbc_radioButton_5 = new GridBagConstraints();
-		gbc_radioButton_5.insets = new Insets(0, 0, 5, 0);
-		gbc_radioButton_5.gridx = 2;
-		gbc_radioButton_5.gridy = 1;
-		panel_10.add(radioButton_5, gbc_radioButton_5);
-
-		radioButton_6 = new JRadioButton("");
-		radioButton_6.setEnabled(false);
-		radioButton_6.setToolTipText("not implemented yet. ");
-		radioButton_6.setContentAreaFilled(false);
-		radioButton_6.setForeground(Color.BLACK);
-		GridBagConstraints gbc_radioButton_6 = new GridBagConstraints();
-		gbc_radioButton_6.insets = new Insets(0, 0, 5, 5);
-		gbc_radioButton_6.gridx = 0;
-		gbc_radioButton_6.gridy = 2;
-		panel_10.add(radioButton_6, gbc_radioButton_6);
-
-		radioButton_7 = new JRadioButton("");
-		radioButton_7.setEnabled(false);
-		radioButton_7.setToolTipText("not implemented yet. ");
-		radioButton_7.setContentAreaFilled(false);
-		radioButton_7.setForeground(Color.BLACK);
-		GridBagConstraints gbc_radioButton_7 = new GridBagConstraints();
-		gbc_radioButton_7.insets = new Insets(0, 0, 5, 5);
-		gbc_radioButton_7.gridx = 1;
-		gbc_radioButton_7.gridy = 2;
-		panel_10.add(radioButton_7, gbc_radioButton_7);
-
-		radioButton_8 = new JRadioButton("");
-		radioButton_8.setEnabled(false);
-		radioButton_8.setToolTipText("not implemented yet. ");
-		radioButton_8.setContentAreaFilled(false);
-		radioButton_8.setForeground(Color.BLACK);
-		GridBagConstraints gbc_radioButton_8 = new GridBagConstraints();
-		gbc_radioButton_8.insets = new Insets(0, 0, 5, 0);
-		gbc_radioButton_8.gridx = 2;
-		gbc_radioButton_8.gridy = 2;
-		panel_10.add(radioButton_8, gbc_radioButton_8);
-
-		textField = new JTextField("");
-		textField.setEnabled(false);
-		textField.setToolTipText("not implemented yet. ");
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.gridwidth = 2;
-		gbc_textField.insets = new Insets(0, 0, 0, 5);
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.gridx = 1;
-		gbc_textField.gridy = 3;
-		panel_10.add(textField, gbc_textField);
-		textField.setColumns(10);
-
 		JPanel panel_11 = new JPanel();
-		panel_11.setBounds(10, 163, 423, 147);
+		panel_11.setBounds(10, 163, 366, 147);
 		contentPane.add(panel_11);
 		GridBagLayout gbl_panel_11 = new GridBagLayout();
 		gbl_panel_11.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -1117,8 +977,27 @@ public class PicSimView extends JFrame {
 		JLabel lblBreakpoints = new JLabel("Selected Breakpoints");
 		lblBreakpoints.setBounds(335, 41, 133, 14);
 		contentPane.add(lblBreakpoints);
+		
+		listModelSTACK = new DefaultListModel<Integer>();
+		 listSTACK = new JList<Integer>(listModelSTACK);
+		 listSTACK.setBorder(new LineBorder(new Color(0, 0, 0)));
+		 listSTACK.setBackground(UIManager.getColor("Button.background"));
+		listSTACK.setBounds(386, 180, 105, 130);
+		contentPane.add(listSTACK);
+		
+		JLabel lblStack = new JLabel("Stack");
+		lblStack.setBounds(387, 163, 46, 14);
+		contentPane.add(lblStack);
 	}
 
+	public void stackAdd(int m){
+		listModelSTACK.addElement(m);
+	}
+	
+	public void stackClear(){
+		listModelSTACK.removeAllElements();
+	}
+	
 	public void initializeComMenu(String port) {
 		choice.addItem(port);
 	}
@@ -1641,7 +1520,7 @@ public class PicSimView extends JFrame {
 
 	}
 
-	public void setWuerfel(boolean a11, boolean a12, boolean a13, boolean a21,
+	/*public void setWuerfel(boolean a11, boolean a12, boolean a13, boolean a21,
 			boolean a22, boolean a23, boolean a31, boolean a32, boolean a33) {
 		if (a11) {
 			radioButton.setSelected(true);
@@ -1688,13 +1567,13 @@ public class PicSimView extends JFrame {
 		} else {
 			radioButton.setSelected(false);
 		}
-	}
+	}*/
 
-	public int getAdressOfWuerfel() {
+	/*public int getAdressOfWuerfel() {
 		String temp = textField.getText();
 		int result = Integer.parseInt(temp);
 		return result;
-	}
+	}*/
 
 	public void setSerialConnected() {
 		lblDisconnected.setText("connected");

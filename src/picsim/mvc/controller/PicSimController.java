@@ -194,11 +194,11 @@ public class PicSimController {
 		view.setTrisBLabels(model.getRegisterEntry(0x86));
 
 		/* Wuerfel setzen */
-		view.setWuerfel(false, false, false, false, false, false, false, false,
-				false);
+		//view.setWuerfel(false, false, false, false, false, false, false, false,
+		//		false);
 
 		/* Laufzeit aktualisieren */
-		view.txtLaufzeit.setText(String.valueOf(model.getRunningTime()));
+		view.txtLaufzeit.setText(String.valueOf(model.getRunningTime())  + " ms");
 
 		/* Programmschritte aktualisieren */
 		view.txtSteps.setText(String.valueOf(model.getSteps()));
@@ -212,6 +212,17 @@ public class PicSimController {
 		 * 
 		 * }
 		 */
+		
+		/*stack aktualisieren*/
+		if(!model.STACK.isEmpty()){
+			Integer[] temp = new Integer[model.STACK.size()];
+			 model.STACK.toArray(temp);
+			 view.stackClear();
+			 int i;
+			 for(i=0;i<model.STACK.size(); i++){
+				view.stackAdd(temp[i]);
+			 }
+		}
 	}
 
 	public void ReloadElements() {

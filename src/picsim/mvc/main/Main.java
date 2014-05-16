@@ -21,6 +21,7 @@ public class Main {
 		 controller = new PicSimController(view, model);
 		 
 		view.setVisible(true);
+		
 	}
 
 }

@@ -12,7 +12,7 @@ public class PicSimModel {
 	private int PC = 0;
 	private long runningTime = 0;
 	private long startTime = 0;
-	private Deque<Integer> STACK = new ArrayDeque<Integer>();
+	public Deque<Integer> STACK = new ArrayDeque<Integer>();
 	public int[] register_array = new int[256];
 	public List<Integer> code_list = new ArrayList<Integer>();
 	private int takt;
