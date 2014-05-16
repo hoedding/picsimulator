@@ -101,6 +101,7 @@ public class PicSimView extends JFrame {
 	private JButton btnRegisterLaden;
 
 	private JMenuItem mntmDateiffnen;
+	private JMenuItem mntmBeenden;
 	private JMenuItem mntmCalculator;
 
 	private DefaultTableModel table_model;
@@ -197,21 +198,6 @@ public class PicSimView extends JFrame {
 
 		JMenu mnDatei = new JMenu("Datei");
 		menuBar.add(mnDatei);
-
-		JMenuItem mntmDateiExportieren = new JMenuItem("Datei exportieren");
-		mnDatei.add(mntmDateiExportieren);
-
-		JMenu mnErweiterungen = new JMenu("Erweiterungen");
-		menuBar.add(mnErweiterungen);
-
-		JMenuItem mntmsegment = new JMenuItem("7-Segment");
-		mnErweiterungen.add(mntmsegment);
-
-		JMenuItem mntmLed = new JMenuItem("LED");
-		mnErweiterungen.add(mntmLed);
-
-		JMenuItem mntmSchalter = new JMenuItem("Schalter");
-		mnErweiterungen.add(mntmSchalter);
 
 		JMenu mnTools = new JMenu("Tools");
 		menuBar.add(mnTools);
@@ -338,6 +324,14 @@ public class PicSimView extends JFrame {
 
 		mntmDateiffnen = new JMenuItem("Datei \u00F6ffnen");
 		mnDatei.add(mntmDateiffnen);
+		
+		mntmBeenden = new JMenuItem("Beenden");
+		mntmBeenden.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}
+		});
+		mnDatei.add(mntmBeenden);
 
 		contentPane.add(scrollpane_table, BorderLayout.CENTER);
 

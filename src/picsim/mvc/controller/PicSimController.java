@@ -114,7 +114,7 @@ public class PicSimController {
 			}
 		}
 		try {
-			//System.out.println(serial.read());
+			// System.out.println(serial.read());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -195,18 +195,20 @@ public class PicSimController {
 		view.setTrisBLabels(model.getRegisterEntry(0x86));
 
 		/* Wuerfel setzen */
-		//view.setWuerfel(false, false, false, false, false, false, false, false,
-		//		false);
+		// view.setWuerfel(false, false, false, false, false, false, false,
+		// false,
+		// false);
 
 		/* Laufzeit aktualisieren */
-		view.txtLaufzeit.setText(String.valueOf(model.getRunningTime())  + " ms");
+		view.txtLaufzeit
+				.setText(String.valueOf(model.getRunningTime()) + " ms");
 
 		/* Programmschritte aktualisieren */
 		view.txtSteps.setText(String.valueOf(model.getSteps()));
 
 		/* Serielle Schnittstelle */
 		reloadSerial();
-		if(serialConnected){
+		if (serialConnected) {
 			view.panel_portstatus.setBackground(Color.green);
 		} else {
 			view.panel_portstatus.setBackground(Color.decode("#f0f0f0"));
@@ -218,16 +220,16 @@ public class PicSimController {
 		 * 
 		 * }
 		 */
-		
-		/*stack aktualisieren*/
-		if(!model.STACK.isEmpty()){
+
+		/* stack aktualisieren */
+		if (!model.STACK.isEmpty()) {
 			Integer[] temp = new Integer[model.STACK.size()];
-			 model.STACK.toArray(temp);
-			 view.stackClear();
-			 int i;
-			 for(i=0;i<model.STACK.size(); i++){
+			model.STACK.toArray(temp);
+			view.stackClear();
+			int i;
+			for (i = 0; i < model.STACK.size(); i++) {
 				view.stackAdd(temp[i]);
-			 }
+			}
 		}
 	}
 
@@ -312,7 +314,7 @@ public class PicSimController {
 					view.setSerialDisconnected();
 				}
 			}
-			
+
 			view.setVisibilityButtons(false, true, true);
 			Thread t1 = new Thread(new PicSimControllerThread(this));
 
@@ -502,7 +504,9 @@ public class PicSimController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				serial.close();
+				if (serialConnected) {
+					serial.close();
+				}
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -1371,10 +1375,9 @@ public class PicSimController {
 			} else {
 				model.setPortB(model.getPortB() - 1);
 			}
-			
-			model.set_Bit(4,0xb);
-			
-		
+
+			model.set_Bit(4, 0xb);
+
 			model.do_interrupt(1);
 			break;
 		}
