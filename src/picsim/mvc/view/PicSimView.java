@@ -168,6 +168,8 @@ public class PicSimView extends JFrame {
 	private JLabel label_52;
 	private JLabel label_51;
 
+	public JPanel panel_portstatus;
+	
 	private JList listSTACK;
 	
 	private JLabel lblDisconnected;
@@ -177,6 +179,8 @@ public class PicSimView extends JFrame {
 	private JComboBox<Integer> breakpoints;
 
 	private int indexOfBreakpoint = 0;
+	
+	private JRadioButton radioButtonComPort;
 
 	public PicSimView() {
 		setTitle("Simulator PIC12F84");
@@ -966,7 +970,7 @@ public class PicSimView extends JFrame {
 		contentPane.add(lblDisconnected);
 
 		choice = new JComboBox<String>();
-		choice.setBounds(335, 106, 98, 20);
+		choice.setBounds(347, 102, 98, 20);
 		contentPane.add(choice);
 
 		breakpoints = new JComboBox<Integer>();
@@ -988,8 +992,24 @@ public class PicSimView extends JFrame {
 		JLabel lblStack = new JLabel("Stack");
 		lblStack.setBounds(387, 163, 46, 14);
 		contentPane.add(lblStack);
+		
+		 radioButtonComPort = new JRadioButton("");
+		radioButtonComPort.setBounds(320, 101, 21, 23);
+		contentPane.add(radioButtonComPort);
+		
+		 panel_portstatus = new JPanel();
+		panel_portstatus.setBounds(447, 101, 21, 22);
+		contentPane.add(panel_portstatus);
 	}
 
+	public boolean portComCheck(){
+		if(radioButtonComPort.isSelected()){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	public void stackAdd(int m){
 		listModelSTACK.addElement(m);
 	}

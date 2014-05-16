@@ -2,6 +2,7 @@ package picsim.mvc.controller;
 
 import gnu.io.CommPortIdentifier;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -113,7 +114,7 @@ public class PicSimController {
 			}
 		}
 		try {
-			System.out.println(serial.read());
+			//System.out.println(serial.read());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -205,6 +206,11 @@ public class PicSimController {
 
 		/* Serielle Schnittstelle */
 		reloadSerial();
+		if(serialConnected){
+			view.panel_portstatus.setBackground(Color.green);
+		} else {
+			view.panel_portstatus.setBackground(Color.decode("#f0f0f0"));
+		}
 		/*
 		 * int m; for(m=0; m < view.breakpoint_list.size(); m++){
 		 * 
@@ -296,15 +302,17 @@ public class PicSimController {
 
 			set_running(true);
 
-			serial = new PicSimSerialConnection(model);
-
-			if (serial.open(model.getDefaultSerialPort())) {
-				serialConnected = true;
-				view.setSerialConnected();
-			} else {
-				serialConnected = false;
-				view.setSerialDisconnected();
+			if (view.portComCheck()) {
+				serial = new PicSimSerialConnection(model);
+				if (serial.open(model.getDefaultSerialPort())) {
+					serialConnected = true;
+					view.setSerialConnected();
+				} else {
+					serialConnected = false;
+					view.setSerialDisconnected();
+				}
 			}
+			
 			view.setVisibilityButtons(false, true, true);
 			Thread t1 = new Thread(new PicSimControllerThread(this));
 
