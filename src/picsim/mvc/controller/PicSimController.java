@@ -24,7 +24,7 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import picsim.mvc.model.PicSimModel;
-import picsim.mvc.model.serial.PicSimSerialConnection;
+import picsim.mvc.model.serial.PicSimSerialController;
 import picsim.mvc.view.PicSimCalculatorView;
 import picsim.mvc.view.PicSimView;
 
@@ -33,7 +33,7 @@ public class PicSimController {
 	private PicSimModel model;
 	private boolean running;
 
-	private PicSimSerialConnection serial;
+	private PicSimSerialController serial;
 	private boolean serialConnected = false;
 
 	public PicSimController(PicSimView view, PicSimModel model) {
@@ -319,7 +319,7 @@ public class PicSimController {
 			set_running(true);
 
 			if (view.portComCheck()) {
-				serial = new PicSimSerialConnection(model);
+				serial = new PicSimSerialController(model);
 				if (serial.open(model.getDefaultSerialPort())) {
 					serialConnected = true;
 					view.setSerialConnected();

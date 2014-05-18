@@ -2,7 +2,7 @@ package picsim.mvc.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Desktop;
+import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -24,6 +24,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -31,6 +32,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JSlider;
@@ -38,45 +40,19 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
-import picsim.mvc.model.PicSimModel;
-import sun.misc.IOUtils;
 
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.List;
-import java.awt.event.ActionEvent;
-
-import javax.swing.JPopupMenu;
-
-import java.awt.Component;
-import java.awt.Choice;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeEvent;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
-import javax.swing.JComboBox;
-import javax.swing.border.LineBorder;
 
 public class PicSimView extends JFrame {
 
 	private static final long serialVersionUID = -6310686304585590231L;
 
-	private PicSimModel model;
+	
 
 	public JTextField txtSteps;
 	public JTextField txtLaufzeit;
@@ -1464,7 +1440,6 @@ public class PicSimView extends JFrame {
 	}
 
 	public void setPortBLabels(int t) {
-		// TODO t = t & 0b11111111;
 		int a = t & 0b00000001;
 		int b = t & 0b00000010;
 		int c = t & 0b00000100;

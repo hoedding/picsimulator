@@ -11,7 +11,7 @@ import java.util.Enumeration;
 
 import picsim.mvc.model.PicSimModel;
 
-public class PicSimSerialConnection {
+public class PicSimSerialController {
 
 	private CommPortIdentifier portId;
 	private SerialPort port;
@@ -21,7 +21,7 @@ public class PicSimSerialConnection {
 	private char LF = '\n';
 	private PicSimModel model;
 
-	public PicSimSerialConnection(PicSimModel model) {
+	public PicSimSerialController(PicSimModel model) {
 		this.model = model;
 	}
 

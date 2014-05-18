@@ -2,7 +2,7 @@ package picsim.mvc.main;
 
 import picsim.mvc.controller.PicSimController;
 import picsim.mvc.model.PicSimModel;
-import picsim.mvc.model.serial.PicSimSerialConnection;
+import picsim.mvc.model.serial.PicSimSerialController;
 import picsim.mvc.view.PicSimView;
 
 public class Main {
