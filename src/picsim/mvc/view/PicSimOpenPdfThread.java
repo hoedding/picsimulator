@@ -21,7 +21,7 @@ public class PicSimOpenPdfThread implements Runnable {
 			} else {
 				System.out.println("File does not exist");
 			}
-			System.out.println("DONE");
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

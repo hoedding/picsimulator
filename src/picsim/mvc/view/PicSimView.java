@@ -966,6 +966,11 @@ public class PicSimView extends JFrame {
 		contentPane.add(lblDisconnected);
 
 		choice = new JComboBox<String>();
+		choice.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				radioButtonComPort.setSelected(true);
+			}
+		});
 		choice.setBounds(347, 102, 98, 20);
 		contentPane.add(choice);
 

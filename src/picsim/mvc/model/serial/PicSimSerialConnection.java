@@ -5,6 +5,8 @@ import gnu.io.SerialPort;
 
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 import picsim.mvc.model.PicSimModel;
@@ -25,7 +27,7 @@ public class PicSimSerialConnection {
 
 	// Startpunkt für die Verbindung
 	public boolean open(String comportUsed) {
-System.out.println("open serial");
+		System.out.println("open serial");
 		try {
 
 			Enumeration portList;
@@ -80,7 +82,7 @@ System.out.println("open serial");
 			System.out.println("Port is already used from other application,");
 			System.out
 					.println("Close that application and re-run this application");
-			
+
 			return false;
 		}
 	}
@@ -112,27 +114,33 @@ System.out.println("open serial");
 		out.flush();
 	}
 
-	public String read() throws Exception {
+	public ArrayList<Integer> read() throws Exception {
 		int n, i;
-		char c;
+		char c = 0;
 		String answer = new String("");
-
-		// TODO code auf website war fehlerhaft, for war abgeschnitten
-		for (i = 0; i < 500; i++) {
-
-			while (in.ready()) {
-				n = in.read();
-				if (n != -1) {
-					c = (char) n;
-					answer = answer + c;
-					Thread.sleep(1);
-				} else
-					break;
+		int index = 5;
+		while (c != CR && index > 0 && in.ready()) {
+			n = in.read();
+			if (n != -1) {
+				c = (char) n;
+				answer += c;
+				index--;
 			}
-			delay(1);
+		}
+		if (index <= 0 && c != CR) {
+			return null;
+		}
+		delay(1);
+
+		ArrayList<Integer> decodedValues = new ArrayList<Integer>();
+		decodedValues = decodeData(answer);
+
+		if (decodedValues.size() > 0) {
+			return decodedValues;
+		} else {
+			return null;
 		}
 
-		return answer;
 	}
 
 	private void delay(int a) {
@@ -158,7 +166,26 @@ System.out.println("open serial");
 		return "" + c1 + c2;
 	}
 
-	private void decodeData() {
+	private ArrayList<Integer> decodeData(String s) {
+
+		int i0 = s.charAt(0) - 0x30;
+		int i1 = s.charAt(1) - 0x30;
+		int i2 = s.charAt(2) - 0x30;
+		int i3 = s.charAt(3) - 0x30;
+
+		ArrayList<Integer> tokens = new ArrayList<Integer>();
+		if (i0 >= 0 && i1 >= 0 && i2 >= 0 && i3 >= 0 && i0 <= 0xF && i1 <= 0xF
+				&& i2 <= 0xF && i3 <= 0xF) {
+			int a = (((int) i0 & 0x0F) << 4) | ((int) i1 & 0x0F);
+			tokens.add(a);
+			int b = (((int) i2 & 0x0F) << 4) | ((int) i3 & 0x0F);
+			tokens.add(b);
+		}
+		if (tokens.size() > 0) {
+			return tokens;
+		} else {
+			return null;
+		}
 
 	}
 

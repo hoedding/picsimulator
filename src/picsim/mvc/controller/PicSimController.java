@@ -3,6 +3,7 @@ package picsim.mvc.controller;
 import gnu.io.CommPortIdentifier;
 
 import java.awt.Color;
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -14,6 +15,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.StringTokenizer;
 
 import javax.swing.JFileChooser;
 import javax.swing.event.ChangeEvent;
@@ -102,17 +104,24 @@ public class PicSimController {
 		view.setComPortChange(new ComPortChange());
 	}
 
-	public void reloadSerialViaThread(){
+	public void reloadSerialViaThread() {
 		Thread t1 = new Thread(new SerialThread(this));
 		t1.run();
 	}
-	
+
 	public void reloadSerial() {
 		if (serialConnected) {
 			try {
 				serial.sendRS232();
-				String temp = serial.read();
-				System.out.println("empfangen: " + temp);
+				ArrayList<Integer> readSerial = new ArrayList<Integer>();
+				readSerial = serial.read();
+				if (readSerial.size() == 2) {
+					model.setRegisterEntryOneBit(5, readSerial.get(0) - 32);
+					model.setRegisterEntryOneBit(6, readSerial.get(1));
+					System.out.println("empfangen portA:" + readSerial.get(0)
+							+ "portB" + readSerial.get(1));
+				}
+
 			} catch (Exception e) {
 
 				e.printStackTrace();

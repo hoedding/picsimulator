@@ -10,7 +10,7 @@ public class SerialThread implements Runnable {
 
 	@Override
 	public void run() {
-		System.out.println("gruﬂ vom thread");
+		
 		controller.reloadSerial();
 		
 	}
