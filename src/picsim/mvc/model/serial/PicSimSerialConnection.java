@@ -25,7 +25,7 @@ public class PicSimSerialConnection {
 
 	// Startpunkt für die Verbindung
 	public boolean open(String comportUsed) {
-
+System.out.println("open serial");
 		try {
 
 			Enumeration portList;
@@ -86,6 +86,7 @@ public class PicSimSerialConnection {
 	}
 
 	public void sendRS232() throws Exception {
+		System.out.println("sendrs232");
 		String p_a = encodeData(model.getPortA());
 		String t_a = encodeData(model.getRegisterEntry(0x85));
 		String p_b = encodeData(model.getPortB());
@@ -96,7 +97,7 @@ public class PicSimSerialConnection {
 	}
 
 	public void write(String s) throws Exception {
-
+		System.out.println("serial write");
 		out.write(s);
 		out.flush();
 	}

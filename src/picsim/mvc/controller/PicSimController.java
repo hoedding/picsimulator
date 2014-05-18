@@ -102,10 +102,15 @@ public class PicSimController {
 		view.setComPortChange(new ComPortChange());
 	}
 
+	public void reloadSerialViaThread(){
+		Thread t1 = new Thread(new SerialThread(this));
+		t1.run();
+	}
+	
 	public void reloadSerial() {
 		if (serialConnected) {
 			try {
-				// serial.sendRS232();
+				serial.sendRS232();
 				String temp = serial.read();
 				System.out.println("empfangen: " + temp);
 			} catch (Exception e) {
@@ -207,7 +212,7 @@ public class PicSimController {
 		view.txtSteps.setText(String.valueOf(model.getSteps()));
 
 		/* Serielle Schnittstelle */
-		reloadSerial();
+		reloadSerialViaThread();
 		if (serialConnected) {
 			view.panel_portstatus.setBackground(Color.green);
 		} else {

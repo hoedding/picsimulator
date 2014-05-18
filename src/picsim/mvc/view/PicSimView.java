@@ -212,6 +212,8 @@ public class PicSimView extends JFrame {
 		JMenuItem mntmDoku = new JMenuItem("Dokumentation");
 		mntmDoku.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				Thread t1 = new Thread( new PicSimOpenPdfThread());
+				t1.run();
 			}
 		});
 		mnHelp.add(mntmDoku);

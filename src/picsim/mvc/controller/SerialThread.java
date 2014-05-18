@@ -1,0 +1,18 @@
+package picsim.mvc.controller;
+
+public class SerialThread implements Runnable {
+
+	private PicSimController controller;
+	
+	public SerialThread(PicSimController controller) {
+		this.controller = controller;
+	}
+
+	@Override
+	public void run() {
+		System.out.println("gruﬂ vom thread");
+		controller.reloadSerial();
+		
+	}
+
+}
