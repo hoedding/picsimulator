@@ -794,7 +794,7 @@ public class PicSimModel {
 		int d = a & 0b10000000;
 		int adress = a & 0b01111111;
 		int value = getRegisterEntry(adress);
-		int result = w_register + value;
+		int result = w_register & value;
 		if (d == 0) {
 			w_register = result;
 		} else {

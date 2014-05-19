@@ -354,7 +354,7 @@ public class PicSimController {
 	public void timermode() {
 		if (model.is_bit_set(3, 0x81)) {
 			model.setRegisterEntryOneBit(1, model.getRegisterEntry(1) + 1);
-			// model.register_array[1] = model.register_array[1] + 1;
+			
 		} else {
 
 			int prescaler = model.register_array[0x81] & 0b00000111;
